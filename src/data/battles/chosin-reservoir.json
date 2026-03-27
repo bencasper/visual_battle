@@ -1,0 +1,582 @@
+{
+  "id": "chosin-reservoir-1950",
+  "name": "Battle of Chosin Reservoir",
+  "slug": "chosin-reservoir",
+  "theater": "Korean War",
+  "date_range": { "start": "1950-11-27", "end": "1950-12-13" },
+  "location": {
+    "lat": 40.6,
+    "lng": 127.25,
+    "region": "North Korea",
+    "terrain_description": "High-altitude reservoir plateau surrounded by the Taebaek Mountains; treeless ridges, frozen roads, temperatures as low as -40°C"
+  },
+  "terrain_type": "mountain_winter",
+  "map_bounds": {
+    "north": 40.95,
+    "south": 39.75,
+    "east": 127.75,
+    "west": 126.85
+  },
+  "outcome": "UN forces successfully broke out to Hungnam under sustained Chinese encirclement; strategic UN withdrawal completed",
+  "result_summary": "Tactical Chinese victory (encirclement achieved); Operational UN success (14,000+ troops and 98,000 refugees evacuated at Hungnam)",
+  "factions": [
+    {
+      "id": "un-x-corps",
+      "name": "UN Command — X Corps",
+      "full_name": "United States X Corps + Allied Forces",
+      "side": "UN",
+      "color": "#1a3a5c",
+      "color_light": "#3a6fa8",
+      "commander": "Major General Oliver P. Smith (1st Marine Division)",
+      "higher_command": "General Edward Almond (X Corps)",
+      "nation_flags": ["us", "uk", "south_korea"],
+      "strength": {
+        "total_troops": 30000,
+        "engaged_at_reservoir": 15000,
+        "infantry_battalions": 12,
+        "artillery_battalions": 4,
+        "tanks": 140,
+        "aircraft_sorties_available": 240
+      },
+      "units": [
+        {
+          "id": "1st-marine-div",
+          "name": "1st Marine Division",
+          "type": "infantry_division",
+          "strength": 10000,
+          "commander": "MG Oliver P. Smith",
+          "equipment_era": "korean_war",
+          "morale": 0.92,
+          "supply_status": "critical"
+        },
+        {
+          "id": "7th-infantry-rgt",
+          "name": "7th Infantry Regiment (Army)",
+          "type": "infantry_regiment",
+          "strength": 3200,
+          "commander": "Col Herbert Powell",
+          "equipment_era": "korean_war",
+          "morale": 0.75,
+          "supply_status": "critical"
+        },
+        {
+          "id": "rct-31",
+          "name": "Regimental Combat Team 31 (Task Force Faith)",
+          "type": "infantry_regiment",
+          "strength": 2500,
+          "commander": "LTC Don Faith",
+          "equipment_era": "korean_war",
+          "morale": 0.65,
+          "supply_status": "depleted"
+        },
+        {
+          "id": "british-41-commando",
+          "name": "41 Independent Commando RM (British)",
+          "type": "commando",
+          "strength": 235,
+          "commander": "Lt Col Douglas Drysdale",
+          "equipment_era": "korean_war",
+          "morale": 0.95,
+          "supply_status": "low"
+        }
+      ],
+      "weapons": [
+        {
+          "id": "m1-garand",
+          "name": "M1 Garand",
+          "type": "rifle",
+          "caliber": "30-06",
+          "effective_range_m": 460,
+          "rate_of_fire_rpm": 50,
+          "stats": { "firepower": 7, "range": 6, "reliability_cold": 8, "weight": 4 }
+        },
+        {
+          "id": "m1919-browning",
+          "name": "M1919 Browning LMG",
+          "type": "machine_gun",
+          "caliber": ".30",
+          "effective_range_m": 900,
+          "rate_of_fire_rpm": 500,
+          "stats": { "firepower": 9, "range": 7, "reliability_cold": 7, "weight": 14 }
+        },
+        {
+          "id": "m26-pershing",
+          "name": "M26 Pershing Tank",
+          "type": "medium_tank",
+          "main_gun": "90mm M3",
+          "effective_range_m": 1800,
+          "stats": { "firepower": 10, "range": 8, "armor": 9, "cold_weather_ops": 6 }
+        },
+        {
+          "id": "f4u-corsair",
+          "name": "F4U Corsair (CAS)",
+          "type": "close_air_support",
+          "payload_kg": 908,
+          "stats": { "firepower": 10, "range": 9, "responsiveness": 8, "cold_weather_ops": 7 }
+        },
+        {
+          "id": "m101-howitzer",
+          "name": "M101 105mm Howitzer",
+          "type": "field_artillery",
+          "effective_range_m": 11000,
+          "stats": { "firepower": 9, "range": 8, "mobility": 5, "cold_weather_ops": 6 }
+        }
+      ]
+    },
+    {
+      "id": "pva-9th-army",
+      "name": "PVA 9th Army Group",
+      "full_name": "Chinese People's Volunteer Army — 9th Army Group",
+      "side": "PVA",
+      "color": "#8B1A1A",
+      "color_light": "#cc3333",
+      "commander": "General Song Shilun",
+      "higher_command": "Marshal Peng Dehuai (CPV Commander)",
+      "nation_flags": ["china"],
+      "strength": {
+        "total_troops": 120000,
+        "engaged_at_reservoir": 67000,
+        "infantry_divisions": 12,
+        "artillery_battalions": 8,
+        "tanks": 0,
+        "aircraft_sorties_available": 0
+      },
+      "units": [
+        {
+          "id": "20th-pva-army",
+          "name": "20th PVA Army (3 Divisions)",
+          "type": "army_corps",
+          "strength": 30000,
+          "commander": "General Zhang Yixiang",
+          "equipment_era": "korean_war_light",
+          "morale": 0.88,
+          "supply_status": "low"
+        },
+        {
+          "id": "27th-pva-army",
+          "name": "27th PVA Army (3 Divisions)",
+          "type": "army_corps",
+          "strength": 30000,
+          "commander": "General Peng Deqing",
+          "equipment_era": "korean_war_light",
+          "morale": 0.85,
+          "supply_status": "low"
+        },
+        {
+          "id": "26th-pva-army",
+          "name": "26th PVA Army (Reserve/Pursuit)",
+          "type": "army_corps",
+          "strength": 30000,
+          "commander": "General Zhang Renjian",
+          "equipment_era": "korean_war_light",
+          "morale": 0.80,
+          "supply_status": "critical"
+        }
+      ],
+      "weapons": [
+        {
+          "id": "type-53-carbine",
+          "name": "Type 53 Carbine (Mosin-Nagant)",
+          "type": "rifle",
+          "caliber": "7.62x54R",
+          "effective_range_m": 400,
+          "rate_of_fire_rpm": 15,
+          "stats": { "firepower": 6, "range": 5, "reliability_cold": 5, "weight": 4 }
+        },
+        {
+          "id": "ppsh-41",
+          "name": "PPSh-41 Submachine Gun",
+          "type": "submachine_gun",
+          "caliber": "7.62x25",
+          "effective_range_m": 150,
+          "rate_of_fire_rpm": 900,
+          "stats": { "firepower": 8, "range": 3, "reliability_cold": 4, "weight": 4 }
+        },
+        {
+          "id": "type-24-grenade",
+          "name": "Type 24 'Stick' Grenade",
+          "type": "grenade",
+          "effective_range_m": 30,
+          "stats": { "firepower": 7, "range": 2, "reliability_cold": 8, "weight": 1 }
+        },
+        {
+          "id": "82mm-mortar",
+          "name": "Type 53 82mm Mortar",
+          "type": "mortar",
+          "effective_range_m": 3040,
+          "stats": { "firepower": 7, "range": 5, "mobility": 8, "cold_weather_ops": 7 }
+        }
+      ]
+    }
+  ],
+  "phases": [
+    {
+      "id": "phase-1-initial-contact",
+      "index": 0,
+      "label": "Initial Contact & PVA Night Assault",
+      "date_range": { "start": "1950-11-27", "end": "1950-11-28" },
+      "timestamp_offset_hours": 0,
+      "summary": "X Corps pushes north toward the Yalu River, unaware that 12 PVA divisions have secretly infiltrated the Taebaek Mountains. At 2200hrs on Nov 27, the PVA launches a coordinated night assault across the entire Chosin perimeter.",
+      "tactical_situation": "UN forces are strung out along the Main Supply Route (MSR) from Koto-ri north through Hagaru-ri to Yudam-ni. The 5th and 7th Marine Regiments are at Yudam-ni; 1st Marines hold Hagaru-ri and Koto-ri. Task Force Faith occupies the east side of the reservoir.",
+      "unit_positions": [
+        {
+          "unit_id": "1st-marine-div",
+          "faction_id": "un-x-corps",
+          "positions": [
+            { "location": "Yudam-ni",  "lat": 40.720, "lng": 127.150, "strength_pct": 1.0, "posture": "advancing" },
+            { "location": "Hagaru-ri", "lat": 40.585, "lng": 127.235, "strength_pct": 1.0, "posture": "holding" },
+            { "location": "Koto-ri",   "lat": 40.475, "lng": 127.280, "strength_pct": 1.0, "posture": "holding" }
+          ]
+        },
+        {
+          "unit_id": "rct-31",
+          "faction_id": "un-x-corps",
+          "positions": [
+            { "location": "East Reservoir", "lat": 40.640, "lng": 127.380, "strength_pct": 1.0, "posture": "advancing" }
+          ]
+        },
+        {
+          "unit_id": "20th-pva-army",
+          "faction_id": "pva-9th-army",
+          "positions": [
+            { "location": "Western Ridges", "lat": 40.720, "lng": 127.050, "strength_pct": 1.0, "posture": "infiltrating" }
+          ]
+        },
+        {
+          "unit_id": "27th-pva-army",
+          "faction_id": "pva-9th-army",
+          "positions": [
+            { "location": "Eastern Ridges", "lat": 40.680, "lng": 127.500, "strength_pct": 1.0, "posture": "infiltrating" }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "id": "evt-1-1",
+          "type": "combat",
+          "timestamp_offset_hours": 0,
+          "label": "PVA Night Assault Begins",
+          "description": "At 2200hrs, 67,000 PVA troops launch a coordinated bugle-signaled assault from surrounding ridges — one of history's most dramatic night attacks.",
+          "location": { "lat": 40.660, "lng": 127.260 },
+          "significance": "critical"
+        },
+        {
+          "id": "evt-1-2",
+          "type": "command",
+          "timestamp_offset_hours": 2,
+          "label": "MG Smith Orders Perimeter Defense",
+          "description": "General Smith, who had prophetically pre-positioned supplies at Hagaru-ri against orders, activates defensive perimeter plans. His caution, mocked before the battle, now saves thousands of lives.",
+          "location": { "lat": 40.585, "lng": 127.235 },
+          "significance": "high"
+        },
+        {
+          "id": "evt-1-3",
+          "type": "logistics",
+          "timestamp_offset_hours": 6,
+          "label": "MSR Cut North of Koto-ri",
+          "description": "PVA forces sever the Main Supply Route, isolating UN positions into separate pockets. Temperature drops to -35°C.",
+          "location": { "lat": 40.530, "lng": 127.265 },
+          "significance": "critical"
+        }
+      ],
+      "annotation": "The PVA's surprise infiltration — 120,000 troops hidden in mountains through arctic conditions for two weeks with minimal resupply — remains one of the most extraordinary feats of operational concealment in modern warfare.",
+      "weather": { "temp_celsius": -27, "conditions": "clear_arctic", "wind_kph": 25 }
+    },
+    {
+      "id": "phase-2-encirclement",
+      "index": 1,
+      "label": "The Encirclement",
+      "date_range": { "start": "1950-11-28", "end": "1950-12-01" },
+      "timestamp_offset_hours": 24,
+      "summary": "UN forces are now fully encircled. Task Force Faith on the east side is systematically destroyed. The 5th and 7th Marines at Yudam-ni fight off wave attacks while Hagaru-ri — the critical logistics hub with the airstrip — is defended by a scratch force of clerks, cooks, and engineers.",
+      "tactical_situation": "Each UN position forms its own 360° defensive perimeter. Air supply from Marine aircraft and USAF C-119s becomes the only lifeline. The Hagaru-ri airstrip, hastily bulldozed from frozen ground, becomes the most important 2,900 feet of runway in the Korean War.",
+      "unit_positions": [
+        {
+          "unit_id": "1st-marine-div",
+          "faction_id": "un-x-corps",
+          "positions": [
+            { "location": "Yudam-ni Perimeter",  "lat": 40.720, "lng": 127.150, "strength_pct": 0.82, "posture": "defending" },
+            { "location": "Hagaru-ri Perimeter", "lat": 40.585, "lng": 127.235, "strength_pct": 0.88, "posture": "defending" },
+            { "location": "Koto-ri Perimeter",   "lat": 40.475, "lng": 127.280, "strength_pct": 0.95, "posture": "defending" }
+          ]
+        },
+        {
+          "unit_id": "rct-31",
+          "faction_id": "un-x-corps",
+          "positions": [
+            { "location": "East Reservoir (Isolated)", "lat": 40.640, "lng": 127.380, "strength_pct": 0.55, "posture": "defending" }
+          ]
+        },
+        {
+          "unit_id": "20th-pva-army",
+          "faction_id": "pva-9th-army",
+          "positions": [
+            { "location": "Yudam-ni Encirclement", "lat": 40.730, "lng": 127.100, "strength_pct": 0.78, "posture": "attacking" },
+            { "location": "Hagaru-ri North",        "lat": 40.640, "lng": 127.220, "strength_pct": 0.85, "posture": "attacking" }
+          ]
+        },
+        {
+          "unit_id": "27th-pva-army",
+          "faction_id": "pva-9th-army",
+          "positions": [
+            { "location": "East Reservoir Attack", "lat": 40.680, "lng": 127.450, "strength_pct": 0.90, "posture": "attacking" }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "id": "evt-2-1",
+          "type": "destruction",
+          "timestamp_offset_hours": 30,
+          "label": "Task Force Faith Overrun",
+          "description": "Without tank support or adequate artillery, RCT-31 under LTC Don Faith (KIA during the breakout) is destroyed as an organized unit. ~1,000 survivors reach Hagaru-ri across the frozen reservoir. Faith is posthumously awarded the Medal of Honor.",
+          "location": { "lat": 40.645, "lng": 127.390 },
+          "significance": "critical"
+        },
+        {
+          "id": "evt-2-2",
+          "type": "logistics",
+          "timestamp_offset_hours": 36,
+          "label": "Hagaru-ri Airstrip Operational",
+          "description": "Engineers and Korean laborers complete the emergency airstrip under fire. Over the next week, 4,312 casualties are evacuated and 537 replacement troops flown in — a logistical miracle under fire.",
+          "location": { "lat": 40.585, "lng": 127.235 },
+          "significance": "critical"
+        },
+        {
+          "id": "evt-2-3",
+          "type": "air_support",
+          "timestamp_offset_hours": 48,
+          "label": "Marine Corsairs Establish Air Umbrella",
+          "description": "VMF-312 and VMF-214 Corsairs fly continuous close air support. Napalm drops on PVA assault waves — in -35°C conditions, many PVA soldiers freeze to death on the ridges between attacks.",
+          "location": { "lat": 40.660, "lng": 127.200 },
+          "significance": "high"
+        },
+        {
+          "id": "evt-2-4",
+          "type": "combat",
+          "timestamp_offset_hours": 60,
+          "label": "Battle of East Hill (Turkey Hill)",
+          "description": "PVA seizes East Hill overlooking Hagaru-ri. Captain Sitter leads a counterattack retaking the hill — receives Medal of Honor. Control of the high ground preserves the perimeter.",
+          "location": { "lat": 40.600, "lng": 127.255 },
+          "significance": "high"
+        }
+      ],
+      "annotation": "The PVA, despite 4:1 numerical superiority, lacked artillery coordination, air support, and resupply. Their soldiers suffered catastrophic frostbite casualties — entire battalions rendered combat-ineffective by cold before engaging. The Chinese later called this their most costly campaign of the entire Korean War.",
+      "weather": { "temp_celsius": -33, "conditions": "clear_arctic", "wind_kph": 40 }
+    },
+    {
+      "id": "phase-3-yudam-ni-breakout",
+      "index": 2,
+      "label": "Yudam-ni Breakout to Hagaru-ri",
+      "date_range": { "start": "1950-12-01", "end": "1950-12-03" },
+      "timestamp_offset_hours": 96,
+      "summary": "The 5th and 7th Marines at Yudam-ni receive orders to fight their way south 14 miles to Hagaru-ri. This nighttime movement under sustained PVA attack — with Marines carrying their dead and wounded — becomes one of the most celebrated fighting retreats in USMC history.",
+      "tactical_situation": "Two Marine regiments (~8,000 men) must fight down a single-lane frozen mountain road through multiple PVA blocking positions. They bring all weapons, equipment, and casualties. No one is left behind.",
+      "unit_positions": [
+        {
+          "unit_id": "1st-marine-div",
+          "faction_id": "un-x-corps",
+          "positions": [
+            { "location": "Yudam-ni (departing)",  "lat": 40.720, "lng": 127.150, "strength_pct": 0.76, "posture": "attacking_south" },
+            { "location": "MSR Midpoint",           "lat": 40.650, "lng": 127.195, "strength_pct": 0.72, "posture": "moving" },
+            { "location": "Hagaru-ri (assembling)", "lat": 40.585, "lng": 127.235, "strength_pct": 0.95, "posture": "consolidating" }
+          ]
+        },
+        {
+          "unit_id": "20th-pva-army",
+          "faction_id": "pva-9th-army",
+          "positions": [
+            { "location": "MSR Blocking Positions", "lat": 40.655, "lng": 127.180, "strength_pct": 0.60, "posture": "blocking" },
+            { "location": "Yudam-ni Pursuit",        "lat": 40.720, "lng": 127.140, "strength_pct": 0.55, "posture": "pursuing" }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "id": "evt-3-1",
+          "type": "movement",
+          "timestamp_offset_hours": 96,
+          "label": "Yudam-ni Column Moves Out",
+          "description": "At 0800hrs, the column of 8,000+ Marines and 1,500 casualties begins the 14-mile march. Advance guard clears ridgelines while rear guard fights off pursuit.",
+          "location": { "lat": 40.720, "lng": 127.150 },
+          "significance": "critical"
+        },
+        {
+          "id": "evt-3-2",
+          "type": "combat",
+          "timestamp_offset_hours": 104,
+          "label": "Hell Fire Valley Ambush",
+          "description": "PVA ambush catches Drysdale's Task Force (41 Commando + Marines + Army) at a narrow valley. Of 922 men, 162 are killed, 159 wounded, 256 captured. Tank-led survivors press through to Hagaru-ri.",
+          "location": { "lat": 40.540, "lng": 127.268 },
+          "significance": "high"
+        },
+        {
+          "id": "evt-3-3",
+          "type": "movement",
+          "timestamp_offset_hours": 130,
+          "label": "5th and 7th Marines Enter Hagaru-ri",
+          "description": "After 59 hours of continuous combat movement, the Yudam-ni regiments arrive at Hagaru-ri. Smith consolidates the full division for the final push south.",
+          "location": { "lat": 40.585, "lng": 127.235 },
+          "significance": "high"
+        }
+      ],
+      "annotation": "General Smith's famous remark to a reporter: 'Retreat, hell! We're not retreating, we're just advancing in a different direction.' This phrase defines the ethos of the entire Chosin campaign — offensive spirit maintained under the most extreme conditions of modern warfare.",
+      "weather": { "temp_celsius": -30, "conditions": "overcast_snow_flurries", "wind_kph": 30 }
+    },
+    {
+      "id": "phase-4-breakout-hungnam",
+      "index": 3,
+      "label": "Breakout to Hungnam",
+      "date_range": { "start": "1950-12-06", "end": "1950-12-13" },
+      "timestamp_offset_hours": 216,
+      "summary": "The consolidated Marine division, with Army survivors and allied forces, fights 78 miles south from Hagaru-ri through Koto-ri and Funchilin Pass to the port of Hungnam. A treadway bridge section is airdropped to span the critical gap at Funchilin Pass — an engineering feat never attempted before or since.",
+      "tactical_situation": "The PVA 26th Army attempts to cut off the column at Funchilin Pass — a 4,000-foot elevation, single-file road clinging to a cliff face. The critical bridge has been destroyed. Without a crossing, 14,000 men and all equipment are trapped.",
+      "unit_positions": [
+        {
+          "unit_id": "1st-marine-div",
+          "faction_id": "un-x-corps",
+          "positions": [
+            { "location": "Hagaru-ri (departing)", "lat": 40.585, "lng": 127.235, "strength_pct": 0.85, "posture": "attacking_south" },
+            { "location": "Koto-ri",               "lat": 40.475, "lng": 127.280, "strength_pct": 0.82, "posture": "consolidating" },
+            { "location": "Funchilin Pass",        "lat": 40.390, "lng": 127.310, "strength_pct": 0.78, "posture": "attacking_south" },
+            { "location": "Hungnam Perimeter",     "lat": 39.830, "lng": 127.620, "strength_pct": 0.75, "posture": "evacuating" }
+          ]
+        },
+        {
+          "unit_id": "26th-pva-army",
+          "faction_id": "pva-9th-army",
+          "positions": [
+            { "location": "Funchilin Pass Block", "lat": 40.395, "lng": 127.300, "strength_pct": 0.70, "posture": "blocking" },
+            { "location": "South Pursuit",         "lat": 40.430, "lng": 127.295, "strength_pct": 0.65, "posture": "pursuing" }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "id": "evt-4-1",
+          "type": "engineering",
+          "timestamp_offset_hours": 220,
+          "label": "Treadway Bridge Airdrop at Funchilin Pass",
+          "description": "USAF C-119 Flying Boxcars airdrop eight treadway bridge sections to span the destroyed Funchilin Pass bridge. Marines and engineers assemble it under fire — one of the most extraordinary engineering achievements in military history.",
+          "location": { "lat": 40.390, "lng": 127.310 },
+          "significance": "critical"
+        },
+        {
+          "id": "evt-4-2",
+          "type": "movement",
+          "timestamp_offset_hours": 240,
+          "label": "Column Clears Funchilin Pass",
+          "description": "14,000 troops, 1,000 vehicles, and all heavy equipment cross the repaired bridge and descend to the coastal plain. The PVA, exhausted and frostbitten, cannot prevent the crossing.",
+          "location": { "lat": 40.380, "lng": 127.315 },
+          "significance": "critical"
+        },
+        {
+          "id": "evt-4-3",
+          "type": "logistics",
+          "timestamp_offset_hours": 312,
+          "label": "Hungnam Evacuation — Operation Christmas Cargo",
+          "description": "105,000 UN troops, 98,000 Korean civilian refugees, 17,500 vehicles, and 350,000 tons of supplies are evacuated by sea. The USS Meredith Victory alone carries 14,000 refugees in a single voyage.",
+          "location": { "lat": 39.830, "lng": 127.620 },
+          "significance": "critical"
+        },
+        {
+          "id": "evt-4-4",
+          "type": "demolition",
+          "timestamp_offset_hours": 360,
+          "label": "Hungnam Port Demolished",
+          "description": "After the last ship departs, engineers destroy port facilities, ammunition dumps, and infrastructure. Explosions are visible 50 miles away.",
+          "location": { "lat": 39.825, "lng": 127.615 },
+          "significance": "high"
+        }
+      ],
+      "annotation": "The Hungnam evacuation is often called the 'Miracle of Christmas' — comparable to Dunkirk. The 1st Marine Division arrived at Hungnam as a cohesive, organized fighting force after 17 days of continuous combat at temperatures down to -40°C.",
+      "weather": { "temp_celsius": -20, "conditions": "overcast", "wind_kph": 20 }
+    }
+  ],
+  "casualties": {
+    "un-x-corps": {
+      "killed_in_action": 1029,
+      "wounded_in_action": 4582,
+      "missing_in_action": 4894,
+      "non_battle_frostbite": 7338,
+      "total_combat_ineffective": 10000,
+      "note": "Non-battle cold-weather casualties nearly equaled combat casualties"
+    },
+    "pva-9th-army": {
+      "killed_in_action": 19202,
+      "wounded_in_action": 28954,
+      "non_battle_frostbite": 30000,
+      "total_combat_ineffective": 60000,
+      "note": "Three PVA divisions rendered completely combat-ineffective by frostbite alone; the 9th Army Group was withdrawn from combat for months"
+    }
+  },
+  "key_figures": [
+    {
+      "name": "Major General Oliver P. Smith",
+      "faction": "un-x-corps",
+      "role": "Division Commander, 1st Marine Division",
+      "significance": "His deliberate advance pace and pre-positioning of supplies at Hagaru-ri — for which he was criticized — directly enabled the breakout."
+    },
+    {
+      "name": "General Song Shilun",
+      "faction": "pva-9th-army",
+      "role": "Commander, PVA 9th Army Group",
+      "significance": "Achieved tactical surprise and encirclement but underestimated UN firepower and logistical resilience. His forces suffered more from cold than from combat."
+    },
+    {
+      "name": "Lieutenant Colonel Don Faith",
+      "faction": "un-x-corps",
+      "role": "Commander, Task Force Faith (RCT-31)",
+      "significance": "KIA while leading a desperate breakout on the east side. Awarded Medal of Honor posthumously."
+    }
+  ],
+  "sources": [
+    { "title": "The Frozen Hours — David Halberstam", "type": "book", "url": null },
+    { "title": "Breakout: The Chosin Reservoir Campaign — Martin Russ", "type": "book", "url": null },
+    { "title": "USMC Historical Monograph: The Chosin Reservoir Campaign", "type": "official", "url": "https://www.marines.mil/News/Publications/MCPEL/Electronic-Library-Display/Article/898996" }
+  ],
+  "wisdom": [
+    {
+      "id": "w-1",
+      "category": "logistics",
+      "title": "Logistics Wins Battles Before They Begin",
+      "body": "General Smith's unauthorized pre-positioning of supplies and building of the Hagaru-ri airstrip — against X Corps orders — is the single decision that saved the 1st Marine Division. The commander closest to reality must sometimes resist pressure from above.",
+      "related_phase": "phase-1-initial-contact"
+    },
+    {
+      "id": "w-2",
+      "category": "intelligence",
+      "title": "Never Discount Infiltration at Scale",
+      "body": "120,000 PVA troops moved through mountains in sub-zero temperatures for two weeks, undetected by UN air reconnaissance. MacArthur's intelligence failure at Chosin is a defining case study in the danger of confirmation bias — seeing what you expect rather than what is there.",
+      "related_phase": "phase-1-initial-contact"
+    },
+    {
+      "id": "w-3",
+      "category": "combined_arms",
+      "title": "Air Superiority as a Force Multiplier",
+      "body": "Marine Corsairs flying close air support were the decisive asymmetric advantage at Chosin. They negated the PVA's 4:1 numerical advantage. The difference in air power was not just tactical — it was the margin between survival and annihilation.",
+      "related_phase": "phase-2-encirclement"
+    },
+    {
+      "id": "w-4",
+      "category": "morale",
+      "title": "Unit Cohesion Is the Ultimate Combat Multiplier",
+      "body": "Task Force Faith was destroyed; the Marine units survived. The structural difference was unit cohesion — the Marines had trained together, trusted their NCOs and commanders, and shared an ethos of never leaving men behind. RCT-31 was an ad-hoc assembly facing the same enemy in the same conditions.",
+      "related_phase": "phase-2-encirclement"
+    },
+    {
+      "id": "w-5",
+      "category": "adaptability",
+      "title": "The Treadway Bridge: Improvise or Die",
+      "body": "The airdropped treadway bridge at Funchilin Pass has no precedent in military history. The willingness to attempt an untested solution under fire — and the engineering competence to execute it — is the difference between a fighting withdrawal and an annihilation.",
+      "related_phase": "phase-4-breakout-hungnam"
+    },
+    {
+      "id": "w-6",
+      "category": "strategic",
+      "title": "Tactical Defeat, Operational Victory",
+      "body": "The PVA achieved its tactical objective — encirclement. But the 1st Marine Division's organized withdrawal preserved a veteran fighting force that would continue the war. The measure of a military force is not whether it avoids encirclement, but whether it survives one.",
+      "related_phase": "phase-4-breakout-hungnam"
+    }
+  ]
+}
