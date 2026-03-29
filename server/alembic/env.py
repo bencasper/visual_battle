@@ -5,8 +5,8 @@ import sys, os
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
 
-from server.db.database import Base
-from server.db import models  # noqa: ensure models are registered
+from db.database import Base
+from db import models  # noqa: ensure models are registered
 
 config = context.config
 if config.config_file_name is not None:

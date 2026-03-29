@@ -1,7 +1,7 @@
 from sqlalchemy import Column, String, Date, Integer, Text
 from sqlalchemy.dialects.postgresql import JSONB
 from geoalchemy2 import Geometry
-from server.db.database import Base
+from db.database import Base
 
 
 class Battle(Base):

@@ -4,7 +4,7 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
-    database_url: str = "postgresql+asyncpg://postgres:password@localhost:5432/visual_battle"
+    database_url: str = "postgresql+asyncpg://visual_battle_user:mysecretpassword@localhost:5432/visual_battle"
     cors_origins: str = "http://localhost:5173"
     server_port: int = 8000
     data_path: str = "./data/battles"

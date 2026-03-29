@@ -1,8 +1,16 @@
+import logging
+
+logging.basicConfig(
+    filename="backend_app.log",
+    level=logging.INFO,
+    format="%(levelname)s %(asctime)s %(message)s",
+)
+
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from server.db.database import settings, engine, Base
-from server.routers import battles
+from db.database import settings, engine, Base
+from routers import battles
 
 
 @asynccontextmanager

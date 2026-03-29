@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
-from server.db.database import get_db
-from server.services.battle_service import BattleService, get_battle_service
-from server.models.battle import BattleModel, BattleListItem, BattlePhasesResponse
+from db.database import get_db
+from services.battle_service import BattleService, get_battle_service
+from models.battle import BattleModel, BattleListItem, BattlePhasesResponse
 
 router = APIRouter(prefix="/battles", tags=["battles"])
 

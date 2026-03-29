@@ -1,7 +1,7 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, text
-from server.db.models import Battle, BattlePhase
-from server.models.battle import BattleModel, BattleListItem, BattlePhasesResponse
+from db.models import Battle, BattlePhase
+from models.battle import BattleModel, BattleListItem, BattlePhasesResponse
 from datetime import date
 from typing import Optional
 
