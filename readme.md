@@ -5,230 +5,173 @@
 [![Built with React](https://img.shields.io/badge/Built%20with-React-61DAFB?logo=react)](https://react.dev/)
 [![Map Engine](https://img.shields.io/badge/Map-MapLibre%20GL%20JS-396CB2?logo=maplibre)](https://maplibre.org/)
 
-> Bring history's greatest battles to life. Explore terrain, armies, weapons, strategies, and dynamic timelines through an immersive, map-driven experience.
+> Bring history’s greatest battles to life. Explore terrain, armies, weapons, strategies, and dynamic timelines through an immersive, map-driven experience.
 
 ---
 
-## 🗺️ Overview
+## 🗺️ What is Visual Battle?
 
-**Visual Battle** is an open-source interactive application that reconstructs historical battles with rich, data-driven visualizations. Powered by a war-game-style map engine, it lets users explore every dimension of a battle — from the lay of the land to the clash of armies — and draw tactical wisdom and historical insight from the past.
+**Visual Battle** is an open-source web application for dynamically exploring historical battles through interactive maps, rich data visualizations, and animated timelines.
 
-Whether you're a history enthusiast, student, educator, or strategy game fan, **Visual Battle** transforms dry historical records into living, breathing battlefields.
-
----
-
-## ✨ Key Features
-
-### 🌄 Terrain Rendering
-- Topographic map engine with elevation, rivers, forests, marshes, roads, and settlements
-- Historically accurate terrain reconstructed from period maps, satellite data, and archaeological records
-- Day/night and seasonal rendering modes
-- Zoom from theatre-level overview to unit-level detail
-
-### ⚔️ Army Strength & Order of Battle
-- Side-by-side comparison of both (or all) opposing forces
-- Troop counts, unit types (infantry, cavalry, artillery, naval, etc.)
-- Commander hierarchy and chain of command visualization
-- Morale, supply lines, and logistics indicators
-
-### 🏹 Weapon & Equipment Comparison
-- Detailed weapon cards: range, firepower, reload time, effectiveness vs. unit type
-- Era-appropriate equipment (swords, longbows, cannons, rifles, tanks, aircraft, etc.)
-- Side-by-side stat comparison panels
-- Technology advantage analysis
-
-### 🎯 Forces & Strategies
-- Annotated strategic maps showing flanking maneuvers, feints, and lines of advance
-- Color-coded faction overlays for easy distinction
-- Named formations and tactical doctrines (e.g., Cannae double envelopment, Blitzkrieg, etc.)
-- Commander decision trees and key turning points
-
-### ⏱️ Dynamic Battle Timeline
-- Scrubable timeline to step through the battle phase by phase
-- Animated unit movements, advances, retreats, and encirclements
-- Event markers: decisive charges, artillery barrages, supply cuts, surrenders
-- Speed control (pause, slow, normal, fast-forward)
-
-### 📚 Knowledge & Insight Panel
-- Contextual historical notes at every timeline step
-- Lessons learned and tactical wisdom highlighted
-- Links to primary sources, references, and further reading
-- Quote overlays from commanders and eyewitnesses
+**Key capabilities:**
+- Reconstruct and visualize iconic battles (from ancient to modern eras).
+- Explore accurate topography, terrain features, and battlefield environments.
+- Compare armies, weapons, and strategies with side-by-side stats and tactical overlays.
+- Step through an animated timeline: watch troop movements, attacks, or retreats, and see how the battle unfolds phase by phase.
+- Contextual knowledge panel gives you insight into decisions, turning points, and historical wisdom—bringing dry records to life.
+- Built for history buffs, educators, researchers, and wargaming/strategy fans.
 
 ---
 
-## 🛠️ Tech Stack (Planned)
+## ✨ Features
 
-| Layer | Technology |
-|---|---|
-| **Map Engine** | [Leaflet.js](https://leafletjs.com/) / [MapLibre GL JS](https://maplibre.org/) |
-| **Tile Source** | Custom historical tiles + [OpenHistoricalMap](https://www.openhistoricalmap.org/) |
-| **Wargame Rendering** | Canvas/WebGL overlays (inspired by [MapChart Wargames](https://www.mapchart.net/wargames.html)) |
-| **Frontend** | React + TypeScript |
-| **State / Timeline** | Zustand + custom timeline engine |
-| **Data Format** | GeoJSON + custom Battle JSON schema |
-| **Backend / API** | Node.js / FastAPI (battle data serving) |
-| **Database** | PostgreSQL + PostGIS (geospatial queries) |
-| **Visualization** | D3.js (charts, graphs, stat comparisons) |
-| **Animations** | Framer Motion / GSAP |
+- 🌄 Terrain Rendering: Topographic map engine, seasonal rendering, zoom levels, historical accuracy.
+- ⚔️ Army Strength & Order of Battle: View opposing forces, unit types, command chains.
+- 🏹 Weapon & Equipment Comparison: Stat cards, era-appropriate gear, tech advantage analysis.
+- 🎯 Forces & Strategies: Annotate maneuvers, doctrines, overlays, and decision-trees.
+- ⏱️ Dynamic Battle Timeline: Scrub through time, watch troop movements, view key events.
+- 📚 Knowledge & Insight Panel: Rich notes, references, sources, quotes, lessons learned.
 
 ---
 
-## 🗂️ Data Schema (Battle JSON)
+## 🛠️ Tech Stack
 
-Each battle is described by a structured JSON file:
-
-```json
-{
-  "id": "battle-of-cannae-216bc",
-  "name": "Battle of Cannae",
-  "date": "-0216-08-02",
-  "location": { "lat": 41.3066, "lng": 16.1329 },
-  "terrain": "flat_plain",
-  "factions": [
-    {
-      "id": "carthage",
-      "name": "Carthaginian Republic",
-      "commander": "Hannibal Barca",
-      "strength": 50000,
-      "units": [ ... ],
-      "color": "#B5451B"
-    },
-    {
-      "id": "rome",
-      "name": "Roman Republic",
-      "commander": "Lucius Aemilius Paullus",
-      "strength": 86000,
-      "units": [ ... ],
-      "color": "#8B0000"
-    }
-  ],
-  "phases": [
-    {
-      "id": "phase-1-initial-deployment",
-      "timestamp_offset_minutes": 0,
-      "label": "Initial Deployment",
-      "unit_positions": [ ... ],
-      "annotation": "Hannibal deliberately weakens his center...",
-      "events": []
-    }
-  ],
-  "outcome": "Carthaginian victory — Roman army encircled and destroyed",
-  "casualties": { "carthage": 6000, "rome": 70000 },
-  "wisdom": [
-    "The double envelopment at Cannae became the model for encirclement doctrine studied by generals for 2,000 years."
-  ]
-}
-```
-
----
-
-## 🗺️ Planned Battle Library
-
-| Battle | Year | Era | Region |
-|---|---|---|---|
-| Battle of Cannae | 216 BC | Ancient | Italy |
-| Battle of Gaugamela | 331 BC | Ancient | Persia |
-| Battle of Hastings | 1066 AD | Medieval | England |
-| Battle of Agincourt | 1415 AD | Medieval | France |
-| Battle of Waterloo | 1815 AD | Napoleonic | Belgium |
-| Battle of Gettysburg | 1863 AD | Civil War | USA |
-| Battle of the Somme | 1916 AD | WWI | France |
-| Battle of Stalingrad | 1942–43 AD | WWII | Russia |
-| Battle of Inchon | 1950 AD | Cold War | Korea |
+| Layer              | Technology            |
+|--------------------|----------------------|
+| Map Engine         | MapLibre GL JS, Leaflet.js, custom historical tiles |
+| Frontend           | React + Vite + TypeScript + Zustand |
+| Backend            | Python FastAPI + SQLAlchemy |
+| Database           | PostgreSQL + PostGIS |
+| Data/Visualization | D3.js, Framer Motion |
+| Animations         | Framer Motion, GSAP  |
 
 ---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js >= 18
-- npm or yarn
-- PostgreSQL with PostGIS extension (optional, for full backend)
 
-### Installation
+- Node.js >= 18 (for frontend)
+- Python >= 3.10 (managed via pyenv — recommended)
+- Docker & Docker Compose (for the database)
 
-```bash
-# Clone the repository
-git clone https://github.com/your-username/visual_battle.git
-cd visual_battle
+---
 
-# Install dependencies
+### Python Environment: pyenv + pyenv-virtualenv
+
+**Why pyenv?**
+- Allows multiple Python versions side by side.
+- Manages project-specific virtualenvs.
+- Avoids system Python/package conflicts.
+
+**Install pyenv and pyenv-virtualenv:**
+
+- macOS:
+  ```sh
+  brew install pyenv pyenv-virtualenv
+  ```
+- Linux:
+  See https://github.com/pyenv/pyenv-virtualenv#installation
+
+Add to your shell config (.zshrc/.bashrc):
+
+```sh
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+```
+Restart your shell.
+
+**Create and activate your project's virtualenv:**
+```sh
+pyenv install 3.13.12
+pyenv virtualenv 3.13.12 visual_battle-env
+pyenv activate visual_battle-env
+pip install -r server/requirements.txt
+echo "visual_battle-env" > .python-version
+```
+
+---
+
+### Database Setup (Docker Compose)
+
+Run this to start the PostGIS-enabled PostgreSQL DB:
+
+```sh
+docker compose up -d db
+```
+
+---
+
+### Frontend & Backend
+
+**Frontend:**
+```sh
 npm install
-
-# Copy environment config
-cp .env.example .env
-
-# Start the development server
 npm run dev
+# Visit http://localhost:5173/
 ```
 
-Open [http://localhost:5173](http://localhost:5173) in your browser.
-
-### Load a Battle
-
-```bash
-# Import a battle dataset
-npm run import-battle -- --file data/battles/cannae.json
+**Backend (after pyenv setup and DB running):**
+```sh
+cp server/.env.example server/.env  # Set DB connection string as needed
+cd server
+uvicorn main:app --host 0.0.0.0 --port 8000
 ```
+Health check: http://localhost:8000/health
+Battles API: http://localhost:8000/api/v1/battles
+
+---
+
+### Initial Data Load
+
+Seed the database (after the DB is up!):
+
+```sh
+python scripts/seed_db.py
+```
+
+---
+
+## 🏗️ How it works
+
+- **Frontend**: React SPA that visualizes battle data. Communicates with backend via REST API for battles, timelines, etc.
+- **Backend**: FastAPI serves structured battle data from Postgres/PostGIS, handles data modeling and migrations (with Alembic).
+- **Battle Data**: JSON files define battles, units, phases, terrain, etc. Saved to DB via scripts, used by backend and visualized by frontend.
+- **Timeline/Phases**: Each battle is broken into phases; users can scrub through the battle's evolution step by step.
+
+---
+
+## Maintenance & Troubleshooting
+
+- Update dependencies: `pip install -r server/requirements.txt --upgrade`, `npm install`
+- Re-seed database: `python scripts/seed_db.py` (after migrations/data changes)
+- Logs:
+  - Backend logs are in `server/backend_app.log`
+  - Frontend logs: See terminal output or browser console
 
 ---
 
 ## 📁 Project Structure
 
-```
-visual_battle/
-├── public/
-│   └── tiles/                  # Custom historical map tiles
-├── src/
-│   ├── components/
-│   │   ├── MapEngine/          # Core map + wargame rendering
-│   │   ├── Timeline/           # Scrubable battle timeline
-│   │   ├── ArmyPanel/          # Strength & order of battle
-│   │   ├── WeaponComparison/   # Weapon stat cards & charts
-│   │   ├── StrategyOverlay/    # Arrows, annotations, zones
-│   │   └── InsightPanel/       # Historical notes & wisdom
-│   ├── data/
-│   │   └── battles/            # Battle JSON files
-│   ├── store/                  # Zustand global state
-│   ├── hooks/                  # Custom React hooks
-│   ├── utils/                  # GeoJSON helpers, math utils
-│   └── types/                  # TypeScript schemas
-├── server/                     # Optional backend API
-├── scripts/                    # Data import & processing tools
-└── docs/                       # Architecture & contribution docs
-```
+(Your existing listing...)
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are very welcome! You can help by:
-
-- **Adding battles** — write or improve a battle JSON dataset
-- **Improving the map engine** — terrain rendering, animation quality
-- **Historical research** — verify facts, add sources, add wisdom notes
-- **UI/UX** — design improvements, accessibility, mobile support
-- **Translations** — make battles accessible in multiple languages
-
-Please read [CONTRIBUTING.md](./docs/CONTRIBUTING.md) before submitting a PR.
+(Your existing contributing note...)
 
 ---
 
 ## 📜 License
-
-MIT License — see [LICENSE](./LICENSE) for details.
+MIT License
 
 ---
 
 ## 🙏 Acknowledgements
 
-- [MapChart Wargames](https://www.mapchart.net/wargames.html) — inspiration for the wargame map aesthetic
-- [OpenHistoricalMap](https://www.openhistoricalmap.org/) — historical geographic data
-- [Leaflet.js](https://leafletjs.com/) & [MapLibre GL JS](https://maplibre.org/) — open-source map engines
-- Every historian, archaeologist, and writer who preserved these stories for us to learn from
+(Your existing acknowledgements...)
 
 ---
-
-> *"Those who cannot remember the past are condemned to repeat it."*
-> — George Santayana
