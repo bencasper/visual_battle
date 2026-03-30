@@ -35,7 +35,7 @@ export const useBattleStore = create<BattleState & BattleActions>((set) => ({
     } catch {
       // API unavailable — build a minimal list from the local JSON file
       try {
-        const res = await fetch('/data/battles/chosin-reservoir.json')
+        const res = await fetch('/data/battles/chosin-reservoir.json', { cache: 'no-store' })
         if (!res.ok) throw new Error('local data missing')
         const battle = await res.json()
         const item: BattleListItem = {
@@ -68,7 +68,7 @@ export const useBattleStore = create<BattleState & BattleActions>((set) => ({
       } catch {
         // Local fallback for development without backend
         const slug = id.replace(/-\d{4}$/, '')
-        const res = await fetch(`/data/battles/${slug}.json?v=${Date.now()}`)
+        const res = await fetch(`/data/battles/${slug}.json`, { cache: 'no-store' })
         if (!res.ok) throw new Error(`Battle data not found: ${slug}`)
         battle = await res.json() as Battle
       }
@@ -79,7 +79,7 @@ export const useBattleStore = create<BattleState & BattleActions>((set) => ({
       let terrain: TerrainCollection | null = null
       try {
         const slug = battle.slug
-        const res = await fetch(`/data/battles/${slug}-terrain.json`)
+        const res = await fetch(`/data/battles/${slug}-terrain.json`, { cache: 'no-store' })
         if (res.ok) terrain = await res.json() as TerrainCollection
       } catch {
         // Terrain is optional

@@ -24,3 +24,10 @@ models/**/__pycache__/
 routers/**/__pycache__/
 services/**/__pycache__/
 
+
+/frontend/dist/
+
+
+/frontend/tsconfig.node.tsbuildinfo
+/frontend/tsconfig.tsbuildinfoª
+/frontend/tsconfig.tsbuildinfo
