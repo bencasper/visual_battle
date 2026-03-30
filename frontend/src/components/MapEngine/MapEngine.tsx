@@ -36,7 +36,7 @@ export function MapEngine({ battle, currentPhase, previousPhase, nextPhase, terr
     if (!map) return
 
     if (is3D) {
-      // Add DEM source (used for both terrain extrusion and hillshade)
+      // Add DEM source
       if (!map.getSource(DEM_SOURCE)) {
         map.addSource(DEM_SOURCE, {
           type: 'raster-dem',
@@ -47,34 +47,40 @@ export function MapEngine({ battle, currentPhase, previousPhase, nextPhase, terr
         })
       }
 
-      // Enable terrain extrusion
-      map.setTerrain({ source: DEM_SOURCE, exaggeration: 1.5 })
+      // Enable terrain extrusion — higher exaggeration makes mountains clearly visible
+      map.setTerrain({ source: DEM_SOURCE, exaggeration: 2.5 })
 
-      // Add hillshade layer so the terrain surface has visible light/shadow relief.
-      // Insert it just above the base raster so it blends with the map tiles.
+      // Fade the base raster so the hillshade can show through it
+      map.setPaintProperty('carto-tiles', 'raster-opacity', 0.55)
+
+      // Hillshade ON TOP of the raster tiles — this is what makes relief visible
       if (!map.getLayer(HILLSHADE_LAYER)) {
         map.addLayer({
           id:     HILLSHADE_LAYER,
           type:   'hillshade',
           source: DEM_SOURCE,
           paint: {
-            'hillshade-exaggeration':    0.6,
-            'hillshade-shadow-color':    '#3a2a10',
-            'hillshade-highlight-color': '#fff8ee',
-            'hillshade-accent-color':    '#8a7258',
+            'hillshade-exaggeration':        0.75,
+            'hillshade-shadow-color':        '#2a1a08',
+            'hillshade-highlight-color':     '#fffaf0',
+            'hillshade-accent-color':        '#6b5030',
+            'hillshade-illumination-direction': 315,
             'hillshade-illumination-anchor': 'viewport',
           },
-        }, 'carto-tiles')  // insert below the raster tiles so it blends through
+        })  // no second arg = appended on top of all current layers
       }
 
-      // Tilt to perspective view
-      map.easeTo({ pitch: 55, bearing: -15, duration: 800 })
+      // Steep pitch + bearing for dramatic mountain perspective
+      map.easeTo({ pitch: 62, bearing: -20, duration: 800 })
 
     } else {
-      // Remove hillshade layer
+      // Remove hillshade
       if (map.getLayer(HILLSHADE_LAYER)) {
         try { map.removeLayer(HILLSHADE_LAYER) } catch { /* */ }
       }
+
+      // Restore full raster opacity
+      map.setPaintProperty('carto-tiles', 'raster-opacity', 1)
 
       // Disable terrain
       map.setTerrain(null)
