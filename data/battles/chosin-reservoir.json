@@ -613,36 +613,22 @@
       "summary": "X Corps pushes north toward the Yalu River, unaware that 12 PVA divisions have secretly infiltrated the Taebaek Mountains. At 2200hrs on Nov 27, the PVA launches a coordinated night assault across the entire Chosin perimeter.",
       "tactical_situation": "UN forces are strung out along the Main Supply Route (MSR) from Koto-ri north through Hagaru-ri to Yudam-ni. The 5th and 7th Marine Regiments are at Yudam-ni; 1st Marines hold Hagaru-ri and Koto-ri. Task Force Faith occupies the east side of the reservoir.",
       "unit_positions": [
-        {
-          "unit_id": "1st-marine-div",
-          "faction_id": "un-x-corps",
-          "positions": [
-            { "location": "Yudam-ni",  "lat": 40.720, "lng": 127.150, "strength_pct": 1.0, "posture": "advancing" },
-            { "location": "Hagaru-ri", "lat": 40.585, "lng": 127.235, "strength_pct": 1.0, "posture": "holding" },
-            { "location": "Koto-ri",   "lat": 40.475, "lng": 127.280, "strength_pct": 1.0, "posture": "holding" }
-          ]
-        },
-        {
-          "unit_id": "rct-31",
-          "faction_id": "un-x-corps",
-          "positions": [
-            { "location": "East Reservoir", "lat": 40.640, "lng": 127.380, "strength_pct": 1.0, "posture": "advancing" }
-          ]
-        },
-        {
-          "unit_id": "20th-pva-army",
-          "faction_id": "pva-9th-army",
-          "positions": [
-            { "location": "Western Ridges", "lat": 40.720, "lng": 127.050, "strength_pct": 1.0, "posture": "infiltrating" }
-          ]
-        },
-        {
-          "unit_id": "27th-pva-army",
-          "faction_id": "pva-9th-army",
-          "positions": [
-            { "location": "Eastern Ridges", "lat": 40.680, "lng": 127.500, "strength_pct": 1.0, "posture": "infiltrating" }
-          ]
-        }
+        { "unit_id": "5th-marines",         "faction_id": "un-x-corps",   "positions": [{ "location": "Yudam-ni",          "lat": 40.480, "lng": 127.112, "strength_pct": 1.0, "posture": "advancing" }] },
+        { "unit_id": "7th-marines",         "faction_id": "un-x-corps",   "positions": [{ "location": "Yudam-ni",          "lat": 40.485, "lng": 127.118, "strength_pct": 1.0, "posture": "advancing" }] },
+        { "unit_id": "fox-company-7th",     "faction_id": "un-x-corps",   "positions": [{ "location": "Toktong Pass",       "lat": 40.394, "lng": 127.161, "strength_pct": 1.0, "posture": "holding" }] },
+        { "unit_id": "1st-marines",         "faction_id": "un-x-corps",   "positions": [{ "location": "Hagaru-ri",          "lat": 40.384, "lng": 127.249, "strength_pct": 1.0, "posture": "holding" }] },
+        { "unit_id": "11th-marines",        "faction_id": "un-x-corps",   "positions": [{ "location": "Hagaru-ri (Arty)",   "lat": 40.382, "lng": 127.245, "strength_pct": 1.0, "posture": "holding" }] },
+        { "unit_id": "rct-31",              "faction_id": "un-x-corps",   "positions": [{ "location": "Sinhung-ni",          "lat": 40.489, "lng": 127.259, "strength_pct": 1.0, "posture": "advancing" }] },
+        { "unit_id": "1-32nd-infantry",     "faction_id": "un-x-corps",   "positions": [{ "location": "North Sinhung-ni",   "lat": 40.500, "lng": 127.260, "strength_pct": 1.0, "posture": "advancing" }] },
+        { "unit_id": "31st-tank-co",        "faction_id": "un-x-corps",   "positions": [{ "location": "Hudong-ni",           "lat": 40.430, "lng": 127.280, "strength_pct": 1.0, "posture": "holding" }] },
+        { "unit_id": "british-41-commando", "faction_id": "un-x-corps",   "positions": [{ "location": "Koto-ri",             "lat": 40.284, "lng": 127.300, "strength_pct": 1.0, "posture": "holding" }] },
+        { "unit_id": "pva-79th-div",        "faction_id": "pva-9th-army", "positions": [{ "location": "Yudam-ni NW Ridges",  "lat": 40.500, "lng": 127.085, "strength_pct": 1.0, "posture": "infiltrating" }] },
+        { "unit_id": "pva-89th-div",        "faction_id": "pva-9th-army", "positions": [{ "location": "Yudam-ni W Block",    "lat": 40.490, "lng": 127.095, "strength_pct": 1.0, "posture": "infiltrating" }] },
+        { "unit_id": "pva-59th-div",        "faction_id": "pva-9th-army", "positions": [{ "location": "Toktong Pass Area",   "lat": 40.400, "lng": 127.150, "strength_pct": 1.0, "posture": "infiltrating" }] },
+        { "unit_id": "pva-58th-div",        "faction_id": "pva-9th-army", "positions": [{ "location": "Hagaru-ri S Approach","lat": 40.360, "lng": 127.240, "strength_pct": 1.0, "posture": "infiltrating" }] },
+        { "unit_id": "pva-60th-div",        "faction_id": "pva-9th-army", "positions": [{ "location": "Koto-ri N Block",     "lat": 40.310, "lng": 127.295, "strength_pct": 1.0, "posture": "infiltrating" }] },
+        { "unit_id": "pva-80th-div",        "faction_id": "pva-9th-army", "positions": [{ "location": "East Reservoir N",    "lat": 40.510, "lng": 127.350, "strength_pct": 1.0, "posture": "infiltrating" }] },
+        { "unit_id": "pva-81st-div",        "faction_id": "pva-9th-army", "positions": [{ "location": "Hill 1221",            "lat": 40.449, "lng": 127.268, "strength_pct": 1.0, "posture": "infiltrating" }] }
       ],
       "events": [
         {
@@ -685,37 +671,21 @@
       "summary": "UN forces are now fully encircled. Task Force Faith on the east side is systematically destroyed. The 5th and 7th Marines at Yudam-ni fight off wave attacks while Hagaru-ri — the critical logistics hub with the airstrip — is defended by a scratch force of clerks, cooks, and engineers.",
       "tactical_situation": "Each UN position forms its own 360° defensive perimeter. Air supply from Marine aircraft and USAF C-119s becomes the only lifeline. The Hagaru-ri airstrip, hastily bulldozed from frozen ground, becomes the most important 2,900 feet of runway in the Korean War.",
       "unit_positions": [
-        {
-          "unit_id": "1st-marine-div",
-          "faction_id": "un-x-corps",
-          "positions": [
-            { "location": "Yudam-ni Perimeter",  "lat": 40.720, "lng": 127.150, "strength_pct": 0.82, "posture": "defending" },
-            { "location": "Hagaru-ri Perimeter", "lat": 40.585, "lng": 127.235, "strength_pct": 0.88, "posture": "defending" },
-            { "location": "Koto-ri Perimeter",   "lat": 40.475, "lng": 127.280, "strength_pct": 0.95, "posture": "defending" }
-          ]
-        },
-        {
-          "unit_id": "rct-31",
-          "faction_id": "un-x-corps",
-          "positions": [
-            { "location": "East Reservoir (Isolated)", "lat": 40.640, "lng": 127.380, "strength_pct": 0.55, "posture": "defending" }
-          ]
-        },
-        {
-          "unit_id": "20th-pva-army",
-          "faction_id": "pva-9th-army",
-          "positions": [
-            { "location": "Yudam-ni Encirclement", "lat": 40.730, "lng": 127.100, "strength_pct": 0.78, "posture": "attacking" },
-            { "location": "Hagaru-ri North",        "lat": 40.640, "lng": 127.220, "strength_pct": 0.85, "posture": "attacking" }
-          ]
-        },
-        {
-          "unit_id": "27th-pva-army",
-          "faction_id": "pva-9th-army",
-          "positions": [
-            { "location": "East Reservoir Attack", "lat": 40.680, "lng": 127.450, "strength_pct": 0.90, "posture": "attacking" }
-          ]
-        }
+        { "unit_id": "5th-marines",         "faction_id": "un-x-corps",   "positions": [{ "location": "Yudam-ni",          "lat": 40.480, "lng": 127.112, "strength_pct": 0.82, "posture": "defending" }] },
+        { "unit_id": "7th-marines",         "faction_id": "un-x-corps",   "positions": [{ "location": "Yudam-ni",          "lat": 40.485, "lng": 127.118, "strength_pct": 0.80, "posture": "defending" }] },
+        { "unit_id": "fox-company-7th",     "faction_id": "un-x-corps",   "positions": [{ "location": "Toktong Pass",       "lat": 40.394, "lng": 127.161, "strength_pct": 0.70, "posture": "defending" }] },
+        { "unit_id": "1st-marines",         "faction_id": "un-x-corps",   "positions": [{ "location": "Hagaru-ri",          "lat": 40.384, "lng": 127.249, "strength_pct": 0.85, "posture": "defending" }] },
+        { "unit_id": "11th-marines",        "faction_id": "un-x-corps",   "positions": [{ "location": "Hagaru-ri (Arty)",   "lat": 40.382, "lng": 127.244, "strength_pct": 0.88, "posture": "holding" }] },
+        { "unit_id": "rct-31",              "faction_id": "un-x-corps",   "positions": [{ "location": "Sinhung-ni",          "lat": 40.489, "lng": 127.259, "strength_pct": 0.55, "posture": "defending" }] },
+        { "unit_id": "57th-fa-bn",          "faction_id": "un-x-corps",   "positions": [{ "location": "Pyungnyuri Inlet",    "lat": 40.470, "lng": 127.270, "strength_pct": 0.65, "posture": "defending" }] },
+        { "unit_id": "british-41-commando", "faction_id": "un-x-corps",   "positions": [{ "location": "Koto-ri",             "lat": 40.284, "lng": 127.300, "strength_pct": 0.92, "posture": "holding" }] },
+        { "unit_id": "pva-79th-div",        "faction_id": "pva-9th-army", "positions": [{ "location": "Yudam-ni NW Ridges",  "lat": 40.500, "lng": 127.085, "strength_pct": 0.78, "posture": "attacking" }] },
+        { "unit_id": "pva-89th-div",        "faction_id": "pva-9th-army", "positions": [{ "location": "Yudam-ni W Block",    "lat": 40.488, "lng": 127.092, "strength_pct": 0.82, "posture": "attacking" }] },
+        { "unit_id": "pva-59th-div",        "faction_id": "pva-9th-army", "positions": [{ "location": "Toktong Pass",        "lat": 40.398, "lng": 127.152, "strength_pct": 0.75, "posture": "attacking" }] },
+        { "unit_id": "pva-58th-div",        "faction_id": "pva-9th-army", "positions": [{ "location": "Hagaru-ri S Attack",  "lat": 40.358, "lng": 127.238, "strength_pct": 0.60, "posture": "attacking" }] },
+        { "unit_id": "pva-60th-div",        "faction_id": "pva-9th-army", "positions": [{ "location": "Koto-ri N Block",     "lat": 40.308, "lng": 127.294, "strength_pct": 0.85, "posture": "attacking" }] },
+        { "unit_id": "pva-80th-div",        "faction_id": "pva-9th-army", "positions": [{ "location": "East Reservoir N",    "lat": 40.510, "lng": 127.348, "strength_pct": 0.80, "posture": "attacking" }] },
+        { "unit_id": "pva-81st-div",        "faction_id": "pva-9th-army", "positions": [{ "location": "Hill 1221",            "lat": 40.449, "lng": 127.268, "strength_pct": 0.88, "posture": "blocking" }] }
       ],
       "events": [
         {
@@ -767,23 +737,14 @@
       "summary": "The 5th and 7th Marines at Yudam-ni receive orders to fight their way south 14 miles to Hagaru-ri. This nighttime movement under sustained PVA attack — with Marines carrying their dead and wounded — becomes one of the most celebrated fighting retreats in USMC history.",
       "tactical_situation": "Two Marine regiments (~8,000 men) must fight down a single-lane frozen mountain road through multiple PVA blocking positions. They bring all weapons, equipment, and casualties. No one is left behind.",
       "unit_positions": [
-        {
-          "unit_id": "1st-marine-div",
-          "faction_id": "un-x-corps",
-          "positions": [
-            { "location": "Yudam-ni (departing)",  "lat": 40.720, "lng": 127.150, "strength_pct": 0.76, "posture": "attacking_south" },
-            { "location": "MSR Midpoint",           "lat": 40.650, "lng": 127.195, "strength_pct": 0.72, "posture": "moving" },
-            { "location": "Hagaru-ri (assembling)", "lat": 40.585, "lng": 127.235, "strength_pct": 0.95, "posture": "consolidating" }
-          ]
-        },
-        {
-          "unit_id": "20th-pva-army",
-          "faction_id": "pva-9th-army",
-          "positions": [
-            { "location": "MSR Blocking Positions", "lat": 40.655, "lng": 127.180, "strength_pct": 0.60, "posture": "blocking" },
-            { "location": "Yudam-ni Pursuit",        "lat": 40.720, "lng": 127.140, "strength_pct": 0.55, "posture": "pursuing" }
-          ]
-        }
+        { "unit_id": "5th-marines",         "faction_id": "un-x-corps",   "positions": [{ "location": "Yudam-ni (breakout)", "lat": 40.480, "lng": 127.112, "strength_pct": 0.76, "posture": "attacking_south" }] },
+        { "unit_id": "7th-marines",         "faction_id": "un-x-corps",   "positions": [{ "location": "Toktong Pass (opening)", "lat": 40.394, "lng": 127.161, "strength_pct": 0.72, "posture": "attacking_south" }] },
+        { "unit_id": "fox-company-7th",     "faction_id": "un-x-corps",   "positions": [{ "location": "Toktong Pass",       "lat": 40.393, "lng": 127.160, "strength_pct": 0.55, "posture": "defending" }] },
+        { "unit_id": "1st-marines",         "faction_id": "un-x-corps",   "positions": [{ "location": "Hagaru-ri",          "lat": 40.384, "lng": 127.249, "strength_pct": 0.88, "posture": "consolidating" }] },
+        { "unit_id": "british-41-commando", "faction_id": "un-x-corps",   "positions": [{ "location": "Hagaru-ri",          "lat": 40.386, "lng": 127.251, "strength_pct": 0.72, "posture": "consolidating" }] },
+        { "unit_id": "pva-59th-div",        "faction_id": "pva-9th-army", "positions": [{ "location": "MSR Block",           "lat": 40.435, "lng": 127.135, "strength_pct": 0.45, "posture": "blocking" }] },
+        { "unit_id": "pva-79th-div",        "faction_id": "pva-9th-army", "positions": [{ "location": "Yudam-ni Pursuit",    "lat": 40.490, "lng": 127.110, "strength_pct": 0.55, "posture": "pursuing" }] },
+        { "unit_id": "pva-58th-div",        "faction_id": "pva-9th-army", "positions": [{ "location": "East Hill",           "lat": 40.387, "lng": 127.259, "strength_pct": 0.35, "posture": "attacking" }] }
       ],
       "events": [
         {
@@ -826,24 +787,16 @@
       "summary": "The consolidated Marine division, with Army survivors and allied forces, fights 78 miles south from Hagaru-ri through Koto-ri and Funchilin Pass to the port of Hungnam. A treadway bridge section is airdropped to span the critical gap at Funchilin Pass — an engineering feat never attempted before or since.",
       "tactical_situation": "The PVA 26th Army attempts to cut off the column at Funchilin Pass — a 4,000-foot elevation, single-file road clinging to a cliff face. The critical bridge has been destroyed. Without a crossing, 14,000 men and all equipment are trapped.",
       "unit_positions": [
-        {
-          "unit_id": "1st-marine-div",
-          "faction_id": "un-x-corps",
-          "positions": [
-            { "location": "Hagaru-ri (departing)", "lat": 40.585, "lng": 127.235, "strength_pct": 0.85, "posture": "attacking_south" },
-            { "location": "Koto-ri",               "lat": 40.475, "lng": 127.280, "strength_pct": 0.82, "posture": "consolidating" },
-            { "location": "Funchilin Pass",        "lat": 40.390, "lng": 127.310, "strength_pct": 0.78, "posture": "attacking_south" },
-            { "location": "Hungnam Perimeter",     "lat": 39.830, "lng": 127.620, "strength_pct": 0.75, "posture": "evacuating" }
-          ]
-        },
-        {
-          "unit_id": "26th-pva-army",
-          "faction_id": "pva-9th-army",
-          "positions": [
-            { "location": "Funchilin Pass Block", "lat": 40.395, "lng": 127.300, "strength_pct": 0.70, "posture": "blocking" },
-            { "location": "South Pursuit",         "lat": 40.430, "lng": 127.295, "strength_pct": 0.65, "posture": "pursuing" }
-          ]
-        }
+        { "unit_id": "7th-marines",         "faction_id": "un-x-corps",   "positions": [{ "location": "Hagaru-ri (vanguard)", "lat": 40.384, "lng": 127.249, "strength_pct": 0.82, "posture": "attacking_south" }] },
+        { "unit_id": "5th-marines",         "faction_id": "un-x-corps",   "positions": [{ "location": "Koto-ri",              "lat": 40.284, "lng": 127.300, "strength_pct": 0.80, "posture": "consolidating" }] },
+        { "unit_id": "1st-marines",         "faction_id": "un-x-corps",   "positions": [{ "location": "Funchilin Pass",        "lat": 40.232, "lng": 127.296, "strength_pct": 0.78, "posture": "attacking_south" }] },
+        { "unit_id": "rct-31",              "faction_id": "un-x-corps",   "positions": [{ "location": "Koto-ri (remnants)",    "lat": 40.286, "lng": 127.302, "strength_pct": 0.35, "posture": "moving" }] },
+        { "unit_id": "task-force-dog",      "faction_id": "un-x-corps",   "positions": [{ "location": "Sudong",                "lat": 40.170, "lng": 127.324, "strength_pct": 0.90, "posture": "holding" }] },
+        { "unit_id": "pva-76th-div",        "faction_id": "pva-9th-army", "positions": [{ "location": "Hagaru-ri (relieving)", "lat": 40.382, "lng": 127.246, "strength_pct": 0.82, "posture": "attacking" }] },
+        { "unit_id": "pva-77th-div",        "faction_id": "pva-9th-army", "positions": [{ "location": "Koto-ri Road Ridges",   "lat": 40.330, "lng": 127.298, "strength_pct": 0.80, "posture": "blocking" }] },
+        { "unit_id": "pva-180th-rgt",       "faction_id": "pva-9th-army", "positions": [{ "location": "Hill 1081",              "lat": 40.233, "lng": 127.326, "strength_pct": 0.70, "posture": "defending" }] },
+        { "unit_id": "pva-58th-div",        "faction_id": "pva-9th-army", "positions": [{ "location": "Funchilin Pass (200)",   "lat": 40.230, "lng": 127.293, "strength_pct": 0.15, "posture": "blocking" }] },
+        { "unit_id": "pva-89th-div",        "faction_id": "pva-9th-army", "positions": [{ "location": "Sudong Ambush",          "lat": 40.172, "lng": 127.325, "strength_pct": 0.40, "posture": "attacking" }] }
       ],
       "events": [
         {
