@@ -21,4 +21,5 @@ export interface StrengthBarProps {
 
 export interface OrderOfBattleProps {
   faction: Faction
+  currentPhase: Phase
 }

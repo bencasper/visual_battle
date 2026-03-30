@@ -1,8 +1,15 @@
 import { useState } from 'react'
 import type { OrderOfBattleProps } from './ArmyPanel.types'
-import type { Unit } from '@/types/battle'
+import type { Phase, Unit } from '@/types/battle'
 import { formatNumber } from '@/utils/formatUtils'
 import { WIKI_COLOURS } from '@/utils/wikiMapStyle'
+
+/** Average strength_pct across all positions for a unit in the given phase */
+function getUnitStrengthPct(phase: Phase, unitId: string): number | null {
+  const up = phase.unit_positions.find((u) => u.unit_id === unitId)
+  if (!up || !up.positions.length) return null
+  return up.positions.reduce((s, p) => s + p.strength_pct, 0) / up.positions.length
+}
 
 // ── NATO milsymbol-style unit size indicators ──────────────────────────────
 // These are the standard NATO "frame echelon" marks used on maps
@@ -58,9 +65,11 @@ interface UnitRowProps {
   children?: Unit[]
   side: 'un' | 'pva'
   depth?: number
+  effectiveStrength: number | null
+  strengthMap: Map<string, number>
 }
 
-function UnitRow({ unit, children, side, depth = 0 }: UnitRowProps) {
+function UnitRow({ unit, children, side, depth = 0, effectiveStrength, strengthMap }: UnitRowProps) {
   const [open, setOpen] = useState(false)
   const hasChildren = children && children.length > 0
   const accentColor = side === 'un' ? WIKI_COLOURS.unBlue : WIKI_COLOURS.pvaRed
@@ -127,7 +136,9 @@ function UnitRow({ unit, children, side, depth = 0 }: UnitRowProps) {
         {/* Right column: strength + supply dot */}
         <div className="shrink-0 flex flex-col items-end gap-0.5">
           <span className="text-[9px] font-mono text-wiki-textMuted">
-            {formatNumber(unit.strength)}
+            {effectiveStrength !== null
+              ? formatNumber(Math.round(effectiveStrength))
+              : formatNumber(unit.strength)}
           </span>
           <span
             className="text-[7px] font-bold rounded-sm px-0.5 leading-none"
@@ -178,7 +189,14 @@ function UnitRow({ unit, children, side, depth = 0 }: UnitRowProps) {
       {open && hasChildren && (
         <div>
           {children!.map((child) => (
-            <UnitRow key={child.id} unit={child} side={side} depth={depth + 1} />
+            <UnitRow
+              key={child.id}
+              unit={child}
+              side={side}
+              depth={depth + 1}
+              effectiveStrength={strengthMap.get(child.id) ?? null}
+              strengthMap={strengthMap}
+            />
           ))}
         </div>
       )}
@@ -186,10 +204,17 @@ function UnitRow({ unit, children, side, depth = 0 }: UnitRowProps) {
   )
 }
 
-export function OrderOfBattle({ faction }: OrderOfBattleProps) {
+export function OrderOfBattle({ faction, currentPhase }: OrderOfBattleProps) {
   const [showAll, setShowAll] = useState(false)
   const side = faction.side.toLowerCase() as 'un' | 'pva'
   const accentColor = side === 'un' ? WIKI_COLOURS.unBlue : WIKI_COLOURS.pvaRed
+
+  // Build unitId → effective strength map for this phase
+  const strengthMap = new Map<string, number>()
+  for (const unit of faction.units) {
+    const pct = getUnitStrengthPct(currentPhase, unit.id)
+    if (pct !== null) strengthMap.set(unit.id, Math.round(unit.strength * pct))
+  }
 
   // Build parent → children index
   const childrenOf = new Map<string | null, Unit[]>()
@@ -232,12 +257,14 @@ export function OrderOfBattle({ faction }: OrderOfBattleProps) {
 
       {/* Unit tree */}
       <div className="space-y-0.5">
-        {visible.map((unit) => (
+      {visible.map((unit) => (
           <UnitRow
             key={unit.id}
             unit={unit}
             children={childrenOf.get(unit.id)}
             side={side}
+            effectiveStrength={strengthMap.get(unit.id) ?? null}
+            strengthMap={strengthMap}
           />
         ))}
       </div>

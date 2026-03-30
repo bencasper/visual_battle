@@ -32,7 +32,7 @@ export function ArmyPanel({ factions, currentPhase, selectedFactionId, onSelectF
 
       {/* Order of battle for active faction */}
       {activeFaction && (
-        <OrderOfBattle faction={activeFaction} />
+        <OrderOfBattle faction={activeFaction} currentPhase={currentPhase} />
       )}
     </Panel>
   )
