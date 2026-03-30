@@ -4,6 +4,8 @@ import { useUIStore } from '@/store/useUIStore'
 import { TerrainLayer } from './TerrainLayer'
 import { UnitMarker } from './UnitMarker'
 import { MapControls } from './MapControls'
+import { MapLegend } from './MapLegend'
+import { MapScaleBar } from './MapScaleBar'
 import { wikiMapStyle, WIKI_COLOURS } from '@/utils/wikiMapStyle'
 import { useEffect } from 'react'
 
@@ -63,7 +65,8 @@ export function MapEngine({ battle, currentPhase, terrain, showTerrain, onUnitCl
           color={pos.color}
           posture={pos.posture}
           strengthPct={pos.strength_pct}
-          onClick={() => onUnitClick?.(pos.unitId)}
+          isSelected={false}
+          onClick={(anchor) => onUnitClick?.(pos.unitId, anchor)}
         />
       ))}
 
@@ -74,6 +77,12 @@ export function MapEngine({ battle, currentPhase, terrain, showTerrain, onUnitCl
         onResetBearing={() => mapRef.current?.resetNorth()}
         onFitBounds={()    => flyToBounds(battle.map_bounds)}
       />
+
+      {/* Scale bar — bottom-left, above timeline */}
+      {mapInstance && <MapScaleBar map={mapInstance} />}
+
+      {/* Map legend — bottom-left, beside scale bar */}
+      <MapLegend factions={battle.factions} />
     </div>
   )
 }

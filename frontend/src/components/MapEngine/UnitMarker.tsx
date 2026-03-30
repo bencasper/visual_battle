@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react'
 import maplibregl, { type Map as MapLibreMap } from 'maplibre-gl'
 import { WIKI_COLOURS } from '@/utils/wikiMapStyle'
-
 interface UnitMarkerProps {
   map: MapLibreMap
   lat: number
@@ -11,7 +10,8 @@ interface UnitMarkerProps {
   color: string
   posture: string
   strengthPct: number
-  onClick?: () => void
+  isSelected?: boolean
+  onClick?: (anchor: { x: number; y: number }) => void
 }
 
 function natoIcon(unitType?: string): string {
@@ -40,7 +40,7 @@ function factionColor(color: string): string {
   return color
 }
 
-export function UnitMarker({ map, lat, lng, label, unitType, color, posture, strengthPct, onClick }: UnitMarkerProps) {
+export function UnitMarker({ map, lat, lng, label, unitType, color, posture, strengthPct, isSelected, onClick }: UnitMarkerProps) {
   const markerRef = useRef<maplibregl.Marker | null>(null)
 
   useEffect(() => {
@@ -70,6 +70,7 @@ export function UnitMarker({ map, lat, lng, label, unitType, color, posture, str
       'align-items: center',
       'justify-content: center',
       'box-shadow: 0 1px 4px rgba(0,0,0,0.5)',
+      isSelected ? 'outline: 2px solid #fff; outline-offset: 1px' : '',
     ].join(';')
 
     // Icon image
@@ -97,18 +98,18 @@ export function UnitMarker({ map, lat, lng, label, unitType, color, posture, str
     el.appendChild(box)
     el.appendChild(lbl)
 
-    if (onClick) el.addEventListener('click', onClick)
+    if (onClick) {
+      el.addEventListener('click', (e) => {
+        onClick({ x: e.clientX, y: e.clientY })
+      })
+    }
 
     // Hover highlight
-    el.addEventListener('mouseenter', () => { box.style.outline = '2px solid #fff' })
-    el.addEventListener('mouseleave', () => { box.style.outline = 'none' })
-
-    const popup = new maplibregl.Popup({ offset: [0, -32], closeButton: false, maxWidth: '180px' })
-      .setHTML(`<strong style="font-size:11px">${label}</strong><br><span style="font-size:10px;opacity:0.8">${posture.replace(/_/g,' ')} · ${Math.round(strengthPct * 100)}%</span>`)
+    el.addEventListener('mouseenter', () => { if (!isSelected) box.style.outline = '2px solid #fff' })
+    el.addEventListener('mouseleave', () => { if (!isSelected) box.style.outline = 'none' })
 
     const marker = new maplibregl.Marker({ element: el, anchor: 'bottom' })
       .setLngLat([lng, lat])
-      .setPopup(popup)
       .addTo(map)
 
     markerRef.current = marker
@@ -116,7 +117,7 @@ export function UnitMarker({ map, lat, lng, label, unitType, color, posture, str
     return () => {
       marker.remove()
     }
-  }, [map, lat, lng, label, unitType, color, posture, strengthPct, onClick])
+  }, [map, lat, lng, label, unitType, color, posture, strengthPct, isSelected, onClick])
 
   return null
 }

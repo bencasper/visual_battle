@@ -1,10 +1,12 @@
 import { useRef, useCallback } from 'react'
 import { useParams } from 'react-router-dom'
+import { AnimatePresence } from 'framer-motion'
 import type { Map as MapLibreMap } from 'maplibre-gl'
 import { useBattleData } from '@/hooks/useBattleData'
 import { useTimelineStore } from '@/store/useTimelineStore'
 import { useUIStore } from '@/store/useUIStore'
 import { MapEngine } from '@/components/MapEngine/MapEngine'
+import { UnitDrawer } from '@/components/MapEngine/UnitDrawer'
 import { Timeline } from '@/components/Timeline/Timeline'
 import { ArmyPanel } from '@/components/ArmyPanel/ArmyPanel'
 import { LoadingSpinner } from '@/components/shared/LoadingSpinner'
@@ -17,7 +19,7 @@ export function BattleView() {
   const { battle, terrain, loading, error } = useBattleData(battleId)
 
   const { currentPhaseIndex, isPlaying, speed, play, pause, stepForward, stepBack, seekToPhase, setSpeed } = useTimelineStore()
-  const { showTerrain, selectedFactionId, selectFaction } = useUIStore()
+  const { showTerrain, selectedFactionId, selectFaction, selectedUnitId, selectedUnitAnchor, selectUnit } = useUIStore()
 
   const mapRef = useRef<MapLibreMap | null>(null)
   const handleMapReady = useCallback((map: MapLibreMap) => { mapRef.current = map }, [])
@@ -40,6 +42,17 @@ export function BattleView() {
 
   const currentPhase = battle.phases[currentPhaseIndex]
 
+  // Resolve selected unit + its current phase position data
+  const selectedUnit = selectedUnitId
+    ? battle.factions.flatMap((f) => f.units).find((u) => u.id === selectedUnitId) ?? null
+    : null
+  const selectedFaction = selectedUnit
+    ? battle.factions.find((f) => f.units.some((u) => u.id === selectedUnit.id)) ?? null
+    : null
+  const selectedPosition = selectedUnitId
+    ? currentPhase.unit_positions.find((up) => up.unit_id === selectedUnitId)?.positions[0] ?? null
+    : null
+
   return (
     <div style={{ position: 'fixed', inset: 0, overflow: 'hidden' }}>
       {/* ── MAP ENGINE (full viewport) ── */}
@@ -49,6 +62,7 @@ export function BattleView() {
           currentPhase={currentPhase}
           terrain={terrain}
           showTerrain={showTerrain}
+          onUnitClick={(id, anchor) => selectUnit(selectedUnitId === id ? null : id, anchor)}
           onMapReady={handleMapReady}
         />
       </ErrorBoundary>
@@ -74,6 +88,21 @@ export function BattleView() {
           />
         </div>
       </div>
+
+      {/* ── UNIT INFO DRAWER (bottom-left, above timeline) ── */}
+      <AnimatePresence>
+        {selectedUnit && selectedFaction && selectedUnitAnchor && (
+          <UnitDrawer
+            unit={selectedUnit}
+            faction={selectedFaction}
+            positionLabel={selectedPosition?.location}
+            posture={selectedPosition?.posture}
+            strengthPct={selectedPosition?.strength_pct}
+            anchor={selectedUnitAnchor}
+            onClose={() => selectUnit(null)}
+          />
+        )}
+      </AnimatePresence>
 
       {/* ── TIMELINE (bottom dock) ── */}
       <Timeline

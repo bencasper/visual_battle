@@ -6,6 +6,6 @@ export interface MapEngineProps {
   currentPhase: Phase
   terrain: object | null
   showTerrain: boolean
-  onUnitClick?: (unitId: string) => void
+  onUnitClick?: (unitId: string, anchor: { x: number; y: number }) => void
   onMapReady?: (map: MapLibreMap) => void
 }

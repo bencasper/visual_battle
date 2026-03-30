@@ -6,6 +6,7 @@ interface UIState {
   activePanel: ActivePanel
   selectedFactionId: string | null
   selectedUnitId: string | null
+  selectedUnitAnchor: { x: number; y: number } | null
   showTerrain: boolean
   showAnnotations: boolean
   mapBearing: number
@@ -18,7 +19,7 @@ interface UIActions {
   togglePanel: (panel: ActivePanel) => void
   closePanel: () => void
   selectFaction: (id: string | null) => void
-  selectUnit: (id: string | null) => void
+  selectUnit: (id: string | null, anchor?: { x: number; y: number }) => void
   toggleTerrain: () => void
   toggleAnnotations: () => void
   setMapView: (view: Partial<Pick<UIState, 'mapBearing' | 'mapZoom' | 'mapPitch'>>) => void
@@ -29,6 +30,7 @@ export const useUIStore = create<UIState & UIActions>((set, get) => ({
   activePanel: null,
   selectedFactionId: null,
   selectedUnitId: null,
+  selectedUnitAnchor: null,
   showTerrain: true,
   showAnnotations: true,
   mapBearing: 0,
@@ -43,7 +45,7 @@ export const useUIStore = create<UIState & UIActions>((set, get) => ({
 
   selectFaction: (id) => set({ selectedFactionId: id }),
 
-  selectUnit: (id) => set({ selectedUnitId: id }),
+  selectUnit: (id, anchor) => set({ selectedUnitId: id, selectedUnitAnchor: anchor ?? null }),
 
   toggleTerrain: () => set((s) => ({ showTerrain: !s.showTerrain })),
 
