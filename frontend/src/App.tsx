@@ -10,7 +10,8 @@ export default function App() {
       <ErrorBoundary>
         <div style={{ position: 'fixed', inset: 0 }}>
           <Routes>
-            <Route path="/" element={<BattleList />} />
+            <Route path="/" element={<BattleView />} />
+            <Route path="/battles" element={<BattleList />} />
             <Route path="/battle/:battleId" element={<BattleView />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
