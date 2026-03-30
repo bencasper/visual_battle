@@ -42,6 +42,7 @@ export function BattleView() {
 
   const currentPhase  = battle.phases[currentPhaseIndex]
   const previousPhase = currentPhaseIndex > 0 ? battle.phases[currentPhaseIndex - 1] : null
+  const nextPhase     = currentPhaseIndex < battle.phases.length - 1 ? battle.phases[currentPhaseIndex + 1] : null
 
   // Resolve selected unit + its current phase position data
   const selectedUnit = selectedUnitId
@@ -62,6 +63,7 @@ export function BattleView() {
           battle={battle}
           currentPhase={currentPhase}
           previousPhase={previousPhase}
+          nextPhase={nextPhase}
           terrain={terrain}
           showTerrain={showTerrain}
           onUnitClick={(id, anchor) => selectUnit(selectedUnitId === id ? null : id, anchor)}

@@ -13,7 +13,7 @@ import { useEffect } from 'react'
 
 const DEM_SOURCE = 'terrain-dem'
 
-export function MapEngine({ battle, currentPhase, previousPhase, terrain, showTerrain, onUnitClick, onMapReady }: MapEngineProps) {
+export function MapEngine({ battle, currentPhase, previousPhase, nextPhase, terrain, showTerrain, onUnitClick, onMapReady }: MapEngineProps) {
   const setMapView = useUIStore((s) => s.setMapView)
   const is3D       = useUIStore((s) => s.is3D)
   const toggle3D   = useUIStore((s) => s.toggle3D)
@@ -89,13 +89,13 @@ export function MapEngine({ battle, currentPhase, previousPhase, terrain, showTe
         <TerrainLayer map={mapInstance} terrain={terrain} />
       )}
 
-      {/* Movement arrows — from previous phase positions to current */}
+      {/* Movement arrows — hint where units will move in the next phase */}
       {mapInstance && (
         <MovementArrowLayer
           map={mapInstance}
           battle={battle}
           currentPhase={currentPhase}
-          previousPhase={previousPhase}
+          nextPhase={nextPhase}
         />
       )}
 

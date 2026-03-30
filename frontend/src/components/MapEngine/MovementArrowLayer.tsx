@@ -1,11 +1,6 @@
 // MovementArrowLayer — Wikipedia-style broad tapered movement arrows.
-// Each arrow is a single SVG element positioned as a MapLibre marker at the
-// midpoint of the path, sized and rotated to span from→to.
-// Visual style matches https://upload.wikimedia.org/wikipedia/commons/6/64/Battle_of_Chishui_River-zh.png:
-//   • Broad, tapered body (wide at tail, narrows toward tip)
-//   • Bold filled triangle arrowhead
-//   • Dark outline/shadow for legibility on parchment
-//   • UN blue / PVA red
+// Arrows show where units are headed NEXT (current → next phase positions),
+// acting as movement hints rather than a record of past movement.
 
 import { useEffect, useRef } from 'react'
 import maplibregl, { type Map as MapLibreMap } from 'maplibre-gl'
@@ -16,7 +11,7 @@ interface MovementArrowLayerProps {
   map: MapLibreMap
   battle: Battle
   currentPhase: Phase
-  previousPhase: Phase | null
+  nextPhase: Phase | null
 }
 
 function wikiColor(hex: string): string {
@@ -123,7 +118,7 @@ function buildArrowSVG(
   }
 }
 
-export function MovementArrowLayer({ map, battle, currentPhase, previousPhase }: MovementArrowLayerProps) {
+export function MovementArrowLayer({ map, battle, currentPhase, nextPhase }: MovementArrowLayerProps) {
   const markersRef = useRef<maplibregl.Marker[]>([])
 
   useEffect(() => {
@@ -131,27 +126,27 @@ export function MovementArrowLayer({ map, battle, currentPhase, previousPhase }:
     markersRef.current.forEach((m) => m.remove())
     markersRef.current = []
 
-    if (!map || !previousPhase) return
+    if (!map || !nextPhase) return
 
     function draw() {
-      // collect arrows
+      // collect arrows: from current position → next phase position
       type Arrow = { fromLng: number; fromLat: number; toLng: number; toLat: number; color: string }
       const arrows: Arrow[] = []
 
       for (const up of currentPhase.unit_positions) {
         const cur = up.positions[0]
         if (!cur) continue
-        const prevUp = previousPhase!.unit_positions.find(
+        const nextUp = nextPhase!.unit_positions.find(
           (p) => p.unit_id === up.unit_id && p.faction_id === up.faction_id,
         )
-        const prev = prevUp?.positions[0]
-        if (!prev) continue
-        if (Math.abs(cur.lat - prev.lat) < 0.001 && Math.abs(cur.lng - prev.lng) < 0.001) continue
+        const next = nextUp?.positions[0]
+        if (!next) continue
+        if (Math.abs(cur.lat - next.lat) < 0.001 && Math.abs(cur.lng - next.lng) < 0.001) continue
 
         const faction = battle.factions.find((f) => f.id === up.faction_id)
         arrows.push({
-          fromLat: prev.lat, fromLng: prev.lng,
-          toLat: cur.lat,    toLng: cur.lng,
+          fromLat: cur.lat,  fromLng: cur.lng,
+          toLat:   next.lat, toLng:   next.lng,
           color: faction ? wikiColor(faction.color) : '#555',
         })
       }
@@ -215,7 +210,7 @@ export function MovementArrowLayer({ map, battle, currentPhase, previousPhase }:
       markersRef.current.forEach((m) => m.remove())
       markersRef.current = []
     }
-  }, [map, battle, currentPhase, previousPhase])
+  }, [map, battle, currentPhase, nextPhase])
 
   return null
 }
