@@ -68,7 +68,7 @@ export const useBattleStore = create<BattleState & BattleActions>((set) => ({
       } catch {
         // Local fallback for development without backend
         const slug = id.replace(/-\d{4}$/, '')
-        const res = await fetch(`/data/battles/${slug}.json`)
+        const res = await fetch(`/data/battles/${slug}.json?v=${Date.now()}`)
         if (!res.ok) throw new Error(`Battle data not found: ${slug}`)
         battle = await res.json() as Battle
       }

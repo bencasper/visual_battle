@@ -10,7 +10,8 @@ import { useEffect } from 'react'
 export function MapEngine({ battle, currentPhase, terrain, showTerrain, onUnitClick, onMapReady }: MapEngineProps) {
   const setMapView = useUIStore((s) => s.setMapView)
 
-  const { containerRef, mapRef, mapReady, flyToBounds } = useMapLibre({
+  // mapInstance is React state — guaranteed non-null when set, triggers re-render
+  const { containerRef, mapRef, mapInstance, flyToBounds } = useMapLibre({
     style: wikiMapStyle,
     bounds: battle.map_bounds,
     onReady: (map) => {
@@ -41,26 +42,25 @@ export function MapEngine({ battle, currentPhase, terrain, showTerrain, onUnitCl
   })
 
   return (
-    <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
-      {/* MapLibre canvas */}
+    <div style={{ position: 'absolute', inset: 0 }}>
+      {/* MapLibre canvas container */}
       <div ref={containerRef} style={{ position: 'absolute', inset: 0, background: WIKI_COLOURS.parchment }} />
 
-      {/* Terrain layer — only after map is ready */}
-      {mapReady && terrain && showTerrain && mapRef.current && (
-        <TerrainLayer map={mapRef.current} terrain={terrain} />
+      {/* Terrain layer */}
+      {mapInstance && terrain && showTerrain && (
+        <TerrainLayer map={mapInstance} terrain={terrain} />
       )}
 
-      {/* Unit markers — only after map is ready */}
-      {mapReady && mapRef.current && allPositions.map((pos, i) => (
+      {/* Unit markers — keyed by unitId+location so they remount on phase change */}
+      {mapInstance && allPositions.map((pos, i) => (
         <UnitMarker
           key={`${pos.unitId}-${pos.location}-${i}`}
-          map={mapRef.current!}
+          map={mapInstance}
           lat={pos.lat}
           lng={pos.lng}
           label={pos.location}
           unitType={pos.unitType}
           color={pos.color}
-          colorLight={pos.colorLight}
           posture={pos.posture}
           strengthPct={pos.strength_pct}
           onClick={() => onUnitClick?.(pos.unitId)}

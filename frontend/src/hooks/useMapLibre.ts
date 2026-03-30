@@ -13,15 +13,13 @@ interface UseMapLibreOptions {
 export function useMapLibre({ style, bounds, onReady }: UseMapLibreOptions) {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const mapRef       = useRef<MapLibreMap | null>(null)
-  const [mapReady, setMapReady] = useState(false)
+  // Store map in STATE so components re-render with the real instance
+  const [mapInstance, setMapInstance] = useState<MapLibreMap | null>(null)
 
   useEffect(() => {
     let active = true
     let map: MapLibreMap | null = null
 
-    // Defer map creation to next frame — ensures the container div is in the
-    // DOM and its CSS dimensions (height: 100%) are fully resolved before
-    // MapLibre measures the canvas size.
     const timer = requestAnimationFrame(() => {
       const container = containerRef.current
       if (!container || !active) return
@@ -38,7 +36,7 @@ export function useMapLibre({ style, bounds, onReady }: UseMapLibreOptions) {
         if (!active) return
         mapRef.current = map
         map!.resize()
-        setMapReady(true)
+        setMapInstance(map)   // ← state update — triggers re-render with real map
         onReady?.(map!)
       })
 
@@ -59,10 +57,8 @@ export function useMapLibre({ style, bounds, onReady }: UseMapLibreOptions) {
         map = null
       }
       mapRef.current = null
-      setMapReady(false)
+      setMapInstance(null)
     }
-  // Re-run if the style object reference changes (e.g. battle switch).
-  // bounds is intentionally excluded — flyToBounds handles live panning.
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [style])
 
@@ -70,5 +66,5 @@ export function useMapLibre({ style, bounds, onReady }: UseMapLibreOptions) {
     mapRef.current?.fitBounds(boundsToMapLibre(b), { padding: { top: 80, bottom: 180, left: 80, right: 80 }, duration: 1200 })
   }, [])
 
-  return { containerRef, mapRef, mapReady, flyToBounds }
+  return { containerRef, mapRef, mapInstance, flyToBounds }
 }
