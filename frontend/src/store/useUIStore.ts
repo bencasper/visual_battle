@@ -13,6 +13,7 @@ interface UIState {
   mapZoom: number
   mapPitch: number
   sidebarCollapsed: boolean
+  is3D: boolean
 }
 
 interface UIActions {
@@ -24,6 +25,7 @@ interface UIActions {
   toggleAnnotations: () => void
   setMapView: (view: Partial<Pick<UIState, 'mapBearing' | 'mapZoom' | 'mapPitch'>>) => void
   toggleSidebar: () => void
+  toggle3D: () => void
 }
 
 export const useUIStore = create<UIState & UIActions>((set, get) => ({
@@ -37,6 +39,7 @@ export const useUIStore = create<UIState & UIActions>((set, get) => ({
   mapZoom: 10,
   mapPitch: 0,
   sidebarCollapsed: false,
+  is3D: false,
 
   togglePanel: (panel) =>
     set((s) => ({ activePanel: s.activePanel === panel ? null : panel })),
@@ -54,4 +57,6 @@ export const useUIStore = create<UIState & UIActions>((set, get) => ({
   setMapView: (view) => set(view),
 
   toggleSidebar: () => set((s) => ({ sidebarCollapsed: !s.sidebarCollapsed })),
+
+  toggle3D: () => { console.log('[3D] toggle3D called, current=', get().is3D); set((s) => ({ is3D: !s.is3D })) },
 }))

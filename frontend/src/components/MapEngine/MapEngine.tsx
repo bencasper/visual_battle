@@ -11,10 +11,13 @@ import { NorthArrow } from './NorthArrow'
 import { wikiMapStyle, WIKI_COLOURS } from '@/utils/wikiMapStyle'
 import { useEffect } from 'react'
 
+const DEM_SOURCE = 'terrain-dem'
+
 export function MapEngine({ battle, currentPhase, previousPhase, terrain, showTerrain, onUnitClick, onMapReady }: MapEngineProps) {
   const setMapView = useUIStore((s) => s.setMapView)
+  const is3D       = useUIStore((s) => s.is3D)
+  const toggle3D   = useUIStore((s) => s.toggle3D)
 
-  // mapInstance is React state — guaranteed non-null when set, triggers re-render
   const { containerRef, mapRef, mapInstance, flyToBounds } = useMapLibre({
     style: wikiMapStyle,
     bounds: battle.map_bounds,
@@ -22,8 +25,39 @@ export function MapEngine({ battle, currentPhase, previousPhase, terrain, showTe
       onMapReady?.(map)
       map.on('zoom',   () => setMapView({ mapZoom:    map.getZoom() }))
       map.on('rotate', () => setMapView({ mapBearing: map.getBearing() }))
+      map.on('pitch',  () => setMapView({ mapPitch:   map.getPitch() }))
     },
   })
+
+  // ── 2D / 3D toggle ────────────────────────────────────────────────────────
+  useEffect(() => {
+    const map = mapRef.current
+    console.log('[3D] effect fired, is3D=', is3D, 'map=', !!map)
+    if (!map) return
+
+    if (is3D) {
+      console.log('[3D] enabling terrain')
+      if (!map.getSource(DEM_SOURCE)) {
+        map.addSource(DEM_SOURCE, {
+          type: 'raster-dem',
+          tiles: ['https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png'],
+          tileSize: 256,
+          maxzoom: 14,
+          encoding: 'terrarium',
+        })
+      }
+      map.setTerrain({ source: DEM_SOURCE, exaggeration: 1.8 })
+      map.easeTo({ pitch: 55, bearing: -15, duration: 800 })
+    } else {
+      console.log('[3D] disabling terrain')
+      map.setTerrain(null)
+      setTimeout(() => {
+        try { if (mapRef.current?.getSource(DEM_SOURCE)) mapRef.current.removeSource(DEM_SOURCE) } catch { /* */ }
+      }, 200)
+      map.easeTo({ pitch: 0, bearing: 0, duration: 600 })
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [is3D, mapInstance])  // mapInstance triggers re-run once map is ready  // deliberately only depend on is3D — mapRef is a stable ref
 
   // Fly to battle bounds when battle changes
   useEffect(() => {
@@ -50,7 +84,7 @@ export function MapEngine({ battle, currentPhase, previousPhase, terrain, showTe
       {/* MapLibre canvas container */}
       <div ref={containerRef} style={{ position: 'absolute', inset: 0, background: WIKI_COLOURS.parchment }} />
 
-      {/* Terrain layer */}
+      {/* Terrain layer (2D GeoJSON overlays) */}
       {mapInstance && terrain && showTerrain && (
         <TerrainLayer map={mapInstance} terrain={terrain} />
       )}
@@ -88,15 +122,17 @@ export function MapEngine({ battle, currentPhase, previousPhase, terrain, showTe
         onZoomOut={()      => mapRef.current?.zoomOut()}
         onResetBearing={() => mapRef.current?.resetNorth()}
         onFitBounds={()    => flyToBounds(battle.map_bounds)}
+        is3D={is3D}
+        onToggle3D={toggle3D}
       />
 
-      {/* Scale bar — bottom-left, above timeline */}
+      {/* Scale bar */}
       {mapInstance && <MapScaleBar map={mapInstance} />}
 
-      {/* Map legend — bottom-left, beside scale bar */}
+      {/* Map legend */}
       <MapLegend factions={battle.factions} />
 
-      {/* North arrow — bottom-left, above scale bar */}
+      {/* North arrow */}
       <NorthArrow />
     </div>
   )

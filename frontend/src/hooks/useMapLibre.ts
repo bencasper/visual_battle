@@ -30,6 +30,8 @@ export function useMapLibre({ style, bounds, onReady }: UseMapLibreOptions) {
         bounds: boundsToMapLibre(bounds),
         fitBoundsOptions: { padding: { top: 80, bottom: 180, left: 80, right: 80 } },
         attributionControl: false,
+        maxPitch: 85,
+        antialias: true,
       })
 
       map.on('load', () => {
