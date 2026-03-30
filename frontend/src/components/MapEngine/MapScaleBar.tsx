@@ -109,11 +109,11 @@ export function MapScaleBar({ map }: MapScaleBarProps) {
         <line x1={0} y1={1} x2={W} y2={1} stroke={WIKI_COLOURS.panelText} strokeWidth={2} />
 
         {/* Left half — dark fill */}
-        <rect x={1} y={1} width={W / 2 - 1} height={H}
+        <rect x={1} y={1} width={Math.max(0, W / 2 - 1)} height={H}
           fill={WIKI_COLOURS.panelText} />
 
         {/* Right half — light fill with border */}
-        <rect x={W / 2} y={1} width={W / 2 - 1} height={H}
+        <rect x={W / 2} y={1} width={Math.max(0, W / 2 - 1)} height={H}
           fill={WIKI_COLOURS.parchment}
           stroke={WIKI_COLOURS.panelBorder} strokeWidth={0.5} />
       </svg>

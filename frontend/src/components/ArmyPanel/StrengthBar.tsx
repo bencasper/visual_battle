@@ -32,7 +32,7 @@ export function StrengthBar({ factions, currentPhase }: StrengthBarProps) {
       .attr('width', 0)
       .attr('fill', c0)
       .transition().duration(700)
-      .attr('width', pct0 * width - 1)
+      .attr('width', Math.max(0, pct0 * width - 1))
 
     // Right bar (faction 1 — PVA)
     d3svg.append('rect')
@@ -41,7 +41,7 @@ export function StrengthBar({ factions, currentPhase }: StrengthBarProps) {
       .attr('fill', c1)
       .transition().duration(700)
       .attr('x', pct0 * width + 1)
-      .attr('width', (1 - pct0) * width - 1)
+      .attr('width', Math.max(0, (1 - pct0) * width - 1))
 
     // Labels
     d3svg.append('text').attr('x', 4).attr('y', 6).attr('fill', c0).attr('font-size', 9).attr('font-weight', 700).text(f0.side)

@@ -6,7 +6,7 @@ import { ErrorBoundary } from '@/components/shared/ErrorBoundary'
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <ErrorBoundary>
         <div style={{ position: 'fixed', inset: 0 }}>
           <Routes>
