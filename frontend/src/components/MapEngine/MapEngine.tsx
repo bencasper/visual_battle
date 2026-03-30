@@ -11,7 +11,8 @@ import { NorthArrow } from './NorthArrow'
 import { wikiMapStyle, WIKI_COLOURS } from '@/utils/wikiMapStyle'
 import { useEffect } from 'react'
 
-const DEM_SOURCE = 'terrain-dem'
+const DEM_SOURCE      = 'terrain-dem'
+const HILLSHADE_LAYER = 'terrain-hillshade'
 
 export function MapEngine({ battle, currentPhase, previousPhase, nextPhase, terrain, showTerrain, onUnitClick, onMapReady }: MapEngineProps) {
   const setMapView = useUIStore((s) => s.setMapView)
@@ -32,11 +33,10 @@ export function MapEngine({ battle, currentPhase, previousPhase, nextPhase, terr
   // ── 2D / 3D toggle ────────────────────────────────────────────────────────
   useEffect(() => {
     const map = mapRef.current
-    console.log('[3D] effect fired, is3D=', is3D, 'map=', !!map)
     if (!map) return
 
     if (is3D) {
-      console.log('[3D] enabling terrain')
+      // Add DEM source (used for both terrain extrusion and hillshade)
       if (!map.getSource(DEM_SOURCE)) {
         map.addSource(DEM_SOURCE, {
           type: 'raster-dem',
@@ -46,18 +46,49 @@ export function MapEngine({ battle, currentPhase, previousPhase, nextPhase, terr
           encoding: 'terrarium',
         })
       }
-      map.setTerrain({ source: DEM_SOURCE, exaggeration: 1.8 })
+
+      // Enable terrain extrusion
+      map.setTerrain({ source: DEM_SOURCE, exaggeration: 1.5 })
+
+      // Add hillshade layer so the terrain surface has visible light/shadow relief.
+      // Insert it just above the base raster so it blends with the map tiles.
+      if (!map.getLayer(HILLSHADE_LAYER)) {
+        map.addLayer({
+          id:     HILLSHADE_LAYER,
+          type:   'hillshade',
+          source: DEM_SOURCE,
+          paint: {
+            'hillshade-exaggeration':    0.6,
+            'hillshade-shadow-color':    '#3a2a10',
+            'hillshade-highlight-color': '#fff8ee',
+            'hillshade-accent-color':    '#8a7258',
+            'hillshade-illumination-anchor': 'viewport',
+          },
+        }, 'carto-tiles')  // insert below the raster tiles so it blends through
+      }
+
+      // Tilt to perspective view
       map.easeTo({ pitch: 55, bearing: -15, duration: 800 })
+
     } else {
-      console.log('[3D] disabling terrain')
+      // Remove hillshade layer
+      if (map.getLayer(HILLSHADE_LAYER)) {
+        try { map.removeLayer(HILLSHADE_LAYER) } catch { /* */ }
+      }
+
+      // Disable terrain
       map.setTerrain(null)
+
+      // Remove DEM source after a tick
       setTimeout(() => {
         try { if (mapRef.current?.getSource(DEM_SOURCE)) mapRef.current.removeSource(DEM_SOURCE) } catch { /* */ }
       }, 200)
+
+      // Return to flat 2D
       map.easeTo({ pitch: 0, bearing: 0, duration: 600 })
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [is3D, mapInstance])  // mapInstance triggers re-run once map is ready  // deliberately only depend on is3D — mapRef is a stable ref
+  }, [is3D, mapInstance])
 
   // Fly to battle bounds when battle changes
   useEffect(() => {

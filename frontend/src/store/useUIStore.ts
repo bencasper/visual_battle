@@ -58,5 +58,5 @@ export const useUIStore = create<UIState & UIActions>((set, get) => ({
 
   toggleSidebar: () => set((s) => ({ sidebarCollapsed: !s.sidebarCollapsed })),
 
-  toggle3D: () => { console.log('[3D] toggle3D called, current=', get().is3D); set((s) => ({ is3D: !s.is3D })) },
+  toggle3D: () => set((s) => ({ is3D: !s.is3D })),
 }))

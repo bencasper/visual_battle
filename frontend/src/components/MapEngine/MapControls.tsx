@@ -26,7 +26,7 @@ export function MapControls({ onZoomIn, onZoomOut, onResetBearing, onFitBounds, 
       <button onClick={onZoomOut}      className={btnClass}                    title="Zoom out">−</button>
       <button onClick={onResetBearing} className={btnClass}                    title="Reset north">⬆</button>
       <button onClick={onFitBounds}    className={btnClass}                    title="Fit to battle">⤢</button>
-      <button onClick={() => { console.log('[3D] button clicked, is3D=', is3D); onToggle3D() }} className={is3D ? activeClass : btnClass} title={is3D ? 'Switch to 2D' : 'Switch to 3D'}>
+      <button onClick={onToggle3D} className={is3D ? activeClass : btnClass} title={is3D ? 'Switch to 2D' : 'Switch to 3D'}>
         {is3D ? '2D' : '3D'}
       </button>
     </div>
