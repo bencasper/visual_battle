@@ -5,32 +5,34 @@ import { StrengthBar } from './StrengthBar'
 import { OrderOfBattle } from './OrderOfBattle'
 
 export function ArmyPanel({ factions, currentPhase, selectedFactionId, onSelectFaction }: ArmyPanelProps) {
-  const selectedFaction = factions.find((f) => f.id === selectedFactionId)
+  // Default: show first faction if none selected
+  const activeFactionId = selectedFactionId ?? factions[0]?.id ?? null
+  const activeFaction = factions.find((f) => f.id === activeFactionId)
 
   return (
-    <Panel title="Order of Battle" icon="⚔️" className="w-64">
-      {/* Strength comparison bar */}
+    <Panel title="Order of Battle" icon="⚔️" className="w-full">
+      {/* Force strength comparison */}
       <div className="mb-2">
         <p className="text-[9px] uppercase tracking-widest text-wiki-textMuted font-semibold mb-1">Force Strength</p>
         <StrengthBar factions={factions} currentPhase={currentPhase} />
       </div>
 
-      {/* Faction cards */}
-      <div className="space-y-1.5">
+      {/* Faction selector tabs */}
+      <div className="flex gap-1.5 mb-2">
         {factions.map((faction) => (
           <FactionCard
             key={faction.id}
             faction={faction}
             currentPhase={currentPhase}
-            isSelected={selectedFactionId === faction.id}
+            isSelected={activeFactionId === faction.id}
             onClick={() => onSelectFaction(faction.id)}
           />
         ))}
       </div>
 
-      {/* Expanded order of battle for selected faction */}
-      {selectedFaction && (
-        <OrderOfBattle faction={selectedFaction} />
+      {/* Order of battle for active faction */}
+      {activeFaction && (
+        <OrderOfBattle faction={activeFaction} />
       )}
     </Panel>
   )

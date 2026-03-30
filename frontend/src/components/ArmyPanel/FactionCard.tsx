@@ -13,36 +13,34 @@ export function FactionCard({ faction, currentPhase, isSelected, onClick }: Fact
   return (
     <button
       onClick={onClick}
-      className="w-full text-left p-2 rounded-lg border transition-all duration-200"
+      className="flex-1 text-left p-2 rounded-lg border transition-all duration-200"
       style={{
         borderColor: isSelected ? wikiColor : WIKI_COLOURS.panelBorder,
         backgroundColor: isSelected ? `${wikiColor}18` : WIKI_COLOURS.parchment,
+        borderWidth: isSelected ? 2 : 1,
       }}
     >
-      {/* Header */}
-      <div className="flex items-center justify-between gap-1 mb-1.5">
+      {/* Side badge */}
+      <div className="flex items-center justify-between gap-1 mb-1">
         <Badge label={faction.side} variant={side} size="xs" />
-        <span className="text-[10px] text-wiki-textMuted font-mono">{formatPct(strengthPct)} strength</span>
+        <span className="text-[9px] text-wiki-textMuted font-mono">{formatPct(strengthPct)}</span>
       </div>
 
-      {/* Name */}
-      <p className="text-xs font-bold text-wiki-text leading-tight mb-0.5">{faction.name}</p>
-      <p className="text-[10px] text-wiki-textMuted leading-tight mb-2">{faction.commander}</p>
+      {/* Short name */}
+      <p className="text-[10px] font-bold text-wiki-text leading-tight">{faction.name}</p>
+      <p className="text-[9px] text-wiki-textMuted leading-tight mt-0.5 truncate">{faction.commander}</p>
 
       {/* Strength bar */}
-      <div className="h-1.5 bg-wiki-hillShade rounded-full overflow-hidden">
+      <div className="h-1 bg-wiki-hillShade rounded-full overflow-hidden mt-1.5">
         <div
           className="h-full rounded-full transition-all duration-700"
-          style={{
-            width: `${strengthPct * 100}%`,
-            backgroundColor: strengthColor(strengthPct),
-          }}
+          style={{ width: `${strengthPct * 100}%`, backgroundColor: strengthColor(strengthPct) }}
         />
       </div>
 
       {/* Troop count */}
-      <p className="text-[10px] text-wiki-textMuted mt-1">
-        {formatNumber(faction.strength.total_troops)} troops total
+      <p className="text-[9px] text-wiki-textMuted mt-1">
+        {formatNumber(faction.strength.total_troops)} troops
       </p>
     </button>
   )

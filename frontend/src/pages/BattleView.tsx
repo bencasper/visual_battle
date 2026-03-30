@@ -6,6 +6,7 @@ import { useTimelineStore } from '@/store/useTimelineStore'
 import { useUIStore } from '@/store/useUIStore'
 import { MapEngine } from '@/components/MapEngine/MapEngine'
 import { Timeline } from '@/components/Timeline/Timeline'
+import { ArmyPanel } from '@/components/ArmyPanel/ArmyPanel'
 import { LoadingSpinner } from '@/components/shared/LoadingSpinner'
 import { ErrorBoundary } from '@/components/shared/ErrorBoundary'
 
@@ -16,7 +17,7 @@ export function BattleView() {
   const { battle, terrain, loading, error } = useBattleData(battleId)
 
   const { currentPhaseIndex, isPlaying, speed, play, pause, stepForward, stepBack, seekToPhase, setSpeed } = useTimelineStore()
-  const { showTerrain } = useUIStore()
+  const { showTerrain, selectedFactionId, selectFaction } = useUIStore()
 
   const mapRef = useRef<MapLibreMap | null>(null)
   const handleMapReady = useCallback((map: MapLibreMap) => { mapRef.current = map }, [])
@@ -59,6 +60,18 @@ export function BattleView() {
           <p className="text-sm font-bold text-wiki-text" style={{ fontFamily: '"Linux Libertine", Georgia, serif' }}>
             {battle.name}
           </p>
+        </div>
+      </div>
+
+      {/* ── ARMY PANEL (right side, scrollable) ── */}
+      <div className="absolute top-3 right-3 bottom-24 z-20 flex flex-col" style={{ width: 268 }}>
+        <div className="flex-1 overflow-y-auto overflow-x-hidden">
+          <ArmyPanel
+            factions={battle.factions}
+            currentPhase={currentPhase}
+            selectedFactionId={selectedFactionId}
+            onSelectFaction={(id) => selectFaction(selectedFactionId === id ? null : id)}
+          />
         </div>
       </div>
 

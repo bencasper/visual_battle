@@ -96,12 +96,19 @@ export interface Weapon {
 export interface Unit {
   id: string
   name: string
-  type: UnitType
+  short_name?: string
+  type: UnitType | string
+  parent_id?: string | null
   strength: number
   commander: string
+  deputy_commander?: string
+  nation?: string
   equipment_era: string
   morale: number // 0–1
   supply_status: SupplyStatus
+  location_label?: string
+  nato_symbol?: string
+  notes?: string
 }
 
 export interface FactionStrength {
