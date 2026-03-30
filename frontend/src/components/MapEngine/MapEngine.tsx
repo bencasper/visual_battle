@@ -3,13 +3,15 @@ import { useMapLibre } from '@/hooks/useMapLibre'
 import { useUIStore } from '@/store/useUIStore'
 import { TerrainLayer } from './TerrainLayer'
 import { UnitMarker } from './UnitMarker'
+import { MovementArrowLayer } from './MovementArrowLayer'
 import { MapControls } from './MapControls'
 import { MapLegend } from './MapLegend'
 import { MapScaleBar } from './MapScaleBar'
+import { NorthArrow } from './NorthArrow'
 import { wikiMapStyle, WIKI_COLOURS } from '@/utils/wikiMapStyle'
 import { useEffect } from 'react'
 
-export function MapEngine({ battle, currentPhase, terrain, showTerrain, onUnitClick, onMapReady }: MapEngineProps) {
+export function MapEngine({ battle, currentPhase, previousPhase, terrain, showTerrain, onUnitClick, onMapReady }: MapEngineProps) {
   const setMapView = useUIStore((s) => s.setMapView)
 
   // mapInstance is React state — guaranteed non-null when set, triggers re-render
@@ -53,6 +55,16 @@ export function MapEngine({ battle, currentPhase, terrain, showTerrain, onUnitCl
         <TerrainLayer map={mapInstance} terrain={terrain} />
       )}
 
+      {/* Movement arrows — from previous phase positions to current */}
+      {mapInstance && (
+        <MovementArrowLayer
+          map={mapInstance}
+          battle={battle}
+          currentPhase={currentPhase}
+          previousPhase={previousPhase}
+        />
+      )}
+
       {/* Unit markers — keyed by unitId+location so they remount on phase change */}
       {mapInstance && allPositions.map((pos, i) => (
         <UnitMarker
@@ -83,6 +95,9 @@ export function MapEngine({ battle, currentPhase, terrain, showTerrain, onUnitCl
 
       {/* Map legend — bottom-left, beside scale bar */}
       <MapLegend factions={battle.factions} />
+
+      {/* North arrow — bottom-left, above scale bar */}
+      <NorthArrow />
     </div>
   )
 }
