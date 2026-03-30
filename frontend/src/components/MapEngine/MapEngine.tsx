@@ -1,67 +1,64 @@
-import { useEffect, useRef, useId } from 'react'
-import maplibregl from 'maplibre-gl'
 import type { MapEngineProps } from './MapEngine.types'
 import { useMapLibre } from '@/hooks/useMapLibre'
 import { useUIStore } from '@/store/useUIStore'
-import { boundsToMapLibre } from '@/utils/geoUtils'
-import { factionColor } from '@/utils/colorUtils'
 import { TerrainLayer } from './TerrainLayer'
 import { UnitMarker } from './UnitMarker'
 import { MapControls } from './MapControls'
-
-const MAP_STYLE = import.meta.env.VITE_MAP_STYLE ?? 'https://demotiles.maplibre.org/style.json'
+import { wikiMapStyle, WIKI_COLOURS } from '@/utils/wikiMapStyle'
+import { useEffect } from 'react'
 
 export function MapEngine({ battle, currentPhase, terrain, showTerrain, onUnitClick, onMapReady }: MapEngineProps) {
-  const containerId = useId()
   const setMapView = useUIStore((s) => s.setMapView)
 
-  const { mapRef, flyToBounds } = useMapLibre({
-    containerId,
-    styleUrl: MAP_STYLE,
+  const { containerRef, mapRef, mapReady, flyToBounds } = useMapLibre({
+    style: wikiMapStyle,
     bounds: battle.map_bounds,
     onReady: (map) => {
       onMapReady?.(map)
-      map.on('zoom', () => setMapView({ mapZoom: map.getZoom() }))
+      map.on('zoom',   () => setMapView({ mapZoom:    map.getZoom() }))
       map.on('rotate', () => setMapView({ mapBearing: map.getBearing() }))
     },
   })
 
-  // Fly to battle bounds whenever the battle changes
+  // Fly to battle bounds when battle changes
   useEffect(() => {
     flyToBounds(battle.map_bounds)
   }, [battle.id, flyToBounds])
 
-  // Build unit position features for the current phase
+  // Build unit positions for the current phase
   const allPositions = currentPhase.unit_positions.flatMap((up) => {
     const faction = battle.factions.find((f) => f.id === up.faction_id)
     if (!faction) return []
+    const unit = faction.units.find((u) => u.id === up.unit_id)
     return up.positions.map((pos) => ({
-      unitId: up.unit_id,
-      factionId: up.faction_id,
-      color: faction.color,
+      unitId:     up.unit_id,
+      factionId:  up.faction_id,
+      unitType:   unit?.type ?? 'infantry_regiment',
+      color:      faction.color,
       colorLight: faction.color_light,
       ...pos,
     }))
   })
 
   return (
-    <div className="relative w-full h-full">
-      {/* MapLibre container */}
-      <div id={containerId} className="w-full h-full" />
+    <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
+      {/* MapLibre canvas */}
+      <div ref={containerRef} style={{ position: 'absolute', inset: 0, background: WIKI_COLOURS.parchment }} />
 
-      {/* Terrain layer (rendered via MapLibre source/layer) */}
-      {terrain && showTerrain && mapRef.current && (
+      {/* Terrain layer — only after map is ready */}
+      {mapReady && terrain && showTerrain && mapRef.current && (
         <TerrainLayer map={mapRef.current} terrain={terrain} />
       )}
 
-      {/* Unit markers */}
-      {mapRef.current && allPositions.map((pos, i) => (
+      {/* Unit markers — only after map is ready */}
+      {mapReady && mapRef.current && allPositions.map((pos, i) => (
         <UnitMarker
           key={`${pos.unitId}-${pos.location}-${i}`}
           map={mapRef.current!}
           lat={pos.lat}
           lng={pos.lng}
           label={pos.location}
+          unitType={pos.unitType}
           color={pos.color}
           colorLight={pos.colorLight}
           posture={pos.posture}
@@ -70,12 +67,12 @@ export function MapEngine({ battle, currentPhase, terrain, showTerrain, onUnitCl
         />
       ))}
 
-      {/* Map controls overlay */}
+      {/* Map controls */}
       <MapControls
-        onZoomIn={() => mapRef.current?.zoomIn()}
-        onZoomOut={() => mapRef.current?.zoomOut()}
+        onZoomIn={()       => mapRef.current?.zoomIn()}
+        onZoomOut={()      => mapRef.current?.zoomOut()}
         onResetBearing={() => mapRef.current?.resetNorth()}
-        onFitBounds={() => flyToBounds(battle.map_bounds)}
+        onFitBounds={()    => flyToBounds(battle.map_bounds)}
       />
     </div>
   )

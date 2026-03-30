@@ -1,0 +1,178 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "reservoir",
+        "name": "Chosin Reservoir",
+        "passable": false,
+        "strategic_value": "critical",
+        "description": "Artificial reservoir on the Changjin River; frozen solid in winter, surface used as an escape route by Task Force Faith survivors"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [127.180, 40.540],
+          [127.220, 40.560],
+          [127.250, 40.600],
+          [127.270, 40.650],
+          [127.280, 40.700],
+          [127.260, 40.730],
+          [127.230, 40.720],
+          [127.210, 40.690],
+          [127.190, 40.650],
+          [127.170, 40.610],
+          [127.160, 40.570],
+          [127.180, 40.540]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "ridge",
+        "name": "Taebaek Western Ridgeline",
+        "elevation_m": 1500,
+        "passable": true,
+        "strategic_value": "high",
+        "description": "Dominant high ground west of reservoir; used by PVA 20th Army for infiltration and attack positions"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [127.050, 40.780],
+          [127.080, 40.740],
+          [127.100, 40.700],
+          [127.120, 40.660],
+          [127.140, 40.600],
+          [127.160, 40.540]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "ridge",
+        "name": "Taebaek Eastern Ridgeline",
+        "elevation_m": 1400,
+        "passable": true,
+        "strategic_value": "high",
+        "description": "High ground east of reservoir; PVA 27th Army infiltration route and attack positions against Task Force Faith"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [127.520, 40.750],
+          [127.490, 40.710],
+          [127.460, 40.670],
+          [127.430, 40.630],
+          [127.400, 40.590],
+          [127.370, 40.540]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "road",
+        "name": "Main Supply Route (MSR) — Route 1",
+        "width_m": 6,
+        "passable": true,
+        "strategic_value": "critical",
+        "description": "The single road linking Hungnam through Koto-ri, Hagaru-ri to Yudam-ni; the lifeline and escape route for all UN forces at Chosin"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [127.280, 40.475],
+          [127.235, 40.585],
+          [127.195, 40.650],
+          [127.150, 40.720]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "settlement",
+        "name": "Yudam-ni",
+        "passable": true,
+        "strategic_value": "high",
+        "description": "Northernmost UN position; held by 5th and 7th Marine Regiments; starting point of the famous fighting breakout south"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [127.150, 40.720]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "settlement",
+        "name": "Hagaru-ri",
+        "passable": true,
+        "strategic_value": "critical",
+        "description": "Central logistics hub; site of the emergency airstrip that evacuated 4,312 casualties; key to the entire division's survival"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [127.235, 40.585]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "settlement",
+        "name": "Koto-ri",
+        "passable": true,
+        "strategic_value": "high",
+        "description": "Southern UN strongpoint; assembly area before the final push through Funchilin Pass to Hungnam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [127.280, 40.475]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "pass",
+        "name": "Funchilin Pass",
+        "elevation_m": 1220,
+        "passable": true,
+        "strategic_value": "critical",
+        "description": "A steep, single-lane road clinging to a cliff face at 4,000ft elevation; site of the famous treadway bridge airdrop; the last major obstacle before the coastal plain"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [127.280, 40.475],
+          [127.295, 40.440],
+          [127.310, 40.390],
+          [127.320, 40.350]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "river",
+        "name": "Changjin River",
+        "passable": false,
+        "strategic_value": "medium",
+        "description": "River feeding the reservoir; frozen in winter but terrain channelizes movement"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [127.180, 40.530],
+          [127.200, 40.480],
+          [127.220, 40.430],
+          [127.240, 40.380],
+          [127.260, 40.330]
+        ]
+      }
+    }
+  ]
+}

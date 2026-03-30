@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import * as d3 from 'd3'
 import type { StrengthBarProps } from './ArmyPanel.types'
 import { getFactionStrengthPct } from '@/utils/phaseUtils'
+import { WIKI_COLOURS } from '@/utils/wikiMapStyle'
 
 export function StrengthBar({ factions, currentPhase }: StrengthBarProps) {
   const svgRef = useRef<SVGSVGElement>(null)
@@ -19,29 +20,32 @@ export function StrengthBar({ factions, currentPhase }: StrengthBarProps) {
     const total = s0 + s1
     const pct0 = total > 0 ? s0 / total : 0.5
 
+    const c0 = WIKI_COLOURS.unBlue
+    const c1 = WIKI_COLOURS.pvaRed
+
     const d3svg = d3.select(svg).attr('width', width).attr('height', height)
     d3svg.selectAll('*').remove()
 
-    // Left bar (faction 0)
+    // Left bar (faction 0 — UN)
     d3svg.append('rect')
       .attr('x', 0).attr('y', 8).attr('height', 12).attr('rx', 2)
       .attr('width', 0)
-      .attr('fill', f0.color)
+      .attr('fill', c0)
       .transition().duration(700)
       .attr('width', pct0 * width - 1)
 
-    // Right bar (faction 1)
+    // Right bar (faction 1 — PVA)
     d3svg.append('rect')
       .attr('x', width).attr('y', 8).attr('height', 12).attr('rx', 2)
       .attr('width', 0)
-      .attr('fill', f1.color)
+      .attr('fill', c1)
       .transition().duration(700)
       .attr('x', pct0 * width + 1)
       .attr('width', (1 - pct0) * width - 1)
 
     // Labels
-    d3svg.append('text').attr('x', 4).attr('y', 6).attr('fill', f0.color_light).attr('font-size', 9).text(f0.side)
-    d3svg.append('text').attr('x', width - 4).attr('y', 6).attr('fill', f1.color_light).attr('font-size', 9).attr('text-anchor', 'end').text(f1.side)
+    d3svg.append('text').attr('x', 4).attr('y', 6).attr('fill', c0).attr('font-size', 9).attr('font-weight', 700).text(f0.side)
+    d3svg.append('text').attr('x', width - 4).attr('y', 6).attr('fill', c1).attr('font-size', 9).attr('font-weight', 700).attr('text-anchor', 'end').text(f1.side)
   }, [factions, currentPhase])
 
   return <svg ref={svgRef} className="w-full" style={{ height: 28 }} />

@@ -32,8 +32,26 @@ export const useBattleStore = create<BattleState & BattleActions>((set) => ({
       if (!res.ok) throw new Error(`HTTP ${res.status}`)
       const data: BattleListItem[] = await res.json()
       set({ battleList: data, loading: false })
-    } catch (err) {
-      set({ error: String(err), loading: false })
+    } catch {
+      // API unavailable — build a minimal list from the local JSON file
+      try {
+        const res = await fetch('/data/battles/chosin-reservoir.json')
+        if (!res.ok) throw new Error('local data missing')
+        const battle = await res.json()
+        const item: BattleListItem = {
+          id:            battle.id,
+          name:          battle.name,
+          slug:          battle.slug,
+          theater:       battle.theater,
+          date_range:    battle.date_range,
+          location:      battle.location,
+          outcome:       battle.outcome,
+          faction_names: battle.factions.map((f: { name: string }) => f.name),
+        }
+        set({ battleList: [item], loading: false })
+      } catch (fallbackErr) {
+        set({ error: String(fallbackErr), loading: false })
+      }
     }
   },
 
@@ -41,7 +59,7 @@ export const useBattleStore = create<BattleState & BattleActions>((set) => ({
     try {
       set({ loading: true, error: null })
 
-      // Fetch battle from API; fall back to local JSON if API unavailable
+      // Fetch battle from API; fall back to /public JSON if API unavailable
       let battle: Battle
       try {
         const res = await fetch(`${API_BASE}/battles/${id}`)
@@ -49,16 +67,20 @@ export const useBattleStore = create<BattleState & BattleActions>((set) => ({
         battle = await res.json()
       } catch {
         // Local fallback for development without backend
-        const local = await import(`@/data/battles/${id.replace(/-\d{4}$/, '')}.json`)
-        battle = local.default as Battle
+        const slug = id.replace(/-\d{4}$/, '')
+        const res = await fetch(`/data/battles/${slug}.json`)
+        if (!res.ok) throw new Error(`Battle data not found: ${slug}`)
+        battle = await res.json() as Battle
       }
 
-      // Load terrain GeoJSON
+      // Load terrain GeoJSON — fetch from /public so MapLibre gets a plain object
+      // (dynamic import via Vite can produce non-serializable module wrappers that
+      // confuse MapLibre's worker postMessage, causing "Unimplemented type: 4")
       let terrain: TerrainCollection | null = null
       try {
         const slug = battle.slug
-        const terrainMod = await import(`@/data/battles/terrain/${slug}-terrain.geojson`)
-        terrain = terrainMod.default as TerrainCollection
+        const res = await fetch(`/data/battles/${slug}-terrain.json`)
+        if (res.ok) terrain = await res.json() as TerrainCollection
       } catch {
         // Terrain is optional
       }

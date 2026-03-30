@@ -21,15 +21,19 @@ export function EventFeed({ phase }: EventFeedProps) {
       {sorted.map((evt) => (
         <div
           key={evt.id}
-          className="flex-shrink-0 w-48 glass-panel p-2 border-l-2"
-          style={{ borderLeftColor: evt.significance === 'critical' ? '#ef4444' : evt.significance === 'high' ? '#f97316' : '#64748b' }}
+          className="flex-shrink-0 w-48 bg-wiki-parchment border border-wiki-border rounded-md p-2 border-l-2 shadow-sm"
+          style={{
+            borderLeftColor:
+              evt.significance === 'critical' ? '#cc0000' :
+              evt.significance === 'high'     ? '#b35800' : '#c8b49a',
+          }}
         >
           <div className="flex items-center justify-between gap-1 mb-1">
             <Badge label={snakeToTitle(evt.type)} variant="neutral" />
             <Badge label={evt.significance} variant={sigVariant(evt.significance)} />
           </div>
-          <p className="text-[11px] font-semibold text-slate-200 leading-tight">{evt.label}</p>
-          <p className="text-[10px] text-slate-400 mt-1 leading-snug line-clamp-3">{evt.description}</p>
+          <p className="text-[11px] font-semibold text-wiki-text leading-tight">{evt.label}</p>
+          <p className="text-[10px] text-wiki-textMuted mt-1 leading-snug line-clamp-3">{evt.description}</p>
         </div>
       ))}
     </div>

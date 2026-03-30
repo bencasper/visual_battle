@@ -6,9 +6,9 @@ export function CommanderQuote({ figure }: CommanderQuoteProps) {
   return (
     <div className="glass-panel p-2.5">
       <Badge label={side.toUpperCase()} variant={side} size="xs" />
-      <p className="text-xs font-semibold text-slate-200 mt-1.5">{figure.name}</p>
-      <p className="text-[10px] text-slate-400">{figure.role}</p>
-      <p className="text-[10px] text-slate-300 mt-2 leading-snug italic">"{figure.significance}"</p>
+      <p className="text-xs font-bold text-wiki-text mt-1.5">{figure.name}</p>
+      <p className="text-[10px] text-wiki-textMuted">{figure.role}</p>
+      <p className="text-[10px] text-wiki-text mt-2 leading-snug italic">"{figure.significance}"</p>
     </div>
   )
 }

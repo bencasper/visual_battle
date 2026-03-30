@@ -16,8 +16,12 @@ export function Timeline({
 
   return (
     <div
-      className="absolute bottom-0 left-0 right-0 z-20 bg-map-panel/95 backdrop-blur-sm border-t border-map-panelBorder"
-      style={{ height: 'var(--timeline-height, 120px)' }}
+      className="absolute bottom-0 left-0 right-0 z-20 backdrop-blur-sm border-t"
+      style={{
+        height: 'var(--timeline-height, 120px)',
+        background: 'rgba(245,234,213,0.97)',
+        borderTopColor: 'var(--color-panel-border)',
+      }}
     >
       <div className="flex flex-col h-full px-4 py-2 gap-2">
         {/* Top row: controls + phase info */}
@@ -35,11 +39,11 @@ export function Timeline({
           />
           {currentPhase && (
             <div className="flex-1 min-w-0">
-              <p className="text-xs font-semibold text-slate-200 truncate">{currentPhase.label}</p>
-              <p className="text-[10px] text-slate-400">{formatDateRange(currentPhase.date_range)}</p>
+              <p className="text-xs font-semibold text-wiki-text truncate">{currentPhase.label}</p>
+              <p className="text-[10px] text-wiki-textMuted">{formatDateRange(currentPhase.date_range)}</p>
             </div>
           )}
-          <div className="text-[10px] text-slate-500 font-mono">
+          <div className="text-[10px] text-wiki-textMuted font-mono">
             {currentIndex + 1} / {phases.length}
           </div>
         </div>
@@ -47,10 +51,10 @@ export function Timeline({
         {/* Scrubber bar */}
         <div className="relative h-6 flex items-center px-4">
           {/* Track */}
-          <div className="absolute inset-x-4 h-0.5 bg-slate-700 rounded" />
+          <div className="absolute inset-x-4 h-0.5 bg-wiki-hillShade rounded" />
           {/* Progress fill */}
           <div
-            className="absolute left-4 h-0.5 bg-un-light rounded transition-all duration-300"
+            className="absolute left-4 h-0.5 bg-un rounded transition-all duration-300"
             style={{ width: `calc(${phases.length > 1 ? (currentIndex / (phases.length - 1)) * 100 : 0}% * (100% - 2rem) / 100%)` }}
           />
           {/* Phase markers */}

@@ -28,7 +28,7 @@ export function WeaponRadarChart({ weapons }: WeaponRadarChartProps) {
       sel.append('circle')
         .attr('cx', cx).attr('cy', cy)
         .attr('r', rScale(i * 2))
-        .attr('fill', 'none').attr('stroke', '#334155').attr('stroke-width', 0.5)
+        .attr('fill', 'none').attr('stroke', '#c8b49a').attr('stroke-width', 0.5)
     }
 
     // Axes
@@ -36,21 +36,27 @@ export function WeaponRadarChart({ weapons }: WeaponRadarChartProps) {
       const angle = angleSlice * i - Math.PI / 2
       const x = cx + rScale(10) * Math.cos(angle)
       const y = cy + rScale(10) * Math.sin(angle)
-      sel.append('line').attr('x1', cx).attr('y1', cy).attr('x2', x).attr('y2', y).attr('stroke', '#475569').attr('stroke-width', 0.5)
+      sel.append('line').attr('x1', cx).attr('y1', cy).attr('x2', x).attr('y2', y).attr('stroke', '#a89070').attr('stroke-width', 0.5)
       const lx = cx + (rScale(10) + 12) * Math.cos(angle)
       const ly = cy + (rScale(10) + 12) * Math.sin(angle)
-      sel.append('text').attr('x', lx).attr('y', ly).attr('text-anchor', 'middle').attr('dominant-baseline', 'middle').attr('fill', '#94a3b8').attr('font-size', 8).text(snakeToTitle(key).replace(' ', '\n'))
+      sel.append('text').attr('x', lx).attr('y', ly).attr('text-anchor', 'middle').attr('dominant-baseline', 'middle').attr('fill', '#5c4a2a').attr('font-size', 8).text(snakeToTitle(key).replace(' ', '\n'))
     })
 
     // Weapon polygons
     weapons.forEach(({ weapon, color }) => {
+      // Map to Wikipedia colours
+      const wikiColor = color.toLowerCase().includes('1a3') || color.toLowerCase().includes('003')
+        ? '#003f87'
+        : color.toLowerCase().includes('8b1') || color.toLowerCase().includes('aa0')
+        ? '#aa0000'
+        : color
       const points = allKeys.map((key, i) => {
         const val = (weapon.stats[key as keyof typeof weapon.stats] as number) ?? 0
         const angle = angleSlice * i - Math.PI / 2
         return [cx + rScale(val) * Math.cos(angle), cy + rScale(val) * Math.sin(angle)] as [number, number]
       })
       const line = d3.line<[number, number]>()(points)!
-      sel.append('path').attr('d', line + 'Z').attr('fill', color).attr('fill-opacity', 0.15).attr('stroke', color).attr('stroke-width', 1.5)
+      sel.append('path').attr('d', line + 'Z').attr('fill', wikiColor).attr('fill-opacity', 0.18).attr('stroke', wikiColor).attr('stroke-width', 2)
     })
   }, [weapons, allKeys.join(',')])
 

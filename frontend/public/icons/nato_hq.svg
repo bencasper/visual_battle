@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- NATO APP-6 Headquarters unit symbol -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60">
+  <rect x="2" y="2" width="96" height="56" fill="none" stroke="#000" stroke-width="3"/>
+  <text x="50" y="33" font-family="Arial,sans-serif" font-size="26" font-weight="bold"
+        text-anchor="middle" dominant-baseline="middle" fill="#000">HQ</text>
+</svg>

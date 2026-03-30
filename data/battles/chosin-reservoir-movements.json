@@ -1,0 +1,267 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "pva-west-attack",
+        "faction": "Chinese",
+        "phase": "encirclement",
+        "unit": "PVA 20th Army (79th, 89th Divs)",
+        "description": "PVA 20th Army attacks from the western ridgelines, striking UN Marines at Yudam-ni",
+        "arrowDir": "SE"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [127.020, 40.800],
+          [127.060, 40.770],
+          [127.100, 40.745],
+          [127.150, 40.720]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "pva-north-attack",
+        "faction": "Chinese",
+        "phase": "encirclement",
+        "unit": "PVA 20th Army (59th, 60th Divs)",
+        "description": "PVA forces drive south from the north to cut the MSR above Hagaru-ri",
+        "arrowDir": "S"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [127.200, 40.800],
+          [127.210, 40.760],
+          [127.220, 40.720],
+          [127.235, 40.680],
+          [127.235, 40.640],
+          [127.235, 40.585]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "pva-ne-attack",
+        "faction": "Chinese",
+        "phase": "encirclement",
+        "unit": "PVA 27th Army (80th, 81st Divs)",
+        "description": "PVA 27th Army descends from northeast highlands to attack Task Force Faith on the east side",
+        "arrowDir": "SW"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [127.500, 40.800],
+          [127.460, 40.770],
+          [127.420, 40.740],
+          [127.380, 40.710],
+          [127.340, 40.680]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "pva-east-attack",
+        "faction": "Chinese",
+        "phase": "encirclement",
+        "unit": "PVA 27th Army (94th Div)",
+        "description": "PVA forces attack from the east to encircle Task Force Faith and cut off the east shore",
+        "arrowDir": "W"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [127.520, 40.640],
+          [127.490, 40.640],
+          [127.450, 40.635],
+          [127.400, 40.625],
+          [127.350, 40.615],
+          [127.310, 40.610]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "pva-msr-cut",
+        "faction": "Chinese",
+        "phase": "encirclement",
+        "unit": "PVA 20th Army (58th Div)",
+        "description": "PVA 58th Division blocks the MSR between Hagaru-ri and Koto-ri, cutting UN supply line",
+        "arrowDir": "W"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [127.430, 40.530],
+          [127.390, 40.525],
+          [127.350, 40.520],
+          [127.310, 40.515],
+          [127.280, 40.510]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "un-yudam-breakout",
+        "faction": "UN",
+        "phase": "breakout",
+        "unit": "US 5th & 7th Marine Regiments",
+        "description": "Marines fight 14 miles south from Yudam-ni through Chinese roadblocks to Hagaru-ri, 27–29 Nov",
+        "arrowDir": "SE"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [127.150, 40.720],
+          [127.165, 40.690],
+          [127.180, 40.660],
+          [127.195, 40.630],
+          [127.210, 40.605],
+          [127.235, 40.585]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "un-hagaru-koto",
+        "faction": "UN",
+        "phase": "breakout",
+        "unit": "US 1st Marine Division",
+        "description": "Division column fights south from Hagaru-ri to Koto-ri, 6–7 Dec 1950",
+        "arrowDir": "S"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [127.235, 40.585],
+          [127.245, 40.555],
+          [127.255, 40.525],
+          [127.265, 40.500],
+          [127.280, 40.475]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "un-koto-hungnam",
+        "faction": "UN",
+        "phase": "breakout",
+        "unit": "US 1st Marine Division",
+        "description": "Final breakout through Funchilin Pass to the coastal plain, 8–11 Dec 1950",
+        "arrowDir": "S"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [127.280, 40.475],
+          [127.292, 40.440],
+          [127.305, 40.400],
+          [127.315, 40.360],
+          [127.320, 40.335]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "un-tf-faith-withdrawal",
+        "faction": "UN",
+        "phase": "breakout",
+        "unit": "Task Force Faith (31st RCT)",
+        "description": "Task Force Faith attempts breakout along the frozen reservoir's east shore, destroyed 1–2 Dec",
+        "arrowDir": "SW"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [127.310, 40.620],
+          [127.290, 40.600],
+          [127.270, 40.580],
+          [127.255, 40.560],
+          [127.245, 40.545],
+          [127.235, 40.585]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "tip-pva-west",
+        "faction": "Chinese",
+        "phase": "encirclement",
+        "unit": "PVA 20th Army",
+        "markerType": "arrowhead"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [127.150, 40.720]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "tip-pva-north",
+        "faction": "Chinese",
+        "phase": "encirclement",
+        "unit": "PVA 20th Army",
+        "markerType": "arrowhead"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [127.235, 40.585]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "tip-pva-ne",
+        "faction": "Chinese",
+        "phase": "encirclement",
+        "unit": "PVA 27th Army",
+        "markerType": "arrowhead"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [127.340, 40.680]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "tip-pva-east",
+        "faction": "Chinese",
+        "phase": "encirclement",
+        "unit": "PVA 27th Army",
+        "markerType": "arrowhead"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [127.310, 40.610]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "tip-pva-msr",
+        "faction": "Chinese",
+        "phase": "encirclement",
+        "unit": "PVA 58th Div",
+        "markerType": "arrowhead"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [127.280, 40.510]
+      }
+    }
+  ]
+}

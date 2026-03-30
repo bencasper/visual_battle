@@ -1,0 +1,87 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [127.2, 41.9],
+          [127.25, 41.85],
+          [127.35, 41.8]
+        ]
+      },
+      "properties": {
+        "phase": "phase-1",
+        "side": "UN",
+        "color": "#1976d2",
+        "label": "1st Marine Division Advance",
+        "arrow": true
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [127.45, 41.92],
+          [127.37, 41.86],
+          [127.32, 41.79]
+        ]
+      },
+      "properties": {
+        "phase": "phase-1",
+        "side": "Chinese",
+        "color": "#d32f2f",
+        "label": "Chinese 79th Div. Attack",
+        "arrow": true
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [127.18, 41.83],
+          [127.37, 41.80],
+          [127.44, 41.79]
+        ]
+      },
+      "properties": {
+        "phase": "phase-1",
+        "side": "frontline",
+        "color": "#222",
+        "style": "dashed",
+        "label": "Front Line"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [127.25, 41.85]
+      },
+      "properties": {
+        "phase": "phase-1",
+        "side": "UN",
+        "icon": "nato_hq",
+        "label": "US HQ",
+        "faction": "UN"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [127.45, 41.92]
+      },
+      "properties": {
+        "phase": "phase-1",
+        "side": "Chinese",
+        "icon": "nato_hq",
+        "label": "PLA HQ",
+        "faction": "Chinese"
+      }
+    }
+  ]
+}

@@ -11,7 +11,7 @@ export function ArmyPanel({ factions, currentPhase, selectedFactionId, onSelectF
     <Panel title="Order of Battle" icon="⚔️" className="w-64">
       {/* Strength comparison bar */}
       <div className="mb-2">
-        <p className="text-[9px] uppercase tracking-widest text-slate-500 mb-1">Force Strength</p>
+        <p className="text-[9px] uppercase tracking-widest text-wiki-textMuted font-semibold mb-1">Force Strength</p>
         <StrengthBar factions={factions} currentPhase={currentPhase} />
       </div>
 

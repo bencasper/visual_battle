@@ -11,8 +11,8 @@ export function PhaseMarker({ phase, index, total, isCurrent, onClick }: PhaseMa
     <Tooltip
       content={
         <div className="max-w-xs">
-          <p className="font-semibold text-white">{phase.label}</p>
-          <p className="text-slate-400 text-[10px] mt-0.5">{formatDateRange(phase.date_range)}</p>
+          <p className="font-semibold text-wiki-text">{phase.label}</p>
+          <p className="text-wiki-textMuted text-[10px] mt-0.5">{formatDateRange(phase.date_range)}</p>
           {criticalEvents > 0 && (
             <Badge label={`${criticalEvents} critical event${criticalEvents > 1 ? 's' : ''}`} variant="critical" size="xs" />
           )}
@@ -30,12 +30,12 @@ export function PhaseMarker({ phase, index, total, isCurrent, onClick }: PhaseMa
           className={`
             w-3 h-3 rounded-full border-2 transition-all duration-200
             ${isCurrent
-              ? 'bg-un-light border-white scale-150 shadow-lg shadow-un/50'
-              : 'bg-slate-600 border-slate-400 hover:bg-slate-400 hover:scale-125'}
+              ? 'bg-un border-wiki-text scale-150 shadow-md'
+              : 'bg-wiki-hillShade border-wiki-mountain hover:bg-wiki-mountain hover:scale-125'}
           `}
         />
         {isCurrent && (
-          <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[9px] text-un-light whitespace-nowrap font-medium">
+          <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[9px] text-un whitespace-nowrap font-bold">
             {index + 1}/{total}
           </div>
         )}

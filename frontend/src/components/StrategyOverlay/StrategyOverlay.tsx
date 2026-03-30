@@ -7,7 +7,6 @@ export function StrategyOverlay({ phase, mapRef, visible }: StrategyOverlayProps
   const markersRef = useRef<maplibregl.Marker[]>([])
 
   useEffect(() => {
-    // Cleanup previous markers
     markersRef.current.forEach((m) => m.remove())
     markersRef.current = []
 
@@ -17,14 +16,14 @@ export function StrategyOverlay({ phase, mapRef, visible }: StrategyOverlayProps
       const el = createAnnotationElement(event)
 
       const popup = new maplibregl.Popup({
-        offset: 12,
+        offset: 14,
         closeButton: true,
-        maxWidth: '220px',
+        maxWidth: '240px',
         className: 'annotation-popup',
       }).setHTML(`
-        <div style="font-family: Inter, sans-serif; font-size: 11px; color: #e2e8f0; background: #0f172a; padding: 8px; border-radius: 6px;">
-          <p style="font-weight: 600; margin: 0 0 4px 0;">${event.label}</p>
-          <p style="color: #94a3b8; margin: 0; line-height: 1.4;">${event.description}</p>
+        <div style="font-family:'Linux Libertine',Georgia,serif;font-size:11px;color:#1a1008">
+          <p style="font-weight:700;margin:0 0 5px 0;font-size:12px">${event.label}</p>
+          <p style="color:#5c4a2a;margin:0;line-height:1.5">${event.description}</p>
         </div>
       `)
 

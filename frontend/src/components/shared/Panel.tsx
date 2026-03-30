@@ -20,13 +20,13 @@ export function Panel({ title, children, className = '', collapsible = true, def
         className="flex items-center justify-between w-full px-3 py-2 text-left select-none"
       >
         <div className="flex items-center gap-2">
-          {icon && <span className="text-slate-400">{icon}</span>}
-          <span className="text-xs font-semibold uppercase tracking-widest text-slate-300">
+          {icon && <span className="text-wiki-textMuted">{icon}</span>}
+          <span className="text-xs font-bold uppercase tracking-widest text-wiki-text">
             {title}
           </span>
         </div>
         {collapsible && (
-          <span className="text-slate-500 text-xs transition-transform duration-200" style={{ transform: open ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+          <span className="text-wiki-textMuted text-xs transition-transform duration-200" style={{ transform: open ? 'rotate(180deg)' : 'rotate(0deg)' }}>
             ▲
           </span>
         )}

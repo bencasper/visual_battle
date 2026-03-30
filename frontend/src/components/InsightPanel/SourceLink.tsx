@@ -1,11 +1,11 @@
 import type { SourceLinkProps } from './InsightPanel.types'
 
 const TYPE_ICONS: Record<string, string> = {
-  book: '📚',
-  official: '📄',
-  article: '📰',
+  book:        '📚',
+  official:    '📄',
+  article:     '📰',
   documentary: '🎥',
-  map: '🗺️',
+  map:         '🗺️',
 }
 
 export function SourceLink({ source }: SourceLinkProps) {
@@ -14,11 +14,12 @@ export function SourceLink({ source }: SourceLinkProps) {
     <div className="flex items-start gap-1.5 text-[10px]">
       <span>{icon}</span>
       {source.url ? (
-        <a href={source.url} target="_blank" rel="noopener noreferrer" className="text-un-light hover:underline leading-snug">
+        <a href={source.url} target="_blank" rel="noopener noreferrer"
+           className="text-un hover:underline leading-snug font-medium">
           {source.title}
         </a>
       ) : (
-        <span className="text-slate-400 leading-snug">{source.title}</span>
+        <span className="text-wiki-textMuted leading-snug">{source.title}</span>
       )}
     </div>
   )

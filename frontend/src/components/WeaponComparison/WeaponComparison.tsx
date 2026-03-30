@@ -36,10 +36,10 @@ export function WeaponComparison({ factions }: WeaponComparisonProps) {
           <button
             key={cat.key}
             onClick={() => setActiveCategory(cat.key)}
-            className={`px-2 py-0.5 rounded text-[10px] font-medium transition-colors ${
+            className={`px-2 py-0.5 rounded text-[10px] font-semibold transition-colors ${
               activeCategory === cat.key
                 ? 'bg-un text-white'
-                : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                : 'bg-wiki-parchmentDk text-wiki-text hover:bg-wiki-hillShade border border-wiki-border'
             }`}
           >
             {cat.icon} {cat.label}
@@ -49,8 +49,8 @@ export function WeaponComparison({ factions }: WeaponComparisonProps) {
 
       {/* Side-by-side cards */}
       <div className="flex gap-1.5 mb-2">
-        {w0 ? <WeaponCard weapon={w0} factionColor={factions[0].color} /> : <div className="flex-1 text-[10px] text-slate-500 italic p-2">No match</div>}
-        {w1 ? <WeaponCard weapon={w1} factionColor={factions[1].color} /> : <div className="flex-1 text-[10px] text-slate-500 italic p-2">No match</div>}
+        {w0 ? <WeaponCard weapon={w0} factionColor={factions[0].color} /> : <div className="flex-1 text-[10px] text-wiki-textMuted italic p-2">No match</div>}
+        {w1 ? <WeaponCard weapon={w1} factionColor={factions[1].color} /> : <div className="flex-1 text-[10px] text-wiki-textMuted italic p-2">No match</div>}
       </div>
 
       {/* Radar chart */}

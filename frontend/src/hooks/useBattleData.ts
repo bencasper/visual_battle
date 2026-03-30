@@ -7,7 +7,7 @@ import { useTimelineStore } from '@/store/useTimelineStore'
  * Falls back to local JSON if the API is unavailable.
  */
 export function useBattleData(battleId: string) {
-  const { activeBattle, loading, error, loadBattle } = useBattleStore()
+  const { activeBattle, terrain, loading, error, loadBattle } = useBattleStore()
   const setTotalPhases = useTimelineStore((s) => s.setTotalPhases)
 
   useEffect(() => {
@@ -22,5 +22,5 @@ export function useBattleData(battleId: string) {
     }
   }, [activeBattle, setTotalPhases])
 
-  return { battle: activeBattle, loading, error }
+  return { battle: activeBattle, terrain, loading, error }
 }

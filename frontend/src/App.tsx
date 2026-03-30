@@ -8,7 +8,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <ErrorBoundary>
-        <div className="w-full h-full">
+        <div style={{ position: 'fixed', inset: 0 }}>
           <Routes>
             <Route path="/" element={<BattleList />} />
             <Route path="/battle/:battleId" element={<BattleView />} />

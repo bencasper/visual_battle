@@ -6,38 +6,58 @@ export default {
   theme: {
     extend: {
       colors: {
+        // ── Wikipedia Military Map palette ──────────────────────────
+        wiki: {
+          parchment:   '#f0e6cc',
+          parchmentDk: '#e2d4b0',
+          hillShade:   '#c8b49a',
+          mountain:    '#a89070',
+          water:       '#aad3df',
+          waterDk:     '#7ab8cf',
+          forest:      '#add19e',
+          road:        '#c88a00',
+          panel:       'rgba(240,230,204,0.93)',
+          border:      '#c8b49a',
+          text:        '#1a1008',
+          textMuted:   '#5c4a2a',
+        },
+        // ── Faction colours (Wikipedia-accurate) ────────────────────
         un: {
-          DEFAULT: '#1a3a5c',
-          light: '#3a6fa8',
-          muted: '#2a4f78',
+          DEFAULT: '#003f87',
+          light:   '#4a7fc1',
+          muted:   '#1a5298',
         },
         pva: {
-          DEFAULT: '#8B1A1A',
-          light: '#cc3333',
-          muted: '#a82222',
+          DEFAULT: '#aa0000',
+          light:   '#dd3333',
+          muted:   '#880000',
         },
+        // ── Terrain tokens (used by TerrainLayer) ───────────────────
         terrain: {
-          water: '#3b82f6',
-          forest: '#166534',
-          mountain: '#78716c',
-          plain: '#d4c5a9',
-          road: '#a8a29e',
-          settlement: '#fbbf24',
+          water:      '#aad3df',
+          forest:     '#add19e',
+          mountain:   '#a89070',
+          plain:      '#e8d9b5',
+          road:       '#c88a00',
+          settlement: '#000000',
+          ridge:      '#a89070',
         },
+        // ── UI surface colours ───────────────────────────────────────
         map: {
-          bg: '#1c1917',
-          panel: '#0f172a',
-          panelBorder: '#1e293b',
-          overlay: 'rgba(15,23,42,0.85)',
+          bg:          '#f0e6cc',
+          panel:       '#f5ead5',
+          panelBorder: '#c8b49a',
+          overlay:     'rgba(240,230,204,0.92)',
         },
       },
       fontFamily: {
-        map: ['"Inter"', 'system-ui', 'sans-serif'],
+        map:  ['"Linux Libertine"', 'Georgia', 'serif'],
+        sans: ['"Inter"', 'system-ui', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'monospace'],
       },
       animation: {
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'ping-slow': 'ping 2s cubic-bezier(0, 0, 0.2, 1) infinite',
+        'ping-slow':  'ping 2s cubic-bezier(0, 0, 0.2, 1) infinite',
       },
     },
   },

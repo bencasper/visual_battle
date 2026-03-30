@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html style="height:100vh;width:100vw;margin:0">
+<head><meta charset="UTF-8"><title>DOM Inspector</title></head>
+<body style="height:100%;width:100%;margin:0;padding:0">
+<div id="out" style="font-family:monospace;font-size:11px;padding:10px;background:#fff;position:fixed;top:0;left:0;z-index:9999;max-width:600px;overflow:auto;max-height:100vh"></div>
+<script>
+const out = document.getElementById('out')
+function log(msg) { out.innerHTML += msg + '<br>'; console.log(msg) }
+
+// Open the battle page in an iframe and inspect it
+const iframe = document.createElement('iframe')
+iframe.src = '/battle/chosin-reservoir-1950'
+iframe.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;border:none;z-index:1'
+document.body.appendChild(iframe)
+
+iframe.onload = () => {
+  setTimeout(() => {
+    try {
+      const doc = iframe.contentDocument
+      const root = doc.getElementById('root')
+      const mapDivs = doc.querySelectorAll('[id^="map-"]')
+      const canvas = doc.querySelector('.maplibregl-canvas')
+
+      log('=== DOM INSPECTION ===')
+      log('root exists: ' + !!root)
+      log('root offsetHeight: ' + (root ? root.offsetHeight : 'N/A'))
+      log('root offsetWidth: ' + (root ? root.offsetWidth : 'N/A'))
+      log('map containers found: ' + mapDivs.length)
+
+      mapDivs.forEach((d, i) => {
+        log(`map[${i}] id=${d.id} offsetH=${d.offsetHeight} offsetW=${d.offsetWidth}`)
+        const cs = iframe.contentWindow.getComputedStyle(d)
+        log(`  computed: h=${cs.height} w=${cs.width} display=${cs.display}`)
+      })
+
+      log('canvas found: ' + !!canvas)
+      if (canvas) {
+        log('canvas size: ' + canvas.width + 'x' + canvas.height)
+        log('canvas offsetH: ' + canvas.offsetHeight)
+      }
+
+      // Walk up from map container
+      if (mapDivs[0]) {
+        let el = mapDivs[0].parentElement
+        let depth = 0
+        while (el && depth < 8) {
+          const cs = iframe.contentWindow.getComputedStyle(el)
+          log(`parent[${depth}] tag=${el.tagName} id=${el.id||'?'} class=${el.className.slice(0,30)} h=${cs.height} w=${cs.width}`)
+          el = el.parentElement
+          depth++
+        }
+      }
+    } catch(e) {
+      log('ERROR: ' + e.message)
+    }
+  }, 3000)
+}
+</script>
+</body>
+</html>

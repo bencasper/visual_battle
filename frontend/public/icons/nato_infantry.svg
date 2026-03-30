@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- NATO APP-6 Infantry unit symbol -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60">
+  <rect x="2" y="2" width="96" height="56" fill="none" stroke="#000" stroke-width="3"/>
+  <line x1="2" y1="2"  x2="98" y2="58" stroke="#000" stroke-width="3"/>
+  <line x1="98" y1="2" x2="2"  y2="58" stroke="#000" stroke-width="3"/>
+</svg>
