@@ -1,5 +1,4 @@
 import type { TimelineProps } from './Timeline.types'
-import { PhaseMarker } from './PhaseMarker'
 import { PlaybackControls } from './PlaybackControls'
 import { EventFeed } from './EventFeed'
 import { formatDateRange } from '@/utils/formatUtils'
@@ -9,7 +8,6 @@ export function Timeline({
   phases, currentIndex, isPlaying, speed,
   onSeek, onPlayPause, onStepForward, onStepBack, onSpeedChange,
 }: TimelineProps) {
-  // Activate the rAF loop
   useTimeline()
 
   const currentPhase = phases[currentIndex]
@@ -18,14 +16,75 @@ export function Timeline({
     <div
       className="absolute bottom-0 left-0 right-0 z-20 backdrop-blur-sm border-t"
       style={{
-        height: 'var(--timeline-height, 120px)',
         background: 'rgba(245,234,213,0.97)',
         borderTopColor: 'var(--color-panel-border)',
       }}
     >
-      <div className="flex flex-col h-full px-4 py-2 gap-2">
-        {/* Top row: controls + phase info */}
-        <div className="flex items-center gap-4">
+      {/* ── Phase tabs ── */}
+      <div className="flex items-stretch border-b" style={{ borderColor: 'var(--color-panel-border)' }}>
+        {phases.map((phase, i) => {
+          const isCurrent = i === currentIndex
+          const criticalCount = phase.events.filter((e) => e.significance === 'critical').length
+          return (
+            <button
+              key={phase.id}
+              onClick={() => onSeek(i)}
+              className="flex-1 flex flex-col items-start px-3 py-2 text-left transition-all duration-150 relative group"
+              style={{
+                background: isCurrent ? 'rgba(26,58,92,0.08)' : 'transparent',
+                borderRight: i < phases.length - 1 ? '1px solid var(--color-panel-border)' : undefined,
+              }}
+              aria-label={`Go to phase ${i + 1}: ${phase.label}`}
+            >
+              {/* active indicator bar */}
+              {isCurrent && (
+                <div
+                  className="absolute top-0 left-0 right-0 h-0.5"
+                  style={{ background: 'var(--color-un, #1a3a5c)' }}
+                />
+              )}
+              <div className="flex items-center gap-1.5 w-full">
+                <span
+                  className="text-[10px] font-bold font-mono shrink-0"
+                  style={{ color: isCurrent ? 'var(--color-un, #1a3a5c)' : '#aaa' }}
+                >
+                  {i + 1}
+                </span>
+                <span
+                  className="text-[11px] font-semibold leading-tight line-clamp-1 flex-1"
+                  style={{ color: isCurrent ? 'var(--color-wiki-text, #202122)' : '#666' }}
+                >
+                  {phase.label}
+                </span>
+                {criticalCount > 0 && (
+                  <span
+                    className="text-[9px] font-bold px-1 py-0.5 rounded shrink-0"
+                    style={{
+                      background: isCurrent ? '#cc000022' : '#00000010',
+                      color: isCurrent ? '#cc0000' : '#999',
+                    }}
+                  >
+                    {criticalCount}★
+                  </span>
+                )}
+              </div>
+              <span
+                className="text-[9px] mt-0.5 leading-none"
+                style={{ color: isCurrent ? 'var(--color-wiki-textMuted, #72777d)' : '#bbb' }}
+              >
+                {formatDateRange(phase.date_range)}
+              </span>
+              {/* hover highlight for inactive tabs */}
+              {!isCurrent && (
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                  style={{ background: 'rgba(0,0,0,0.04)' }} />
+              )}
+            </button>
+          )
+        })}
+
+        {/* Playback controls pinned to the right */}
+        <div className="flex items-center px-3 shrink-0 border-l" style={{ borderColor: 'var(--color-panel-border)' }}>
           <PlaybackControls
             isPlaying={isPlaying}
             speed={speed}
@@ -37,42 +96,15 @@ export function Timeline({
             onStepForward={onStepForward}
             onSpeedChange={onSpeedChange}
           />
-          {currentPhase && (
-            <div className="flex-1 min-w-0">
-              <p className="text-xs font-semibold text-wiki-text truncate">{currentPhase.label}</p>
-              <p className="text-[10px] text-wiki-textMuted">{formatDateRange(currentPhase.date_range)}</p>
-            </div>
-          )}
-          <div className="text-[10px] text-wiki-textMuted font-mono">
-            {currentIndex + 1} / {phases.length}
-          </div>
         </div>
-
-        {/* Scrubber bar */}
-        <div className="relative h-6 flex items-center px-4">
-          {/* Track */}
-          <div className="absolute inset-x-4 h-0.5 bg-wiki-hillShade rounded" />
-          {/* Progress fill */}
-          <div
-            className="absolute left-4 h-0.5 bg-un rounded transition-all duration-300"
-            style={{ width: `calc(${phases.length > 1 ? (currentIndex / (phases.length - 1)) * 100 : 0}% * (100% - 2rem) / 100%)` }}
-          />
-          {/* Phase markers */}
-          {phases.map((phase, i) => (
-            <PhaseMarker
-              key={phase.id}
-              phase={phase}
-              index={i}
-              total={phases.length}
-              isCurrent={i === currentIndex}
-              onClick={() => onSeek(i)}
-            />
-          ))}
-        </div>
-
-        {/* Event feed */}
-        {currentPhase && <EventFeed phase={currentPhase} />}
       </div>
+
+      {/* ── Event feed ── */}
+      {currentPhase && (
+        <div className="px-4 py-2">
+          <EventFeed phase={currentPhase} />
+        </div>
+      )}
     </div>
   )
 }
