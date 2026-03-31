@@ -18,6 +18,15 @@ interface BattleActions {
 
 const API_BASE = import.meta.env.VITE_API_URL ?? '/api/v1'
 
+/** Throws if the response isn't JSON (e.g. Vite serving index.html for a missing proxy) */
+async function jsonOrThrow<T>(res: Response): Promise<T> {
+  const ct = res.headers.get('content-type') ?? ''
+  if (!ct.includes('application/json')) {
+    throw new Error(`Expected JSON but got ${ct || 'unknown content-type'} (HTTP ${res.status})`)
+  }
+  return res.json() as Promise<T>
+}
+
 export const useBattleStore = create<BattleState & BattleActions>((set) => ({
   activeBattle: null,
   battleList: [],
@@ -30,25 +39,37 @@ export const useBattleStore = create<BattleState & BattleActions>((set) => ({
       set({ loading: true, error: null })
       const res = await fetch(`${API_BASE}/battles`)
       if (!res.ok) throw new Error(`HTTP ${res.status}`)
-      const data: BattleListItem[] = await res.json()
+      const data: BattleListItem[] = await jsonOrThrow(res)
       set({ battleList: data, loading: false })
     } catch {
-      // API unavailable — build a minimal list from the local JSON file
+      // API unavailable — build a minimal list from the local JSON files
       try {
-        const res = await fetch('/data/battles/chosin-reservoir.json', { cache: 'no-store' })
-        if (!res.ok) throw new Error('local data missing')
-        const battle = await res.json()
-        const item: BattleListItem = {
-          id:            battle.id,
-          name:          battle.name,
-          slug:          battle.slug,
-          theater:       battle.theater,
-          date_range:    battle.date_range,
-          location:      battle.location,
-          outcome:       battle.outcome,
-          faction_names: battle.factions.map((f: { name: string }) => f.name),
-        }
-        set({ battleList: [item], loading: false })
+        const LOCAL_BATTLES = [
+          '/data/battles/chosin-reservoir.json',
+          '/data/battles/stalingrad.json',
+        ]
+        const results = await Promise.allSettled(
+          LOCAL_BATTLES.map((path) =>
+            fetch(path, { cache: 'no-store' }).then((r) => {
+              if (!r.ok) throw new Error(`missing: ${path}`)
+              return r.json()
+            })
+          )
+        )
+        const battleList: BattleListItem[] = results
+          .filter((r): r is PromiseFulfilledResult<Battle> => r.status === 'fulfilled')
+          .map(({ value: battle }) => ({
+            id:            battle.id,
+            name:          battle.name,
+            slug:          battle.slug,
+            theater:       battle.theater,
+            date_range:    battle.date_range,
+            location:      battle.location,
+            outcome:       battle.outcome,
+            faction_names: battle.factions.map((f: { name: string }) => f.name),
+          }))
+        if (battleList.length === 0) throw new Error('no local battle data found')
+        set({ battleList, loading: false })
       } catch (fallbackErr) {
         set({ error: String(fallbackErr), loading: false })
       }
@@ -64,7 +85,7 @@ export const useBattleStore = create<BattleState & BattleActions>((set) => ({
       try {
         const res = await fetch(`${API_BASE}/battles/${id}`)
         if (!res.ok) throw new Error(`HTTP ${res.status}`)
-        battle = await res.json()
+        battle = await jsonOrThrow<Battle>(res)
       } catch {
         // Local fallback for development without backend
         const slug = id.replace(/-\d{4}$/, '')
@@ -80,7 +101,8 @@ export const useBattleStore = create<BattleState & BattleActions>((set) => ({
       try {
         const slug = battle.slug
         const res = await fetch(`/data/battles/${slug}-terrain.json`, { cache: 'no-store' })
-        if (res.ok) terrain = await res.json() as TerrainCollection
+        if (res.ok && (res.headers.get('content-type') ?? '').includes('application/json'))
+          terrain = await res.json() as TerrainCollection
       } catch {
         // Terrain is optional
       }
