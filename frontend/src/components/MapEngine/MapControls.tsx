@@ -21,7 +21,7 @@ export function MapControls({ onZoomIn, onZoomOut, onResetBearing, onFitBounds, 
     'rounded transition-colors text-sm font-semibold shadow-sm'
 
   return (
-    <div className="absolute bottom-32 right-3 flex flex-col gap-1 z-30">
+    <div className="absolute bottom-4 right-3 flex flex-col gap-1 z-30">
       <button onClick={onZoomIn}       className={btnClass}                    title="Zoom in">+</button>
       <button onClick={onZoomOut}      className={btnClass}                    title="Zoom out">−</button>
       <button onClick={onResetBearing} className={btnClass}                    title="Reset north">⬆</button>

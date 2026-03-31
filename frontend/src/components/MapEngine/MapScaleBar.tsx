@@ -56,9 +56,9 @@ export function MapScaleBar({ map }: MapScaleBarProps) {
   return (
     <div
       style={{
-        position: 'fixed',
-        bottom: 132,
-        left: 12,
+        position: 'absolute',
+        bottom: 16,
+        left: 80,
         zIndex: 25,
         pointerEvents: 'none',
         userSelect: 'none',

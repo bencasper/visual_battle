@@ -35,8 +35,8 @@ export function NorthArrow() {
   return (
     <div
       style={{
-        position: 'fixed',
-        bottom: 196,   // above scale bar (132) + some gap
+        position: 'absolute',
+        bottom: 16,
         left: 12,
         zIndex: 25,
         pointerEvents: 'none',

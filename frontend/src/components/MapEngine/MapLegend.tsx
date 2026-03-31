@@ -33,9 +33,9 @@ export function MapLegend({ factions }: MapLegendProps) {
   return (
     <div
       style={{
-        position: 'fixed',
-        bottom: 132,
-        left: 228,   // 12 (left margin) + 200 (max bar width) + 16 (gap)
+        position: 'absolute',
+        bottom: 16,
+        left: 310,
         zIndex: 25,
         background: WIKI_COLOURS.panelBg,
         border: `1px solid ${WIKI_COLOURS.panelBorder}`,
