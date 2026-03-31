@@ -56,59 +56,61 @@ export function BattleView() {
     : null
 
   return (
-    <div style={{ position: 'fixed', inset: 0, overflow: 'hidden' }}>
-      {/* ── MAP ENGINE (full viewport) ── */}
-      <ErrorBoundary>
-        <MapEngine
-          battle={battle}
-          currentPhase={currentPhase}
-          previousPhase={previousPhase}
-          nextPhase={nextPhase}
-          terrain={terrain}
-          showTerrain={showTerrain}
-          onUnitClick={(id, anchor) => selectUnit(selectedUnitId === id ? null : id, anchor)}
-          onMapReady={handleMapReady}
-        />
-      </ErrorBoundary>
-
-      {/* ── Title chip (top-left) ── */}
-      <div className="absolute top-3 left-3 z-20">
-        <div className="glass-panel px-3 py-1.5 shadow-md">
-          <p className="text-[9px] uppercase tracking-widest text-wiki-textMuted font-semibold">{battle.theater}</p>
-          <p className="text-sm font-bold text-wiki-text" style={{ fontFamily: '"Linux Libertine", Georgia, serif' }}>
-            {battle.name}
-          </p>
-        </div>
-      </div>
-
-      {/* ── ARMY PANEL (right side, scrollable) ── */}
-      <div className="absolute top-3 right-3 bottom-24 z-20 flex flex-col" style={{ width: 268 }}>
-        <div className="flex-1 overflow-y-auto overflow-x-hidden">
-          <ArmyPanel
-            factions={battle.factions}
+    <div style={{ position: 'fixed', inset: 0, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+      {/* ── MAP ENGINE (fills remaining space above timeline) ── */}
+      <div style={{ position: 'relative', flex: 1, minHeight: 0 }}>
+        <ErrorBoundary>
+          <MapEngine
+            battle={battle}
             currentPhase={currentPhase}
-            selectedFactionId={selectedFactionId}
-            onSelectFaction={(id) => selectFaction(selectedFactionId === id ? null : id)}
+            previousPhase={previousPhase}
+            nextPhase={nextPhase}
+            terrain={terrain}
+            showTerrain={showTerrain}
+            onUnitClick={(id, anchor) => selectUnit(selectedUnitId === id ? null : id, anchor)}
+            onMapReady={handleMapReady}
           />
+        </ErrorBoundary>
+
+        {/* ── Title chip (top-left) ── */}
+        <div className="absolute top-3 left-3 z-20">
+          <div className="glass-panel px-3 py-1.5 shadow-md">
+            <p className="text-[9px] uppercase tracking-widest text-wiki-textMuted font-semibold">{battle.theater}</p>
+            <p className="text-sm font-bold text-wiki-text" style={{ fontFamily: '"Linux Libertine", Georgia, serif' }}>
+              {battle.name}
+            </p>
+          </div>
         </div>
+
+        {/* ── ARMY PANEL (right side, scrollable) ── */}
+        <div className="absolute top-3 right-3 bottom-3 z-20 flex flex-col" style={{ width: 268 }}>
+          <div className="flex-1 overflow-y-auto overflow-x-hidden">
+            <ArmyPanel
+              factions={battle.factions}
+              currentPhase={currentPhase}
+              selectedFactionId={selectedFactionId}
+              onSelectFaction={(id) => selectFaction(selectedFactionId === id ? null : id)}
+            />
+          </div>
+        </div>
+
+        {/* ── UNIT INFO DRAWER (bottom-left, above timeline) ── */}
+        <AnimatePresence>
+          {selectedUnit && selectedFaction && selectedUnitAnchor && (
+            <UnitDrawer
+              unit={selectedUnit}
+              faction={selectedFaction}
+              positionLabel={selectedPosition?.location}
+              posture={selectedPosition?.posture}
+              strengthPct={selectedPosition?.strength_pct}
+              anchor={selectedUnitAnchor}
+              onClose={() => selectUnit(null)}
+            />
+          )}
+        </AnimatePresence>
       </div>
 
-      {/* ── UNIT INFO DRAWER (bottom-left, above timeline) ── */}
-      <AnimatePresence>
-        {selectedUnit && selectedFaction && selectedUnitAnchor && (
-          <UnitDrawer
-            unit={selectedUnit}
-            faction={selectedFaction}
-            positionLabel={selectedPosition?.location}
-            posture={selectedPosition?.posture}
-            strengthPct={selectedPosition?.strength_pct}
-            anchor={selectedUnitAnchor}
-            onClose={() => selectUnit(null)}
-          />
-        )}
-      </AnimatePresence>
-
-      {/* ── TIMELINE (bottom dock) ── */}
+      {/* ── TIMELINE (bottom dock, natural height) ── */}
       <Timeline
         phases={battle.phases}
         currentIndex={currentPhaseIndex}
