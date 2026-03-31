@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { BattleView } from '@/pages/BattleView'
 import { BattleList } from '@/pages/BattleList'
 import { NotFound } from '@/pages/NotFound'
@@ -10,7 +10,7 @@ export default function App() {
       <ErrorBoundary>
         <div style={{ position: 'fixed', inset: 0 }}>
           <Routes>
-            <Route path="/" element={<BattleView />} />
+            <Route path="/" element={<Navigate to="/battles" replace />} />
             <Route path="/battles" element={<BattleList />} />
             <Route path="/battle/:battleId" element={<BattleView />} />
             <Route path="*" element={<NotFound />} />
