@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Date, Integer, Text
+from sqlalchemy import Column, String, Date, Integer, Text, DateTime, func
 from sqlalchemy.dialects.postgresql import JSONB
 from geoalchemy2 import Geometry
 from db.database import Base
@@ -15,6 +15,10 @@ class Battle(Base):
     date_end = Column(Date, nullable=True)
     location = Column(Geometry("POINT", srid=4326), nullable=True)
     map_bounds = Column(JSONB, nullable=True)
+    outcome = Column(Text, nullable=True)
+    result_summary = Column(Text, nullable=True)
+    terrain_type = Column(String, nullable=True)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now(), nullable=False)
     data = Column(JSONB, nullable=False)           # full battle JSON minus phases
 
 
@@ -27,4 +31,5 @@ class BattlePhase(Base):
     label = Column(String, nullable=False)
     date_start = Column(Date, nullable=True)
     date_end = Column(Date, nullable=True)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now(), nullable=False)
     data = Column(JSONB, nullable=False)           # full phase JSON

@@ -1,18 +1,20 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { useBattleStore } from '@/store/useBattleStore'
 import { LoadingSpinner } from '@/components/shared/LoadingSpinner'
 import { Badge } from '@/components/shared/Badge'
 import { formatDateRange } from '@/utils/formatUtils'
 
 export function BattleList() {
+  const { t } = useTranslation()
   const { battleList, loading, error, loadBattleList } = useBattleStore()
 
   useEffect(() => { loadBattleList() }, [loadBattleList])
 
   if (loading) return (
     <div className="flex items-center justify-center h-full bg-wiki-parchment">
-      <LoadingSpinner size="lg" label="Loading battles…" />
+      <LoadingSpinner size="lg" label={t('battleList.loading')} />
     </div>
   )
   if (error) return (
@@ -22,25 +24,25 @@ export function BattleList() {
   )
 
   return (
-    <div className="min-h-full bg-wiki-parchment p-8">
+    <div className="absolute inset-0 overflow-y-auto bg-wiki-parchment p-8">
       <div className="max-w-4xl mx-auto">
         <h1
           className="text-2xl font-bold text-wiki-text mb-1"
           style={{ fontFamily: '"Linux Libertine", Georgia, serif' }}
         >
-          ⚔️ Visual Battle
+          {t('battleList.title')}
         </h1>
         <p className="text-sm text-wiki-textMuted mb-8">
-          Explore history's greatest battles through interactive maps, timelines, and tactical analysis.
+          {t('battleList.subtitle')}
         </p>
 
         {battleList.length === 0 ? (
           <div className="glass-panel p-8 text-center text-wiki-textMuted">
             <p className="text-4xl mb-3">🗺️</p>
-            <p className="font-semibold text-wiki-text">No battles loaded yet.</p>
-            <p className="text-sm mt-1">Run the seed script to populate the database.</p>
+            <p className="font-semibold text-wiki-text">{t('battleList.empty.title')}</p>
+            <p className="text-sm mt-1">{t('battleList.empty.hint')}</p>
             <code className="block text-xs bg-wiki-parchmentDk border border-wiki-border rounded px-3 py-2 mt-3 text-wiki-text">
-              cd server && python -m scripts.seed_db
+              {t('battleList.empty.code')}
             </code>
           </div>
         ) : (

@@ -10,7 +10,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from db.database import settings, engine, Base
-from routers import battles
+from routers import battles, export
 
 
 @asynccontextmanager
@@ -38,6 +38,7 @@ app.add_middleware(
 )
 
 app.include_router(battles.router, prefix="/api/v1")
+app.include_router(export.router, prefix="/api/v1")
 
 
 @app.get("/health")
