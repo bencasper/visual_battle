@@ -1,8 +1,10 @@
+import { useTranslation } from 'react-i18next'
 import type { WeaponCardProps } from './WeaponComparison.types'
 import { snakeToTitle } from '@/utils/formatUtils'
 import { WIKI_COLOURS } from '@/utils/wikiMapStyle'
 
 export function WeaponCard({ weapon, factionColor }: WeaponCardProps) {
+  const { t } = useTranslation()
   const stats = Object.entries(weapon.stats).filter(([, v]) => v != null) as [string, number][]
   // Map old faction colours to Wikipedia palette
   const barColor = factionColor.toLowerCase().includes('1a3') || factionColor.toLowerCase().includes('003')
@@ -39,8 +41,8 @@ export function WeaponCard({ weapon, factionColor }: WeaponCardProps) {
       </div>
 
       {weapon.effective_range_m && (
-        <p className="text-[9px] text-wiki-textMuted mt-1.5">
-          Range: {weapon.effective_range_m.toLocaleString()}m
+      <p className="text-[9px] text-wiki-textMuted mt-1.5">
+          {t('weaponCard.range')}: {weapon.effective_range_m.toLocaleString()}m
           {weapon.rate_of_fire_rpm ? ` · ${weapon.rate_of_fire_rpm} rpm` : ''}
         </p>
       )}

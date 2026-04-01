@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import type { WeaponComparisonProps } from './WeaponComparison.types'
 import { Panel } from '@/components/shared/Panel'
 import { WeaponCard } from './WeaponCard'
@@ -6,15 +7,16 @@ import { WeaponRadarChart } from './WeaponRadarChart'
 
 type WeaponCategory = 'rifle' | 'machine_gun' | 'submachine_gun' | 'mortar' | 'field_artillery' | 'medium_tank' | 'close_air_support' | 'grenade'
 
-const CATEGORIES: { key: WeaponCategory; label: string; icon: string }[] = [
-  { key: 'rifle', label: 'Rifles', icon: '🔫' },
-  { key: 'machine_gun', label: 'MG', icon: '⚙️' },
-  { key: 'field_artillery', label: 'Artillery', icon: '💥' },
-  { key: 'medium_tank', label: 'Armor', icon: '🛡️' },
-  { key: 'close_air_support', label: 'Air', icon: '✈️' },
+const CATEGORY_KEYS: { key: WeaponCategory; icon: string }[] = [
+  { key: 'rifle', icon: '🔫' },
+  { key: 'machine_gun', icon: '⚙️' },
+  { key: 'field_artillery', icon: '💥' },
+  { key: 'medium_tank', icon: '🛡️' },
+  { key: 'close_air_support', icon: '✈️' },
 ]
 
 export function WeaponComparison({ factions }: WeaponComparisonProps) {
+  const { t } = useTranslation()
   const [activeCategory, setActiveCategory] = useState<WeaponCategory>('rifle')
 
   const getWeapon = (factionIndex: number) =>
@@ -29,10 +31,10 @@ export function WeaponComparison({ factions }: WeaponComparisonProps) {
   ].filter(Boolean) as WeaponRadarChart['props'] extends { weapons: infer W } ? W : never[]
 
   return (
-    <Panel title="Weapon Comparison" icon="🏹" className="w-64">
+    <Panel title={t('weaponComparison.title')} icon="🏹" className="w-64">
       {/* Category tabs */}
       <div className="flex flex-wrap gap-1 mb-2">
-        {CATEGORIES.map((cat) => (
+        {CATEGORY_KEYS.map((cat) => (
           <button
             key={cat.key}
             onClick={() => setActiveCategory(cat.key)}
@@ -42,15 +44,15 @@ export function WeaponComparison({ factions }: WeaponComparisonProps) {
                 : 'bg-wiki-parchmentDk text-wiki-text hover:bg-wiki-hillShade border border-wiki-border'
             }`}
           >
-            {cat.icon} {cat.label}
+            {cat.icon} {t(`weaponComparison.category.${cat.key}`)}
           </button>
         ))}
       </div>
 
       {/* Side-by-side cards */}
       <div className="flex gap-1.5 mb-2">
-        {w0 ? <WeaponCard weapon={w0} factionColor={factions[0].color} /> : <div className="flex-1 text-[10px] text-wiki-textMuted italic p-2">No match</div>}
-        {w1 ? <WeaponCard weapon={w1} factionColor={factions[1].color} /> : <div className="flex-1 text-[10px] text-wiki-textMuted italic p-2">No match</div>}
+        {w0 ? <WeaponCard weapon={w0} factionColor={factions[0].color} /> : <div className="flex-1 text-[10px] text-wiki-textMuted italic p-2">{t('weaponComparison.noMatch')}</div>}
+        {w1 ? <WeaponCard weapon={w1} factionColor={factions[1].color} /> : <div className="flex-1 text-[10px] text-wiki-textMuted italic p-2">{t('weaponComparison.noMatch')}</div>}
       </div>
 
       {/* Radar chart */}

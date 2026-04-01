@@ -1,0 +1,124 @@
+{
+  "battleList": {
+    "loading": "加载战役中…",
+    "title": "⚔️ 可视化战役",
+    "subtitle": "通过互动地图、时间线和战术分析，探索历史上最伟大的战役。",
+    "empty": {
+      "title": "暂无战役数据。",
+      "hint": "运行种子脚本以填充数据库。",
+      "code": "cd server && python -m scripts.seed_db"
+    }
+  },
+  "battleView": {
+    "loading": "加载战役数据中…",
+    "notFound": "未找到战役"
+  },
+  "notFound": {
+    "title": "页面未找到",
+    "body": "此区域尚未探索。",
+    "back": "← 返回战役列表"
+  },
+  "error": {
+    "title": "出现错误"
+  },
+  "armyPanel": {
+    "title": "战斗序列",
+    "forceStrength": "兵力对比"
+  },
+  "oob": {
+    "label": "OOB",
+    "title": "战斗序列",
+    "unitCount_one": "{{count}} 个单位",
+    "unitCount_other": "{{count}} 个单位",
+    "morale": "士气",
+    "showFewer": "▲ 收起",
+    "showMore": "▼ 还有 {{count}} 个单位"
+  },
+  "unit": {
+    "commander": "指挥官",
+    "deputy": "副指挥",
+    "location": "位置",
+    "strength": "兵力",
+    "morale": "士气",
+    "supply": "补给",
+    "troops": "兵员"
+  },
+  "mapControls": {
+    "zoomIn": "放大",
+    "zoomOut": "缩小",
+    "resetNorth": "重置朝向",
+    "fitBattle": "适应战场",
+    "switchTo2D": "切换至 2D",
+    "switchTo3D": "切换至 3D"
+  },
+  "legend": {
+    "factions": "阵营",
+    "natoSymbols": "北约符号",
+    "echelon": "编制",
+    "infantry": "步兵 / 侦察",
+    "artillery": "炮兵",
+    "armour": "装甲",
+    "hq": "司令部",
+    "airWing": "航空队",
+    "corps": "军",
+    "division": "师",
+    "regiment": "团",
+    "battalion": "营",
+    "company": "连"
+  },
+  "playback": {
+    "stepBack": "上一阶段",
+    "play": "播放",
+    "pause": "暂停",
+    "stepForward": "下一阶段",
+    "speed1x": "1× 速度",
+    "speed2x": "2× 速度",
+    "speed4x": "4× 速度"
+  },
+  "timeline": {
+    "goToPhase": "跳至第 {{n}} 阶段：{{label}}",
+    "criticalEvent_one": "{{count}} 个关键事件",
+    "criticalEvent_other": "{{count}} 个关键事件"
+  },
+  "supply": {
+    "short": {
+      "full": "满",
+      "adequate": "正常",
+      "low": "不足",
+      "critical": "告急",
+      "depleted": "耗尽"
+    },
+    "long": {
+      "full": "充足",
+      "adequate": "基本充足",
+      "low": "不足",
+      "critical": "严重不足",
+      "depleted": "耗尽"
+    }
+  },
+  "languageToggle": {
+    "label": "EN"
+  },
+  "weaponComparison": {
+    "title": "武器比较",
+    "noMatch": "无匹配",
+    "category": {
+      "rifle": "步枪",
+      "machine_gun": "机枪",
+      "field_artillery": "火炮",
+      "medium_tank": "装甲",
+      "close_air_support": "航空"
+    }
+  },
+  "weaponCard": {
+    "range": "射程"
+  },
+  "insightPanel": {
+    "title": "阶段洞察",
+    "tacticalContext": "战术背景",
+    "wind": "风速 {{kph}} 千米/时",
+    "lessonsWisdom": "经验与智慧",
+    "keyFigures": "关键人物",
+    "sources": "资料来源"
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "battleList": {
+    "loading": "Loading battles…",
+    "title": "⚔️ Visual Battle",
+    "subtitle": "Explore history's greatest battles through interactive maps, timelines, and tactical analysis.",
+    "empty": {
+      "title": "No battles loaded yet.",
+      "hint": "Run the seed script to populate the database.",
+      "code": "cd server && python -m scripts.seed_db"
+    }
+  },
+  "battleView": {
+    "loading": "Loading battle data…",
+    "notFound": "Battle not found"
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "body": "This territory is uncharted.",
+    "back": "← Return to Battle List"
+  },
+  "error": {
+    "title": "Something went wrong"
+  },
+  "armyPanel": {
+    "title": "Order of Battle",
+    "forceStrength": "Force Strength"
+  },
+  "oob": {
+    "label": "OOB",
+    "title": "Order of Battle",
+    "unitCount_one": "{{count}} unit",
+    "unitCount_other": "{{count}} units",
+    "morale": "Morale",
+    "showFewer": "▲ Show fewer",
+    "showMore": "▼ +{{count}} more units"
+  },
+  "unit": {
+    "commander": "Commander",
+    "deputy": "Deputy",
+    "location": "Location",
+    "strength": "Strength",
+    "morale": "Morale",
+    "supply": "Supply",
+    "troops": "troops"
+  },
+  "mapControls": {
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
+    "resetNorth": "Reset north",
+    "fitBattle": "Fit to battle",
+    "switchTo2D": "Switch to 2D",
+    "switchTo3D": "Switch to 3D"
+  },
+  "legend": {
+    "factions": "Factions",
+    "natoSymbols": "NATO Symbols",
+    "echelon": "Echelon",
+    "infantry": "Infantry / Recon",
+    "artillery": "Artillery",
+    "armour": "Armour",
+    "hq": "HQ",
+    "airWing": "Air Wing",
+    "corps": "Corps",
+    "division": "Division",
+    "regiment": "Regiment",
+    "battalion": "Battalion",
+    "company": "Company"
+  },
+  "playback": {
+    "stepBack": "Step back",
+    "play": "Play",
+    "pause": "Pause",
+    "stepForward": "Step forward",
+    "speed1x": "1× speed",
+    "speed2x": "2× speed",
+    "speed4x": "4× speed"
+  },
+  "timeline": {
+    "goToPhase": "Go to phase {{n}}: {{label}}",
+    "criticalEvent_one": "{{count}} critical event",
+    "criticalEvent_other": "{{count}} critical events"
+  },
+  "supply": {
+    "short": {
+      "full": "Full",
+      "adequate": "OK",
+      "low": "Low",
+      "critical": "Crit",
+      "depleted": "Dep"
+    },
+    "long": {
+      "full": "Full",
+      "adequate": "Adequate",
+      "low": "Low",
+      "critical": "Critical",
+      "depleted": "Depleted"
+    }
+  },
+  "languageToggle": {
+    "label": "中文"
+  },
+  "weaponComparison": {
+    "title": "Weapon Comparison",
+    "noMatch": "No match",
+    "category": {
+      "rifle": "Rifles",
+      "machine_gun": "MG",
+      "field_artillery": "Artillery",
+      "medium_tank": "Armor",
+      "close_air_support": "Air"
+    }
+  },
+  "weaponCard": {
+    "range": "Range"
+  },
+  "insightPanel": {
+    "title": "Phase Insight",
+    "tacticalContext": "Tactical Context",
+    "wind": "Wind {{kph}} kph",
+    "lessonsWisdom": "Lessons & Wisdom",
+    "keyFigures": "Key Figures",
+    "sources": "Sources"
+  }
+}

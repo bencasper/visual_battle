@@ -1,10 +1,12 @@
 import { motion, AnimatePresence } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 import type { InsightPanelProps } from './InsightPanel.types'
 import { WisdomCard } from './WisdomCard'
 import { CommanderQuote } from './CommanderQuote'
 import { SourceLink } from './SourceLink'
 
 export function InsightPanel({ phase, battle, visible, onClose }: InsightPanelProps) {
+  const { t } = useTranslation()
   const phaseWisdom = battle.wisdom.filter((w) => w.related_phase === phase.id)
   const relevantFigures = battle.key_figures.slice(0, 2)
 
@@ -32,7 +34,7 @@ export function InsightPanel({ phase, battle, visible, onClose }: InsightPanelPr
             }}
           >
             <div>
-              <p className="text-[9px] uppercase tracking-widest text-wiki-textMuted font-semibold">Phase Insight</p>
+              <p className="text-[9px] uppercase tracking-widest text-wiki-textMuted font-semibold">{t('insightPanel.title')}</p>
               <p className="text-xs font-bold text-wiki-text" style={{ fontFamily: '"Linux Libertine", Georgia, serif' }}>
                 {phase.label}
               </p>
@@ -48,7 +50,7 @@ export function InsightPanel({ phase, battle, visible, onClose }: InsightPanelPr
           <div className="p-3 space-y-3">
             {/* Tactical annotation */}
             <div>
-              <p className="text-[9px] uppercase tracking-widest text-wiki-textMuted font-semibold mb-1">Tactical Context</p>
+              <p className="text-[9px] uppercase tracking-widest text-wiki-textMuted font-semibold mb-1">{t('insightPanel.tacticalContext')}</p>
               <p className="text-[11px] text-wiki-text leading-relaxed">{phase.annotation}</p>
             </div>
 
@@ -59,14 +61,14 @@ export function InsightPanel({ phase, battle, visible, onClose }: InsightPanelPr
                 <p className="text-[10px] text-wiki-text font-semibold">
                   {phase.weather.temp_celsius}°C · {phase.weather.conditions.replace(/_/g, ' ')}
                 </p>
-                <p className="text-[9px] text-wiki-textMuted">Wind {phase.weather.wind_kph} kph</p>
+                <p className="text-[9px] text-wiki-textMuted">{t('insightPanel.wind', { kph: phase.weather.wind_kph })}</p>
               </div>
             </div>
 
             {/* Wisdom cards */}
             {phaseWisdom.length > 0 && (
               <div>
-                <p className="text-[9px] uppercase tracking-widest text-wiki-textMuted font-semibold mb-1.5">Lessons & Wisdom</p>
+                <p className="text-[9px] uppercase tracking-widest text-wiki-textMuted font-semibold mb-1.5">{t('insightPanel.lessonsWisdom')}</p>
                 <div className="space-y-2">
                   {phaseWisdom.map((w) => <WisdomCard key={w.id} wisdom={w} />)}
                 </div>
@@ -75,7 +77,7 @@ export function InsightPanel({ phase, battle, visible, onClose }: InsightPanelPr
 
             {/* Commander quotes */}
             <div>
-              <p className="text-[9px] uppercase tracking-widest text-wiki-textMuted font-semibold mb-1.5">Key Figures</p>
+              <p className="text-[9px] uppercase tracking-widest text-wiki-textMuted font-semibold mb-1.5">{t('insightPanel.keyFigures')}</p>
               <div className="space-y-2">
                 {relevantFigures.map((fig) => <CommanderQuote key={fig.name} figure={fig} />)}
               </div>
@@ -83,7 +85,7 @@ export function InsightPanel({ phase, battle, visible, onClose }: InsightPanelPr
 
             {/* Sources */}
             <div>
-              <p className="text-[9px] uppercase tracking-widest text-wiki-textMuted font-semibold mb-1.5">Sources</p>
+              <p className="text-[9px] uppercase tracking-widest text-wiki-textMuted font-semibold mb-1.5">{t('insightPanel.sources')}</p>
               <div className="space-y-1.5">
                 {battle.sources.map((src, i) => <SourceLink key={i} source={src} />)}
               </div>
