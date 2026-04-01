@@ -164,10 +164,10 @@ export function MapEngine({ battle, currentPhase, previousPhase, nextPhase, terr
         />
       )}
 
-      {/* Unit markers — keyed by unitId+location so they remount on phase change */}
-      {mapInstance && allPositions.map((pos, i) => (
+      {/* Unit markers — keyed by unitId+factionId so they persist across phases and lerp */}
+      {mapInstance && allPositions.map((pos) => (
         <UnitMarker
-          key={`${pos.unitId}-${pos.location}-${i}`}
+          key={`${pos.unitId}-${pos.factionId}`}
           map={mapInstance}
           lat={pos.lat}
           lng={pos.lng}

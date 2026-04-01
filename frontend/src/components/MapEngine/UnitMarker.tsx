@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import maplibregl, { type Map as MapLibreMap } from 'maplibre-gl'
 import { WIKI_COLOURS } from '@/utils/wikiMapStyle'
+
 interface UnitMarkerProps {
   map: MapLibreMap
   lat: number
@@ -40,14 +41,23 @@ function factionColor(color: string): string {
   return color
 }
 
-export function UnitMarker({ map, lat, lng, label, unitType, color, posture, strengthPct, isSelected, onClick }: UnitMarkerProps) {
-  const markerRef = useRef<maplibregl.Marker | null>(null)
+function easeInOut(t: number): number {
+  return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t
+}
 
+const LERP_DURATION = 600 // ms
+
+export function UnitMarker({ map, lat, lng, label, unitType, color, posture, strengthPct, isSelected, onClick }: UnitMarkerProps) {
+  const markerRef   = useRef<maplibregl.Marker | null>(null)
+  // Tracks the *displayed* position during animation (may differ from lat/lng props mid-lerp)
+  const curPosRef   = useRef<{ lat: number; lng: number }>({ lat, lng })
+  const rafRef      = useRef<number | null>(null)
+
+  // ── Effect 1: create / destroy the marker DOM + handle non-position prop changes ──
   useEffect(() => {
-    const fc = factionColor(color)
+    const fc      = factionColor(color)
     const opacity = Math.max(0.5, strengthPct)
 
-    // Outer wrapper
     const el = document.createElement('div')
     el.style.cssText = [
       'cursor: pointer',
@@ -58,7 +68,6 @@ export function UnitMarker({ map, lat, lng, label, unitType, color, posture, str
       `opacity: ${opacity}`,
     ].join(';')
 
-    // NATO box
     const box = document.createElement('div')
     box.style.cssText = [
       'width: 34px',
@@ -73,7 +82,6 @@ export function UnitMarker({ map, lat, lng, label, unitType, color, posture, str
       isSelected ? 'outline: 2px solid #fff; outline-offset: 1px' : '',
     ].join(';')
 
-    // Icon image
     const img = document.createElement('img')
     img.src = natoIcon(unitType)
     img.width = 28
@@ -82,7 +90,6 @@ export function UnitMarker({ map, lat, lng, label, unitType, color, posture, str
     img.onerror = () => { img.style.display = 'none' }
     box.appendChild(img)
 
-    // Label
     const lbl = document.createElement('div')
     lbl.textContent = label.split(/[\s,(]/)[0]
     lbl.style.cssText = [
@@ -104,20 +111,69 @@ export function UnitMarker({ map, lat, lng, label, unitType, color, posture, str
       })
     }
 
-    // Hover highlight
     el.addEventListener('mouseenter', () => { if (!isSelected) box.style.outline = '2px solid #fff' })
     el.addEventListener('mouseleave', () => { if (!isSelected) box.style.outline = 'none' })
 
+    // Place at the *current displayed* position (not the target prop) so the
+    // lerp effect can drive it from there if it fires simultaneously.
     const marker = new maplibregl.Marker({ element: el, anchor: 'bottom' })
-      .setLngLat([lng, lat])
+      .setLngLat([curPosRef.current.lng, curPosRef.current.lat])
       .addTo(map)
 
     markerRef.current = marker
 
     return () => {
+      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current)
       marker.remove()
+      markerRef.current = null
     }
-  }, [map, lat, lng, label, unitType, color, posture, strengthPct, isSelected, onClick])
+    // Intentionally excludes lat/lng — position is driven by Effect 2
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [map, label, unitType, color, posture, strengthPct, isSelected, onClick])
+
+  // ── Effect 2: smooth lerp to new lat/lng whenever they change ──
+  useEffect(() => {
+    const marker = markerRef.current
+    if (!marker) {
+      // Marker not mounted yet — just sync the ref so Effect 1 starts at the right place
+      curPosRef.current = { lat, lng }
+      return
+    }
+
+    // Cancel any in-flight animation
+    if (rafRef.current !== null) cancelAnimationFrame(rafRef.current)
+
+    const startLat = curPosRef.current.lat
+    const startLng = curPosRef.current.lng
+    const startTime = performance.now()
+
+    function step(now: number) {
+      const raw = Math.min(1, (now - startTime) / LERP_DURATION)
+      const t   = easeInOut(raw)
+
+      const curLat = startLat + (lat - startLat) * t
+      const curLng = startLng + (lng - startLng) * t
+      curPosRef.current = { lat: curLat, lng: curLng }
+
+      marker!.setLngLat([curLng, curLat])
+
+      if (raw < 1) {
+        rafRef.current = requestAnimationFrame(step)
+      } else {
+        rafRef.current = null
+        curPosRef.current = { lat, lng }
+      }
+    }
+
+    rafRef.current = requestAnimationFrame(step)
+
+    return () => {
+      if (rafRef.current !== null) {
+        cancelAnimationFrame(rafRef.current)
+        rafRef.current = null
+      }
+    }
+  }, [lat, lng])
 
   return null
 }

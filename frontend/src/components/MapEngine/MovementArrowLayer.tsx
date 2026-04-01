@@ -1,5 +1,6 @@
-// MovementArrowLayer — Wikipedia-style broad tapered movement arrows.
-// Arrows show where units are headed NEXT (current → next phase positions).
+// MovementArrowLayer — thin, crisp movement arrows in the style of a printed
+// military atlas.  A slender curved stroke + small arrowhead; no filled blobs.
+// Phase transitions: new arrows draw on (stroke-dashoffset), old ones fade out.
 
 import { useEffect, useRef } from 'react'
 import maplibregl, { type Map as MapLibreMap } from 'maplibre-gl'
@@ -13,34 +14,28 @@ interface MovementArrowLayerProps {
   nextPhase: Phase | null
 }
 
-// ── Unit-size scale factor ─────────────────────────────────────────────────
-// Maps unit type + effective troop strength to a 0–1 arrow thickness scale.
-// Corps/Army = fattest; company/battalion = thinnest.
-const TYPE_BASE_SCALE: Record<string, number> = {
-  hq:                  0.55,
-  army_corps:          1.00,
-  infantry_division:   0.80,
-  infantry_regiment:   0.55,
-  infantry_task_force: 0.50,
-  infantry_battalion:  0.35,
-  infantry_company:    0.22,
-  commando:            0.25,
-  artillery_regiment:  0.45,
-  artillery_battalion: 0.30,
-  armor_company:       0.28,
-  air_wing:            0.00,   // no ground movement arrow
+// ── Stroke widths: readable but not dominant ───────────────────────────────
+const TYPE_STROKE: Record<string, number> = {
+  hq:                  2.0,
+  army_corps:          3.0,
+  infantry_division:   2.5,
+  infantry_regiment:   2.0,
+  infantry_task_force: 2.0,
+  infantry_battalion:  1.8,
+  infantry_company:    1.6,
+  commando:            1.8,
+  artillery_regiment:  2.0,
+  artillery_battalion: 1.8,
+  armor_company:       1.8,
+  air_wing:            0.0,   // skip
 }
 
-/** Returns a 0–1 size scale for this unit based on type + current effective strength */
-function unitSizeScale(unitType: string, effectiveStrength: number): number {
-  const typeBase = TYPE_BASE_SCALE[unitType] ?? 0.40
-  // Troop-count modifier: log-scale from 100 (min) to 40,000 (max)
-  const strengthScale = Math.max(0, Math.min(1,
-    (Math.log10(Math.max(100, effectiveStrength)) - Math.log10(100)) /
-    (Math.log10(40000)                           - Math.log10(100))
-  ))
-  // Blend: 70% type-driven, 30% strength-driven
-  return typeBase * 0.70 + strengthScale * 0.30
+// Maximum arrow length in screen pixels — clamp very long moves so they
+// don't become confusing scratches across the whole map.
+const MAX_ARROW_PX = 180
+
+function strokeWidth(unitType: string): number {
+  return TYPE_STROKE[unitType] ?? 2.0
 }
 
 function wikiColor(hex: string): string {
@@ -50,235 +45,245 @@ function wikiColor(hex: string): string {
   return hex
 }
 
-function lighten(hex: string, amount: number): string {
-  const r = parseInt(hex.slice(1, 3), 16)
-  const g = parseInt(hex.slice(3, 5), 16)
-  const b = parseInt(hex.slice(5, 7), 16)
-  return `rgb(${Math.round(r + (255 - r) * amount)},${Math.round(g + (255 - g) * amount)},${Math.round(b + (255 - b) * amount)})`
+/** Approximate quadratic-bezier arc length (for stroke-dasharray draw-on). */
+function bezierLen(
+  x0: number, y0: number,
+  cx: number, cy: number,
+  x1: number, y1: number,
+  steps = 32,
+): number {
+  let len = 0, px = x0, py = y0
+  for (let i = 1; i <= steps; i++) {
+    const t = i / steps, mt = 1 - t
+    const nx = mt * mt * x0 + 2 * mt * t * cx + t * t * x1
+    const ny = mt * mt * y0 + 2 * mt * t * cy + t * t * y1
+    len += Math.hypot(nx - px, ny - py)
+    px = nx; py = ny
+  }
+  return len
 }
 
 /**
- * Build an SVG arrow from pixel (x1,y1) to (x2,y2).
- *
- * The SVG is sized to the full bounding box of the arrow.
- * The marker is anchored at the geographic mid-point, so we return the
- * pixel offset from the SVG top-left to the mid-point of the arrow.
+ * Build a minimal SVG: a thin curved arrow from (x1,y1) to (x2,y2).
+ * Returns the SVG string and where to anchor the MapLibre marker.
  */
-function buildArrowSVG(
+function buildArrow(
   x1: number, y1: number,
   x2: number, y2: number,
   color: string,
-  sizeScale: number,       // 0–1 driven by unit type + strength
+  sw: number,   // stroke width in px
 ): { svg: string; anchorOffsetX: number; anchorOffsetY: number } | null {
-  const dx = x2 - x1
-  const dy = y2 - y1
-  const length = Math.sqrt(dx * dx + dy * dy)
-  if (length < 10) return null
+  const dx = x2 - x1, dy = y2 - y1
+  let len = Math.hypot(dx, dy)
+  if (len < 12) return null
 
-  // Body width: purely unit-size driven (2–8 px), NOT length-driven
-  const bodyW   = 2 + sizeScale * 6           // 2 px (company) → 8 px (corps)
-  const headLen = Math.max(bodyW * 2.0, 6 + sizeScale * 10)    // proportional head
-  const headW   = bodyW * 2.4
+  // Clamp very long arrows — shorten to MAX_ARROW_PX along the same direction
+  // so distant movements still show direction without a distracting long line.
+  if (len > MAX_ARROW_PX) {
+    const scale = MAX_ARROW_PX / len
+    x2 = x1 + dx * scale
+    y2 = y1 + dy * scale
+    len = MAX_ARROW_PX
+  }
 
-  // Unit vectors
-  const ux = dx / length, uy = dy / length   // along
-  const px = -uy,         py =  ux           // perpendicular
+  const ux = dx / len, uy = dy / len   // unit vector along arrow
+  const px = -uy,      py =  ux        // perpendicular (for arc bow)
 
-  // Bezier control point — subtle arc
-  const arcAmt = length * 0.10
-  const qcX = (x1 + x2) / 2 + px * arcAmt
-  const qcY = (y1 + y2) / 2 + py * arcAmt
+  // Gentle arc — bow perpendicular to the arrow, 8% of length
+  const bow = len * 0.08
+  const cx = (x1 + x2) / 2 + px * bow
+  const cy = (y1 + y2) / 2 + py * bow
 
-  // Arrow tip
-  const tipX = x2, tipY = y2
+  // Arrowhead: small open chevron at the tip
+  // Step back from tip along the tangent at t=1 of the bezier
+  const headLen = Math.max(7, sw * 4.0)   // scales gently with stroke
+  const headAngle = 25                     // half-angle in degrees
 
-  // Head base centre (step back from tip)
-  const hbX = tipX - ux * headLen
-  const hbY = tipY - uy * headLen
+  // Tangent at t=1: direction from control point to end point
+  const tx = x2 - cx, ty = y2 - cy
+  const tLen = Math.hypot(tx, ty)
+  const tux = tx / tLen, tuy = ty / tLen
 
-  // Head base corners
-  const hlX = hbX + px * headW, hlY = hbY + py * headW
-  const hrX = hbX - px * headW, hrY = hbY - py * headW
+  const rad = (headAngle * Math.PI) / 180
+  const cos = Math.cos(rad), sin = Math.sin(rad)
+  // Left and right barbs
+  const lx = x2 - headLen * (tux * cos - tuy * sin)
+  const ly = y2 - headLen * (tuy * cos + tux * sin)
+  const rx = x2 - headLen * (tux * cos + tuy * sin)
+  const ry = y2 - headLen * (tuy * cos - tux * sin)
 
-  // Tail corners
-  const tlX = x1 + px * bodyW, tlY = y1 + py * bodyW
-  const trX = x1 - px * bodyW, trY = y1 - py * bodyW
+  // Arc length for the draw-on animation
+  const arcLen = Math.round(bezierLen(x1, y1, cx, cy, x2, y2))
 
-  // Body-end corners (narrowed where it meets head)
-  const beW = bodyW * 0.55
-  const belX = hbX + px * beW, belY = hbY + py * beW
-  const berX = hbX - px * beW, berY = hbY - py * beW
-
-  // Bezier side control points (parallel offset of qc)
-  const qclX = qcX + px * bodyW, qclY = qcY + py * bodyW
-  const qcrX = qcX - px * bodyW, qcrY = qcY - py * bodyW
-
-  // Compute bounding box with margin
-  const margin = headW + 10
-  const allX = [x1, x2, qcX, tlX, trX, hlX, hrX, belX, berX]
-  const allY = [y1, y2, qcY, tlY, trY, hlY, hrY, belY, berY]
+  // Bounding box with margin for the stroke + arrowhead
+  const margin = headLen + sw * 3 + 4
+  const allX = [x1, x2, cx, lx, rx]
+  const allY = [y1, y2, cy, ly, ry]
   const minX = Math.min(...allX) - margin
   const minY = Math.min(...allY) - margin
-  const maxX = Math.max(...allX) + margin
-  const maxY = Math.max(...allY) + margin
-  const svgW = Math.ceil(maxX - minX)
-  const svgH = Math.ceil(maxY - minY)
-
+  const svgW = Math.ceil(Math.max(...allX) + margin - minX)
+  const svgH = Math.ceil(Math.max(...allY) + margin - minY)
   const ox = -minX, oy = -minY
 
-  // Shift helpers
-  const p  = (x: number, y: number) => `${(x+ox).toFixed(1)},${(y+oy).toFixed(1)}`
-  const ps = (x: number, y: number) => `${(x+ox).toFixed(1)} ${(y+oy).toFixed(1)}`
+  const pt = (x: number, y: number) => `${(x + ox).toFixed(1)},${(y + oy).toFixed(1)}`
+  const ps = (x: number, y: number) => `${(x + ox).toFixed(1)} ${(y + oy).toFixed(1)}`
 
-  // Body path: tapered quad-bezier outline
-  const bodyPath =
-    `M ${p(tlX,tlY)} ` +
-    `Q ${ps(qclX,qclY)} ${p(belX,belY)} ` +
-    `L ${p(berX,berY)} ` +
-    `Q ${ps(qcrX,qcrY)} ${p(trX,trY)} Z`
+  const curvePath = `M ${pt(x1, y1)} Q ${ps(cx, cy)} ${pt(x2, y2)}`
 
-  // Head: filled triangle
-  const headPath = `M ${p(hlX,hlY)} L ${p(tipX,tipY)} L ${p(hrX,hrY)} Z`
+  // Draw-on: animate stroke-dashoffset from arcLen → 0
+  const drawDur = '0.5s'
+  const headDelay = '0.38s'  // arrowhead appears near the end
 
-  // Centreline path for march-line animation
-  const centrePath = `M ${ps(x1,y1)} Q ${ps(qcX,qcY)} ${ps(hbX,hbY)}`
+  // White halo outline width
+  const haloW = (sw + 1.5).toFixed(1)
+  const strokeW = sw.toFixed(1)
+  // Arrowhead stroke (open chevron, no fill)
+  const headW = (sw * 0.9).toFixed(1)
 
-  const colorLight = lighten(color, 0.50)
-  const gradId  = `g${Math.random().toString(36).slice(2,8)}`
-  const animDur = '1.5s'
-  const dashLen = Math.max(4, Math.round(bodyW * 1.4))
-  const gapLen  = Math.max(3, Math.round(bodyW * 1.0))
-
-  // Anchor offset: pixel distance from SVG top-left to geographic midpoint
-  const midScreenX = (x1 + x2) / 2
-  const midScreenY = (y1 + y2) / 2
-  const anchorOffsetX = midScreenX + ox
-  const anchorOffsetY = midScreenY + oy
+  // anchor at the geographic midpoint of the arrow
+  const midX = (x1 + x2) / 2
+  const midY = (y1 + y2) / 2
 
   const svg = `<svg xmlns="http://www.w3.org/2000/svg"
-     width="${svgW}" height="${svgH}"
-     style="overflow:visible;display:block;pointer-events:none"
-     viewBox="0 0 ${svgW} ${svgH}">
-  <defs>
-    <linearGradient id="${gradId}" gradientUnits="userSpaceOnUse"
-        x1="${(x1+ox).toFixed(1)}" y1="${(y1+oy).toFixed(1)}"
-        x2="${(x2+ox).toFixed(1)}" y2="${(y2+oy).toFixed(1)}">
-      <stop offset="0%"   stop-color="${colorLight}" stop-opacity="0.70"/>
-      <stop offset="55%"  stop-color="${color}"      stop-opacity="0.90"/>
-      <stop offset="100%" stop-color="${color}"      stop-opacity="0.98"/>
-    </linearGradient>
-  </defs>
+    width="${svgW}" height="${svgH}"
+    style="overflow:visible;display:block;pointer-events:none"
+    viewBox="0 0 ${svgW} ${svgH}">
 
-  <!-- Drop shadow -->
-  <path d="${bodyPath}" fill="#000" opacity="0.20" transform="translate(1.5,2.5)"/>
-  <path d="${headPath}" fill="#000" opacity="0.20" transform="translate(1.5,2.5)"/>
-
-  <!-- Dark outline (readability on sat/terrain) -->
-  <path d="${bodyPath}" fill="none" stroke="#000"
-        stroke-width="${(bodyW * 1.05).toFixed(1)}"
-        stroke-linejoin="round" stroke-linecap="round" opacity="0.38"/>
-  <path d="${headPath}" fill="#000" opacity="0.28"/>
-
-  <!-- White halo -->
-  <path d="${bodyPath}" fill="none" stroke="#fff"
-        stroke-width="${(bodyW * 0.70).toFixed(1)}"
-        stroke-linejoin="round" stroke-linecap="round" opacity="0.60"/>
-
-  <!-- Body gradient fill -->
-  <path d="${bodyPath}" fill="url(#${gradId})"
-        stroke="${color}" stroke-width="0.5"
-        stroke-linejoin="round" opacity="0.95"/>
-
-  <!-- Animated march-line dashes -->
-  <path d="${centrePath}" fill="none"
-        stroke="#fff" stroke-width="${(bodyW * 0.24).toFixed(1)}"
-        stroke-linecap="round" opacity="0.60"
-        stroke-dasharray="${dashLen} ${gapLen}">
+  <!-- White halo for contrast on any basemap -->
+  <path d="${curvePath}" fill="none"
+        stroke="#fff" stroke-width="${haloW}"
+        stroke-linecap="round" stroke-linejoin="round"
+        opacity="0.70"
+        stroke-dasharray="${arcLen} ${arcLen}"
+        stroke-dashoffset="${arcLen}">
     <animate attributeName="stroke-dashoffset"
-             from="0" to="${-(dashLen + gapLen)}"
-             dur="${animDur}" repeatCount="indefinite"/>
+             from="${arcLen}" to="0"
+             dur="${drawDur}" fill="freeze"
+             calcMode="spline" keySplines="0.25 0.1 0.25 1" keyTimes="0;1"/>
   </path>
 
-  <!-- Arrowhead -->
-  <path d="${headPath}" fill="${color}"
-        stroke="#fff" stroke-width="1.4"
-        stroke-linejoin="round" opacity="0.98"/>
+  <!-- Main coloured stroke -->
+  <path d="${curvePath}" fill="none"
+        stroke="${color}" stroke-width="${strokeW}"
+        stroke-linecap="round" stroke-linejoin="round"
+        opacity="0.92"
+        stroke-dasharray="${arcLen} ${arcLen}"
+        stroke-dashoffset="${arcLen}">
+    <animate attributeName="stroke-dashoffset"
+             from="${arcLen}" to="0"
+             dur="${drawDur}" fill="freeze"
+             calcMode="spline" keySplines="0.25 0.1 0.25 1" keyTimes="0;1"/>
+  </path>
 
-  <!-- Arrowhead centre highlight -->
-  <line x1="${(hlX*0.6 + tipX*0.4 + ox).toFixed(1)}" y1="${(hlY*0.6 + tipY*0.4 + oy).toFixed(1)}"
-        x2="${(tipX+ox).toFixed(1)}" y2="${(tipY+oy).toFixed(1)}"
-        stroke="#fff" stroke-width="1.8" stroke-linecap="round" opacity="0.38"/>
+  <!-- Arrowhead (open chevron) — fades in at the end of the draw-on -->
+  <g opacity="0">
+    <animate attributeName="opacity" from="0" to="1"
+             begin="${headDelay}" dur="0.12s" fill="freeze"/>
+
+    <!-- halo -->
+    <polyline points="${pt(lx,ly)} ${pt(x2,y2)} ${pt(rx,ry)}"
+              fill="none" stroke="#fff" stroke-width="${(sw + 1.5).toFixed(1)}"
+              stroke-linecap="round" stroke-linejoin="round" opacity="0.70"/>
+    <!-- coloured chevron -->
+    <polyline points="${pt(lx,ly)} ${pt(x2,y2)} ${pt(rx,ry)}"
+              fill="none" stroke="${color}" stroke-width="${headW}"
+              stroke-linecap="round" stroke-linejoin="round" opacity="0.92"/>
+  </g>
 </svg>`
 
-  return { svg, anchorOffsetX, anchorOffsetY }
+  return {
+    svg,
+    anchorOffsetX: midX + ox,
+    anchorOffsetY: midY + oy,
+  }
 }
 
 export function MovementArrowLayer({ map, battle, currentPhase, nextPhase }: MovementArrowLayerProps) {
-  const markersRef = useRef<maplibregl.Marker[]>([])
+  const markersRef    = useRef<maplibregl.Marker[]>([])
+  const fadingRef     = useRef<maplibregl.Marker[]>([])
+  const fadeTimersRef = useRef<ReturnType<typeof setTimeout>[]>([])
 
   useEffect(() => {
-    markersRef.current.forEach((m) => m.remove())
-    markersRef.current = []
+    // ── Fade out the previous set of arrows ───────────────────────────────
+    fadeTimersRef.current.forEach(clearTimeout)
+    fadeTimersRef.current = []
+
+    fadingRef.current.forEach((m) => m.remove())
+    fadingRef.current = []
+
+    if (markersRef.current.length > 0) {
+      const outgoing = markersRef.current
+      markersRef.current = []
+
+      outgoing.forEach((m) => {
+        const el = m.getElement()
+        el.style.transition = 'opacity 180ms ease-out'
+        el.style.opacity = '0'
+      })
+
+      const t = setTimeout(() => {
+        outgoing.forEach((m) => m.remove())
+        fadingRef.current = fadingRef.current.filter((x) => !outgoing.includes(x))
+      }, 200)
+
+      fadeTimersRef.current.push(t)
+      fadingRef.current = outgoing
+    }
 
     if (!map || !nextPhase) return
 
+    // ── Collect movements ─────────────────────────────────────────────────
+    type Arrow = {
+      fromLng: number; fromLat: number
+      toLng:   number; toLat:   number
+      color:   string
+      sw:      number
+    }
+    const arrows: Arrow[] = []
+
+    for (const up of currentPhase.unit_positions) {
+      const cur = up.positions[0]
+      if (!cur) continue
+
+      const nextUp = nextPhase.unit_positions.find(
+        (p) => p.unit_id === up.unit_id && p.faction_id === up.faction_id,
+      )
+      const next = nextUp?.positions[0]
+      if (!next) continue
+      if (Math.abs(cur.lat - next.lat) < 0.001 && Math.abs(cur.lng - next.lng) < 0.001) continue
+
+      const faction = battle.factions.find((f) => f.id === up.faction_id)
+      const unit    = faction?.units.find((u) => u.id === up.unit_id)
+
+      if (unit?.type === 'air_wing') continue
+
+      const sw = strokeWidth(unit?.type ?? '')
+      if (sw === 0) continue
+
+      arrows.push({
+        fromLat: cur.lat,  fromLng: cur.lng,
+        toLat:   next.lat, toLng:   next.lng,
+        color:   faction ? wikiColor(faction.color) : '#555',
+        sw,
+      })
+    }
+
+    // ── Draw arrows ───────────────────────────────────────────────────────
     function draw() {
-      type Arrow = {
-        fromLng: number; fromLat: number
-        toLng: number;   toLat: number
-        color: string
-        sizeScale: number
-      }
-      const arrows: Arrow[] = []
-
-      for (const up of currentPhase.unit_positions) {
-        const cur = up.positions[0]
-        if (!cur) continue
-        const nextUp = nextPhase!.unit_positions.find(
-          (p) => p.unit_id === up.unit_id && p.faction_id === up.faction_id,
-        )
-        const next = nextUp?.positions[0]
-        if (!next) continue
-        if (Math.abs(cur.lat - next.lat) < 0.001 && Math.abs(cur.lng - next.lng) < 0.001) continue
-
-        const faction = battle.factions.find((f) => f.id === up.faction_id)
-        const unit    = faction?.units.find((u) => u.id === up.unit_id)
-
-        // Skip air wings — no ground movement arrow
-        if (unit?.type === 'air_wing') continue
-
-        const effectiveStrength = unit
-          ? Math.round(unit.strength * cur.strength_pct)
-          : 1000
-
-        const sizeScale = unit
-          ? unitSizeScale(unit.type, effectiveStrength)
-          : 0.40
-
-        arrows.push({
-          fromLat: cur.lat,  fromLng: cur.lng,
-          toLat:   next.lat, toLng:   next.lng,
-          color:     faction ? wikiColor(faction.color) : '#555',
-          sizeScale,
-        })
-      }
+      markersRef.current.forEach((m) => m.remove())
+      markersRef.current = []
 
       for (const a of arrows) {
         const p1 = map.project([a.fromLng, a.fromLat])
         const p2 = map.project([a.toLng,   a.toLat])
 
-        const result = buildArrowSVG(p1.x, p1.y, p2.x, p2.y, a.color, a.sizeScale)
+        const result = buildArrow(p1.x, p1.y, p2.x, p2.y, a.color, a.sw)
         if (!result) continue
         const { svg, anchorOffsetX, anchorOffsetY } = result
 
         const el = document.createElement('div')
-        el.style.cssText = 'pointer-events:none; position:absolute;'
+        el.style.cssText = 'pointer-events:none;position:absolute;'
         el.innerHTML = svg
-
-        // Place marker at geographic midpoint; offset the element so the
-        // SVG draws correctly relative to that anchor point.
-        const midLng = (a.fromLng + a.toLng) / 2
-        const midLat = (a.fromLat + a.toLat) / 2
 
         const marker = new maplibregl.Marker({
           element: el,
@@ -287,18 +292,14 @@ export function MovementArrowLayer({ map, battle, currentPhase, nextPhase }: Mov
           rotationAlignment: 'viewport',
           pitchAlignment: 'viewport',
         })
-          .setLngLat([midLng, midLat])
+          .setLngLat([(a.fromLng + a.toLng) / 2, (a.fromLat + a.toLat) / 2])
           .addTo(map)
 
         markersRef.current.push(marker)
       }
     }
 
-    function onMapMove() {
-      markersRef.current.forEach((m) => m.remove())
-      markersRef.current = []
-      draw()
-    }
+    function onMapMove() { draw() }
 
     draw()
     map.on('move', onMapMove)
