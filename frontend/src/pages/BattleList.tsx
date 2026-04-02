@@ -26,12 +26,20 @@ export function BattleList() {
   return (
     <div className="absolute inset-0 overflow-y-auto bg-wiki-parchment p-8">
       <div className="max-w-4xl mx-auto">
-        <h1
-          className="text-2xl font-bold text-wiki-text mb-1"
-          style={{ fontFamily: '"Linux Libertine", Georgia, serif' }}
-        >
-          {t('battleList.title')}
-        </h1>
+        <div className="flex items-center justify-between mb-1">
+          <h1
+            className="text-2xl font-bold text-wiki-text"
+            style={{ fontFamily: '"Linux Libertine", Georgia, serif' }}
+          >
+            {t('battleList.title')}
+          </h1>
+          <Link
+            to="/admin"
+            className="px-2.5 py-1 text-[10px] text-wiki-textMuted border border-wiki-border rounded hover:bg-wiki-parchmentDk hover:text-wiki-text transition-colors"
+          >
+            Admin
+          </Link>
+        </div>
         <p className="text-sm text-wiki-textMuted mb-8">
           {t('battleList.subtitle')}
         </p>

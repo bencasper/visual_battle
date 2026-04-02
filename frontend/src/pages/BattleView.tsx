@@ -1,5 +1,6 @@
 import { useRef, useCallback } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { AnimatePresence } from 'framer-motion'
 import type { Map as MapLibreMap } from 'maplibre-gl'
 import { useBattleData } from '@/hooks/useBattleData'
@@ -15,6 +16,7 @@ import { ErrorBoundary } from '@/components/shared/ErrorBoundary'
 const DEFAULT_BATTLE_ID = 'chosin-reservoir-1950'
 
 export function BattleView() {
+  const { t } = useTranslation()
   const { battleId = DEFAULT_BATTLE_ID } = useParams<{ battleId: string }>()
   const { battle, terrain, loading, error } = useBattleData(battleId)
 
@@ -27,7 +29,7 @@ export function BattleView() {
   if (loading) {
     return (
       <div className="w-full h-full flex items-center justify-center bg-wiki-parchment">
-        <LoadingSpinner size="lg" label="Loading battle data…" />
+        <LoadingSpinner size="lg" label={t('battleView.loading')} />
       </div>
     )
   }
@@ -35,7 +37,7 @@ export function BattleView() {
   if (error || !battle) {
     return (
       <div className="w-full h-full flex items-center justify-center text-pva text-sm bg-wiki-parchment">
-        {error ?? 'Battle not found'}
+        {error ?? t('battleView.notFound')}
       </div>
     )
   }
@@ -75,7 +77,13 @@ export function BattleView() {
         {/* ── Title chip (top-left) ── */}
         <div className="absolute top-3 left-3 z-20">
           <div className="glass-panel px-3 py-1.5 shadow-md">
-            <p className="text-[9px] uppercase tracking-widest text-wiki-textMuted font-semibold">{battle.theater}</p>
+            <div className="flex items-center justify-between gap-3">
+              <p className="text-[9px] uppercase tracking-widest text-wiki-textMuted font-semibold">{battle.theater}</p>
+              <div className="flex gap-1.5">
+                <Link to="/battles" className="text-[9px] text-wiki-textMuted hover:text-un transition-colors">Battles</Link>
+                <Link to="/admin" className="text-[9px] text-wiki-textMuted hover:text-un transition-colors">Admin</Link>
+              </div>
+            </div>
             <p className="text-sm font-bold text-wiki-text" style={{ fontFamily: '"Linux Libertine", Georgia, serif' }}>
               {battle.name}
             </p>
