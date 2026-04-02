@@ -2,202 +2,235 @@
   "id": "stalingrad-1942",
   "name": "Battle of Stalingrad",
   "slug": "stalingrad",
-  "theater": "World War II — Eastern Front",
-  "date_range": { "start": "1942-08-23", "end": "1943-02-02" },
-  "location": {
-    "lat": 48.708,
-    "lng": 44.513,
-    "region": "Stalingrad Oblast, Soviet Union",
-    "terrain_description": "Industrial city on the western bank of the Volga River; factory districts, ravines (balkas), rubble-filled streets, Mamayev Kurgan hill; steppe to the west and north"
-  },
-  "terrain_type": "urban_winter",
-  "map_bounds": {
-    "north": 49.20,
-    "south": 47.80,
-    "east":  45.60,
-    "west":  42.80
-  },
+  "wisdom": [
+    {
+      "id": "sw-1",
+      "body": "The 62nd Army was reduced to a strip a few hundred metres wide — nowhere to retreat, the Volga at their backs. Paradoxically, this made them more dangerous. Chuikov understood that a soldier with no retreat route fights harder than one with an exit. The city fought to a different set of physics than the open steppe.",
+      "title": "Never Underestimate a Defender Who Has Nothing Left to Lose",
+      "category": "strategic",
+      "related_phase": "phase-2-street-fighting"
+    },
+    {
+      "id": "sw-2",
+      "body": "Zhukov and Vasilevsky didn't try to defeat Germany in Stalingrad. They watched the Germans exhaust themselves in the city, then struck the weakest flanks — the Romanian armies holding a 300km front with anti-tank rifles, not guns. The lesson: never let a strong enemy choose the ground; find where they are weak.",
+      "title": "The Flank Is Always the Decisive Point",
+      "category": "intelligence",
+      "related_phase": "phase-3-operation-uranus"
+    },
+    {
+      "id": "sw-3",
+      "body": "Göring promised 500 tons/day by air. The Luftwaffe never delivered more than 120 tons on any day. 330,000 men require 600+ tons/day just to survive. The 6th Army starved in place while waiting for a logistical miracle that was physically impossible. Leaders who accept impossible promises from their subordinates condemn their men.",
+      "title": "Air Supply Cannot Substitute for Ground Lines of Communication",
+      "category": "logistics",
+      "related_phase": "phase-4-operation-ring"
+    },
+    {
+      "id": "sw-4",
+      "body": "The Luftwaffe's bombing of Stalingrad — intended to shatter Soviet resistance — instead created the perfect defensive terrain. In rubble, tanks cannot manoeuvre, aircraft cannot target accurately, artillery kills attacker and defender alike. The Germans' greatest advantages (air power, armour, artillery coordination) were nullified by the very destruction they created.",
+      "title": "Urban Rubble Defeats Combined Arms",
+      "category": "terrain",
+      "related_phase": "phase-2-street-fighting"
+    },
+    {
+      "id": "sw-5",
+      "body": "Paulus had a narrow window in late November 1942 to break out when the Soviet encirclement ring was only a few divisions deep. His instinct was to retreat; Hitler forbade it. Three months later, 91,000 men surrendered. The commander on the ground who sees the decisive moment must have the authority — and the courage — to act on it.",
+      "title": "The Decisive Moment Has an Expiry Date",
+      "category": "leadership",
+      "related_phase": "phase-3-operation-uranus"
+    },
+    {
+      "id": "sw-6",
+      "body": "Chuikov's 'hugging' tactic — keeping Soviet troops so close to German lines that Luftwaffe and artillery could not engage without hitting their own men — is a masterclass in asymmetric adaptation. When you cannot match the enemy's firepower, negate it by collapsing the distance at which it is effective.",
+      "title": "Hug Your Enemy — The Proximity Tactic",
+      "category": "adaptability",
+      "related_phase": "phase-2-street-fighting"
+    }
+  ],
   "outcome": "Decisive Soviet victory — German 6th Army destroyed; strategic initiative on the Eastern Front permanently shifted to the Soviet Union",
-  "result_summary": "Operation Uranus encircled ~330,000 Axis troops; 91,000 surrendered including Field Marshal Paulus. Germany never recovered the strategic offensive on the Eastern Front.",
+  "sources": [
+    {
+      "url": null,
+      "type": "book",
+      "title": "Stalingrad — Antony Beevor"
+    },
+    {
+      "url": null,
+      "type": "book",
+      "title": "Enemy at the Gates: The Battle for Stalingrad — William Craig"
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Battle_of_Stalingrad",
+      "type": "article",
+      "title": "Battle of Stalingrad — Wikipedia"
+    }
+  ],
+  "theater": "World War II — Eastern Front",
   "factions": [
     {
       "id": "soviet-stalingrad",
       "name": "Soviet Stalingrad / Don / SW Fronts",
-      "full_name": "Stalingrad Front, Don Front, South-West Front — Red Army",
       "side": "Soviet",
       "color": "#8B1A1A",
-      "color_light": "#cc3333",
-      "commander": "General Georgy Zhukov (Stavka coord.)",
-      "higher_command": "Marshal Alexander Vasilevsky (Stavka representative)",
-      "nation_flags": ["ussr"],
-      "strength": {
-        "total_troops": 1143000,
-        "engaged_at_reservoir": 500000,
-        "infantry_battalions": 200,
-        "artillery_battalions": 115,
-        "tanks": 1463,
-        "aircraft_sorties_available": 1350
-      },
       "units": [
         {
           "id": "soviet-stavka-hq",
           "name": "Stavka (Soviet Supreme Command)",
-          "short_name": "Stavka",
           "type": "hq",
-          "parent_id": null,
+          "notes": "Zhukov and Vasilevsky planned Operation Uranus; Stavka controlled three fronts for the encirclement",
+          "morale": 0.82,
+          "nation": "USSR",
           "strength": 1143000,
           "commander": "Marshal Georgy Zhukov",
-          "nation": "USSR",
-          "equipment_era": "ww2_soviet",
-          "morale": 0.82,
-          "supply_status": "adequate",
-          "location_label": "Moscow / Stalingrad Front HQ",
+          "parent_id": null,
+          "short_name": "Stavka",
           "nato_symbol": "hq",
-          "notes": "Zhukov and Vasilevsky planned Operation Uranus; Stavka controlled three fronts for the encirclement"
+          "equipment_era": "ww2_soviet",
+          "supply_status": "adequate",
+          "location_label": "Moscow / Stalingrad Front HQ"
         },
         {
           "id": "62nd-army",
           "name": "Soviet 62nd Army",
-          "short_name": "62nd Army",
           "type": "army_corps",
-          "parent_id": "soviet-stavka-hq",
+          "notes": "Chuikov's 'Not one step back' defense held the city for 5 months; supplied across the Volga under constant German fire",
+          "morale": 0.9,
+          "nation": "USSR",
           "strength": 55000,
           "commander": "Lt Gen Vasily Chuikov",
-          "nation": "USSR",
-          "equipment_era": "ww2_soviet",
-          "morale": 0.90,
-          "supply_status": "critical",
-          "location_label": "Stalingrad city — western bank",
+          "parent_id": "soviet-stavka-hq",
+          "short_name": "62nd Army",
           "nato_symbol": "infantry",
-          "notes": "Chuikov's 'Not one step back' defense held the city for 5 months; supplied across the Volga under constant German fire"
+          "equipment_era": "ww2_soviet",
+          "supply_status": "critical",
+          "location_label": "Stalingrad city — western bank"
         },
         {
           "id": "13th-guards-div",
           "name": "13th Guards Rifle Division",
-          "short_name": "13th Gds Div",
           "type": "infantry_division",
-          "parent_id": "62nd-army",
+          "notes": "Crossed the Volga under fire on 14 Sep; immediately counterattacked to recapture the central landing stage and Mamayev Kurgan",
+          "morale": 0.95,
+          "nation": "USSR",
           "strength": 10000,
           "commander": "Maj Gen Alexander Rodimtsev",
-          "nation": "USSR",
-          "equipment_era": "ww2_soviet",
-          "morale": 0.95,
-          "supply_status": "critical",
-          "location_label": "Central Stalingrad / Mamayev Kurgan",
+          "parent_id": "62nd-army",
+          "short_name": "13th Gds Div",
           "nato_symbol": "infantry",
-          "notes": "Crossed the Volga under fire on 14 Sep; immediately counterattacked to recapture the central landing stage and Mamayev Kurgan"
+          "equipment_era": "ww2_soviet",
+          "supply_status": "critical",
+          "location_label": "Central Stalingrad / Mamayev Kurgan"
         },
         {
           "id": "284th-rifle-div",
           "name": "284th Rifle Division",
-          "short_name": "284th Rifle Div",
           "type": "infantry_division",
-          "parent_id": "62nd-army",
+          "notes": "Held Mamayev Kurgan through the worst of the urban fighting; the hill changed hands multiple times",
+          "morale": 0.88,
+          "nation": "USSR",
           "strength": 8000,
           "commander": "Col Nikolai Batyuk",
-          "nation": "USSR",
-          "equipment_era": "ww2_soviet",
-          "morale": 0.88,
-          "supply_status": "critical",
-          "location_label": "Mamayev Kurgan",
+          "parent_id": "62nd-army",
+          "short_name": "284th Rifle Div",
           "nato_symbol": "infantry",
-          "notes": "Held Mamayev Kurgan through the worst of the urban fighting; the hill changed hands multiple times"
+          "equipment_era": "ww2_soviet",
+          "supply_status": "critical",
+          "location_label": "Mamayev Kurgan"
         },
         {
           "id": "308th-rifle-div",
           "name": "308th Rifle Division",
-          "short_name": "308th Rifle Div",
           "type": "infantry_division",
-          "parent_id": "62nd-army",
+          "notes": "Fought room-by-room in the Barrikady gun factory; Gurtiev KIA January 1943",
+          "morale": 0.87,
+          "nation": "USSR",
           "strength": 7500,
           "commander": "Col Leonty Gurtiev",
-          "nation": "USSR",
-          "equipment_era": "ww2_soviet",
-          "morale": 0.87,
-          "supply_status": "critical",
-          "location_label": "Barrikady Factory District",
+          "parent_id": "62nd-army",
+          "short_name": "308th Rifle Div",
           "nato_symbol": "infantry",
-          "notes": "Fought room-by-room in the Barrikady gun factory; Gurtiev KIA January 1943"
+          "equipment_era": "ww2_soviet",
+          "supply_status": "critical",
+          "location_label": "Barrikady Factory District"
         },
         {
           "id": "sw-front",
           "name": "South-West Front",
-          "short_name": "SW Front",
           "type": "army_corps",
-          "parent_id": "soviet-stavka-hq",
+          "notes": "Northern pincer of Operation Uranus; 5th Tank Army broke through Romanian 3rd Army on 19 Nov 1942",
+          "morale": 0.85,
+          "nation": "USSR",
           "strength": 398000,
           "commander": "Lt Gen Nikolai Vatutin",
-          "nation": "USSR",
-          "equipment_era": "ww2_soviet",
-          "morale": 0.85,
-          "supply_status": "adequate",
-          "location_label": "North of Don River (Uranus northern pincer)",
+          "parent_id": "soviet-stavka-hq",
+          "short_name": "SW Front",
           "nato_symbol": "infantry",
-          "notes": "Northern pincer of Operation Uranus; 5th Tank Army broke through Romanian 3rd Army on 19 Nov 1942"
+          "equipment_era": "ww2_soviet",
+          "supply_status": "adequate",
+          "location_label": "North of Don River (Uranus northern pincer)"
         },
         {
           "id": "5th-tank-army",
           "name": "Soviet 5th Tank Army",
-          "short_name": "5th Tank Army",
           "type": "army_corps",
-          "parent_id": "sw-front",
+          "notes": "Led the northern Uranus breakthrough; 500 tanks; crushed Romanian 3rd Army in hours on 19 Nov",
+          "morale": 0.88,
+          "nation": "USSR",
           "strength": 80000,
           "commander": "Lt Gen Prokofiy Romanenko",
-          "nation": "USSR",
-          "equipment_era": "ww2_soviet",
-          "morale": 0.88,
-          "supply_status": "adequate",
-          "location_label": "Serafimovich bridgehead — Don River",
+          "parent_id": "sw-front",
+          "short_name": "5th Tank Army",
           "nato_symbol": "infantry",
-          "notes": "Led the northern Uranus breakthrough; 500 tanks; crushed Romanian 3rd Army in hours on 19 Nov"
+          "equipment_era": "ww2_soviet",
+          "supply_status": "adequate",
+          "location_label": "Serafimovich bridgehead — Don River"
         },
         {
           "id": "stalingrad-front",
           "name": "Stalingrad Front",
-          "short_name": "Stalingrad Front",
           "type": "army_corps",
-          "parent_id": "soviet-stavka-hq",
+          "notes": "Southern pincer of Operation Uranus; 51st and 57th Armies broke through Romanian 4th Army",
+          "morale": 0.84,
+          "nation": "USSR",
           "strength": 290000,
           "commander": "Col Gen Andrei Yeremenko",
-          "nation": "USSR",
-          "equipment_era": "ww2_soviet",
-          "morale": 0.84,
-          "supply_status": "low",
-          "location_label": "South of Stalingrad (Uranus southern pincer)",
+          "parent_id": "soviet-stavka-hq",
+          "short_name": "Stalingrad Front",
           "nato_symbol": "infantry",
-          "notes": "Southern pincer of Operation Uranus; 51st and 57th Armies broke through Romanian 4th Army"
+          "equipment_era": "ww2_soviet",
+          "supply_status": "low",
+          "location_label": "South of Stalingrad (Uranus southern pincer)"
         },
         {
           "id": "51st-army",
           "name": "Soviet 51st Army",
-          "short_name": "51st Army",
           "type": "army_corps",
-          "parent_id": "stalingrad-front",
+          "notes": "Southern arm of the Uranus pincer; broke through Romanian 4th Army on 20 Nov",
+          "morale": 0.85,
+          "nation": "USSR",
           "strength": 60000,
           "commander": "Lt Gen Nikolai Trufanov",
-          "nation": "USSR",
-          "equipment_era": "ww2_soviet",
-          "morale": 0.85,
-          "supply_status": "low",
-          "location_label": "Sarpa Lakes — south of Stalingrad",
+          "parent_id": "stalingrad-front",
+          "short_name": "51st Army",
           "nato_symbol": "infantry",
-          "notes": "Southern arm of the Uranus pincer; broke through Romanian 4th Army on 20 Nov"
+          "equipment_era": "ww2_soviet",
+          "supply_status": "low",
+          "location_label": "Sarpa Lakes — south of Stalingrad"
         },
         {
           "id": "don-front",
           "name": "Don Front",
-          "short_name": "Don Front",
           "type": "army_corps",
-          "parent_id": "soviet-stavka-hq",
+          "notes": "Operation Ring (10 Jan–2 Feb 1943): compressed the Kessel (pocket) from all sides; accepted German surrender",
+          "morale": 0.86,
+          "nation": "USSR",
           "strength": 280000,
           "commander": "Lt Gen Konstantin Rokossovsky",
-          "nation": "USSR",
-          "equipment_era": "ww2_soviet",
-          "morale": 0.86,
-          "supply_status": "adequate",
-          "location_label": "North of Stalingrad — Don bend",
+          "parent_id": "soviet-stavka-hq",
+          "short_name": "Don Front",
           "nato_symbol": "infantry",
-          "notes": "Operation Ring (10 Jan–2 Feb 1943): compressed the Kessel (pocket) from all sides; accepted German surrender"
+          "equipment_era": "ww2_soviet",
+          "supply_status": "adequate",
+          "location_label": "North of Stalingrad — Don bend"
         }
       ],
       "weapons": [
@@ -205,230 +238,262 @@
           "id": "ppsh-41-soviet",
           "name": "PPSh-41 Submachine Gun",
           "type": "submachine_gun",
+          "stats": {
+            "range": 3,
+            "weight": 4,
+            "firepower": 8,
+            "reliability_cold": 8
+          },
           "caliber": "7.62x25mm",
-          "effective_range_m": 200,
           "rate_of_fire_rpm": 900,
-          "stats": { "firepower": 8, "range": 3, "reliability_cold": 8, "weight": 4 }
+          "effective_range_m": 200
         },
         {
           "id": "t-34-42",
           "name": "T-34 Model 1942",
           "type": "medium_tank",
+          "stats": {
+            "armor": 8,
+            "range": 7,
+            "firepower": 9,
+            "cold_weather_ops": 9
+          },
           "main_gun": "76mm F-34",
-          "effective_range_m": 1500,
-          "stats": { "firepower": 9, "range": 7, "armor": 8, "cold_weather_ops": 9 }
+          "effective_range_m": 1500
         },
         {
           "id": "katyusha",
           "name": "BM-13 Katyusha Rocket Artillery",
           "type": "rocket_artillery",
-          "effective_range_m": 8500,
-          "stats": { "firepower": 10, "range": 7, "mobility": 8, "cold_weather_ops": 7 }
+          "stats": {
+            "range": 7,
+            "mobility": 8,
+            "firepower": 10,
+            "cold_weather_ops": 7
+          },
+          "effective_range_m": 8500
         },
         {
           "id": "mosin-nagant",
           "name": "Mosin-Nagant M91/30 Rifle",
           "type": "rifle",
+          "stats": {
+            "range": 6,
+            "weight": 4,
+            "firepower": 7,
+            "reliability_cold": 8
+          },
           "caliber": "7.62x54R",
-          "effective_range_m": 500,
-          "stats": { "firepower": 7, "range": 6, "reliability_cold": 8, "weight": 4 }
+          "effective_range_m": 500
         },
         {
           "id": "dp-28",
           "name": "DP-28 Light Machine Gun",
           "type": "light_machine_gun",
+          "stats": {
+            "range": 6,
+            "weight": 9,
+            "firepower": 8,
+            "reliability_cold": 8
+          },
           "caliber": "7.62x54R",
-          "effective_range_m": 800,
           "rate_of_fire_rpm": 550,
-          "stats": { "firepower": 8, "range": 6, "reliability_cold": 8, "weight": 9 }
+          "effective_range_m": 800
         },
         {
           "id": "il-2-shturmovik",
           "name": "Ilyushin Il-2 Shturmovik (CAS)",
           "type": "close_air_support",
-          "payload_kg": 600,
-          "stats": { "firepower": 9, "range": 6, "armor": 8, "cold_weather_ops": 7 }
+          "stats": {
+            "armor": 8,
+            "range": 6,
+            "firepower": 9,
+            "cold_weather_ops": 7
+          },
+          "payload_kg": 600
         }
-      ]
+      ],
+      "strength": {
+        "tanks": 1463,
+        "total_troops": 1143000,
+        "infantry_battalions": 200,
+        "artillery_battalions": 115,
+        "engaged_at_reservoir": 500000,
+        "aircraft_sorties_available": 1350
+      },
+      "commander": "General Georgy Zhukov (Stavka coord.)",
+      "full_name": "Stalingrad Front, Don Front, South-West Front — Red Army",
+      "color_light": "#cc3333",
+      "nation_flags": [
+        "ussr"
+      ],
+      "higher_command": "Marshal Alexander Vasilevsky (Stavka representative)"
     },
     {
       "id": "axis-6th-army",
       "name": "German 6th Army & Axis Forces",
-      "full_name": "German 6th Army, 4th Panzer Army, Romanian 3rd & 4th Armies",
       "side": "Axis",
       "color": "#1a3a5c",
-      "color_light": "#3a6fa8",
-      "commander": "General Friedrich Paulus (→ Field Marshal, 31 Jan 1943)",
-      "higher_command": "Field Marshal Fedor von Bock / Maximilian von Weichs (Army Group B)",
-      "nation_flags": ["germany", "romania"],
-      "strength": {
-        "total_troops": 1011500,
-        "engaged_at_reservoir": 430000,
-        "infantry_battalions": 150,
-        "artillery_battalions": 90,
-        "tanks": 675,
-        "aircraft_sorties_available": 1600
-      },
       "units": [
         {
           "id": "6th-army-hq",
           "name": "German 6th Army (HQ)",
-          "short_name": "6th Army HQ",
           "type": "hq",
-          "parent_id": null,
+          "notes": "Hitler promoted Paulus to Feldmarschall on 31 Jan 1943 — no German field marshal had ever surrendered. He surrendered the next day.",
+          "morale": 0.85,
+          "nation": "Germany",
           "strength": 330000,
           "commander": "Gen Friedrich Paulus",
-          "nation": "Germany",
-          "equipment_era": "ww2_german",
-          "morale": 0.85,
-          "supply_status": "low",
-          "location_label": "Stalingrad — Gumrak HQ",
+          "parent_id": null,
+          "short_name": "6th Army HQ",
           "nato_symbol": "hq",
-          "notes": "Hitler promoted Paulus to Feldmarschall on 31 Jan 1943 — no German field marshal had ever surrendered. He surrendered the next day."
+          "equipment_era": "ww2_german",
+          "supply_status": "low",
+          "location_label": "Stalingrad — Gumrak HQ"
         },
         {
           "id": "li-army-corps",
           "name": "LI Army Corps",
-          "short_name": "LI Corps",
           "type": "army_corps",
-          "parent_id": "6th-army-hq",
+          "notes": "Primary assault force for the city fighting; Seydlitz-Kurzbach later advocated for surrender against Hitler's orders",
+          "morale": 0.88,
+          "nation": "Germany",
           "strength": 70000,
           "commander": "Gen Walter von Seydlitz-Kurzbach",
-          "nation": "Germany",
-          "equipment_era": "ww2_german",
-          "morale": 0.88,
-          "supply_status": "low",
-          "location_label": "Central / Southern Stalingrad",
+          "parent_id": "6th-army-hq",
+          "short_name": "LI Corps",
           "nato_symbol": "infantry",
-          "notes": "Primary assault force for the city fighting; Seydlitz-Kurzbach later advocated for surrender against Hitler's orders"
+          "equipment_era": "ww2_german",
+          "supply_status": "low",
+          "location_label": "Central / Southern Stalingrad"
         },
         {
           "id": "295th-infantry-div",
           "name": "295th Infantry Division",
-          "short_name": "295th Inf Div",
           "type": "infantry_division",
-          "parent_id": "li-army-corps",
+          "notes": "Fought for Mamayev Kurgan throughout the battle; one of the primary German divisions in city combat",
+          "morale": 0.87,
+          "nation": "Germany",
           "strength": 12000,
           "commander": "Gen Rolf Wuthmann",
-          "nation": "Germany",
-          "equipment_era": "ww2_german",
-          "morale": 0.87,
-          "supply_status": "low",
-          "location_label": "Mamayev Kurgan",
+          "parent_id": "li-army-corps",
+          "short_name": "295th Inf Div",
           "nato_symbol": "infantry",
-          "notes": "Fought for Mamayev Kurgan throughout the battle; one of the primary German divisions in city combat"
+          "equipment_era": "ww2_german",
+          "supply_status": "low",
+          "location_label": "Mamayev Kurgan"
         },
         {
           "id": "71st-infantry-div",
           "name": "71st Infantry Division",
-          "short_name": "71st Inf Div",
           "type": "infantry_division",
-          "parent_id": "li-army-corps",
+          "notes": "Captured the central railway station multiple times; Hartmann KIA on 26 Jan 1943",
+          "morale": 0.86,
+          "nation": "Germany",
           "strength": 12000,
           "commander": "Gen Alexander von Hartmann (KIA Feb 1943)",
-          "nation": "Germany",
-          "equipment_era": "ww2_german",
-          "morale": 0.86,
-          "supply_status": "low",
-          "location_label": "Central Stalingrad / Railway Station",
+          "parent_id": "li-army-corps",
+          "short_name": "71st Inf Div",
           "nato_symbol": "infantry",
-          "notes": "Captured the central railway station multiple times; Hartmann KIA on 26 Jan 1943"
+          "equipment_era": "ww2_german",
+          "supply_status": "low",
+          "location_label": "Central Stalingrad / Railway Station"
         },
         {
           "id": "xiv-panzer-corps",
           "name": "XIV Panzer Corps",
-          "short_name": "XIV Pz Corps",
           "type": "army_corps",
-          "parent_id": "6th-army-hq",
+          "notes": "14th and 16th Panzer Divisions; reached the Volga north of the city on 23 Aug 1942 — the day of the massive Luftwaffe bombing raid",
+          "morale": 0.85,
+          "nation": "Germany",
           "strength": 60000,
           "commander": "Gen Gustav von Wietersheim (→ Hans-Valentin Hube)",
-          "nation": "Germany",
-          "equipment_era": "ww2_german",
-          "morale": 0.85,
-          "supply_status": "low",
-          "location_label": "Northern Stalingrad / Tractor Factory",
+          "parent_id": "6th-army-hq",
+          "short_name": "XIV Pz Corps",
           "nato_symbol": "infantry",
-          "notes": "14th and 16th Panzer Divisions; reached the Volga north of the city on 23 Aug 1942 — the day of the massive Luftwaffe bombing raid"
+          "equipment_era": "ww2_german",
+          "supply_status": "low",
+          "location_label": "Northern Stalingrad / Tractor Factory"
         },
         {
           "id": "16th-panzer-div",
           "name": "16th Panzer Division",
-          "short_name": "16th Pz Div",
           "type": "infantry_division",
-          "parent_id": "xiv-panzer-corps",
+          "notes": "First German unit to reach the Volga on 23 Aug 1942; fought in the factory district for months",
+          "morale": 0.88,
+          "nation": "Germany",
           "strength": 15000,
           "commander": "Gen Hans-Valentin Hube",
-          "nation": "Germany",
-          "equipment_era": "ww2_german",
-          "morale": 0.88,
-          "supply_status": "low",
-          "location_label": "Volga bank north of Stalingrad",
+          "parent_id": "xiv-panzer-corps",
+          "short_name": "16th Pz Div",
           "nato_symbol": "infantry",
-          "notes": "First German unit to reach the Volga on 23 Aug 1942; fought in the factory district for months"
+          "equipment_era": "ww2_german",
+          "supply_status": "low",
+          "location_label": "Volga bank north of Stalingrad"
         },
         {
           "id": "4th-panzer-army",
           "name": "German 4th Panzer Army",
-          "short_name": "4th Pz Army",
           "type": "army_corps",
-          "parent_id": "6th-army-hq",
+          "notes": "Attacked from the south; after encirclement led Operation Winter Storm relief attempt Dec 1942 — halted at the Myshkova River",
+          "morale": 0.84,
+          "nation": "Germany",
           "strength": 85000,
           "commander": "Col Gen Hermann Hoth",
-          "nation": "Germany",
-          "equipment_era": "ww2_german",
-          "morale": 0.84,
-          "supply_status": "low",
-          "location_label": "Southern Stalingrad approaches / Kotelnikovo",
+          "parent_id": "6th-army-hq",
+          "short_name": "4th Pz Army",
           "nato_symbol": "infantry",
-          "notes": "Attacked from the south; after encirclement led Operation Winter Storm relief attempt Dec 1942 — halted at the Myshkova River"
+          "equipment_era": "ww2_german",
+          "supply_status": "low",
+          "location_label": "Southern Stalingrad approaches / Kotelnikovo"
         },
         {
           "id": "romanian-3rd-army",
           "name": "Romanian 3rd Army",
-          "short_name": "Romanian 3rd Army",
           "type": "army_corps",
-          "parent_id": "6th-army-hq",
+          "notes": "Held the exposed northern flank of the 6th Army; crushed by Soviet 5th Tank Army in hours on 19 Nov 1942; the key weak point that enabled Uranus",
+          "morale": 0.6,
+          "nation": "Romania",
           "strength": 155492,
           "commander": "Gen Petre Dumitrescu",
-          "nation": "Romania",
-          "equipment_era": "ww2_romanian",
-          "morale": 0.60,
-          "supply_status": "low",
-          "location_label": "Don River front — north of Stalingrad",
+          "parent_id": "6th-army-hq",
+          "short_name": "Romanian 3rd Army",
           "nato_symbol": "infantry",
-          "notes": "Held the exposed northern flank of the 6th Army; crushed by Soviet 5th Tank Army in hours on 19 Nov 1942; the key weak point that enabled Uranus"
+          "equipment_era": "ww2_romanian",
+          "supply_status": "low",
+          "location_label": "Don River front — north of Stalingrad"
         },
         {
           "id": "romanian-4th-army",
           "name": "Romanian 4th Army",
-          "short_name": "Romanian 4th Army",
           "type": "army_corps",
-          "parent_id": "6th-army-hq",
+          "notes": "Held the exposed southern flank; collapsed under Soviet 51st and 57th Armies on 20 Nov 1942",
+          "morale": 0.58,
+          "nation": "Romania",
           "strength": 75580,
           "commander": "Gen Constantin Constantinescu",
-          "nation": "Romania",
-          "equipment_era": "ww2_romanian",
-          "morale": 0.58,
-          "supply_status": "low",
-          "location_label": "South of Stalingrad — Sarpa Lakes sector",
+          "parent_id": "6th-army-hq",
+          "short_name": "Romanian 4th Army",
           "nato_symbol": "infantry",
-          "notes": "Held the exposed southern flank; collapsed under Soviet 51st and 57th Armies on 20 Nov 1942"
+          "equipment_era": "ww2_romanian",
+          "supply_status": "low",
+          "location_label": "South of Stalingrad — Sarpa Lakes sector"
         },
         {
           "id": "luftwaffe-4th-fleet",
           "name": "Luftflotte 4 (4th Air Fleet)",
-          "short_name": "Luftflotte 4",
           "type": "air_wing",
-          "parent_id": "6th-army-hq",
+          "notes": "Promised to supply the Kessel by air; could only deliver 100–120 tons/day vs 500 needed; Tatsinskaya airfield overrun by Soviet tanks Dec 24",
+          "morale": 0.8,
+          "nation": "Germany",
           "strength": 0,
           "commander": "Gen Wolfram von Richthofen",
-          "nation": "Germany",
-          "equipment_era": "ww2_german",
-          "morale": 0.80,
-          "supply_status": "low",
-          "location_label": "Tatsinskaya / Morozovsk airfields",
+          "parent_id": "6th-army-hq",
+          "short_name": "Luftflotte 4",
           "nato_symbol": "infantry",
-          "notes": "Promised to supply the Kessel by air; could only deliver 100–120 tons/day vs 500 needed; Tatsinskaya airfield overrun by Soviet tanks Dec 24"
+          "equipment_era": "ww2_german",
+          "supply_status": "low",
+          "location_label": "Tatsinskaya / Morozovsk airfields"
         }
       ],
       "weapons": [
@@ -436,416 +501,1136 @@
           "id": "mp40",
           "name": "MP 40 Submachine Gun",
           "type": "submachine_gun",
+          "stats": {
+            "range": 2,
+            "weight": 4,
+            "firepower": 7,
+            "reliability_cold": 7
+          },
           "caliber": "9mm",
-          "effective_range_m": 100,
           "rate_of_fire_rpm": 500,
-          "stats": { "firepower": 7, "range": 2, "reliability_cold": 7, "weight": 4 }
+          "effective_range_m": 100
         },
         {
           "id": "panzerkampfwagen-iv",
           "name": "Panzer IV Ausf. F2",
           "type": "medium_tank",
+          "stats": {
+            "armor": 7,
+            "range": 8,
+            "firepower": 9,
+            "cold_weather_ops": 5
+          },
           "main_gun": "75mm KwK 40 L/43",
-          "effective_range_m": 1800,
-          "stats": { "firepower": 9, "range": 8, "armor": 7, "cold_weather_ops": 5 }
+          "effective_range_m": 1800
         },
         {
           "id": "stuka",
           "name": "Ju 87 Stuka (CAS)",
           "type": "close_air_support",
-          "payload_kg": 1000,
-          "stats": { "firepower": 9, "range": 7, "responsiveness": 8, "cold_weather_ops": 5 }
+          "stats": {
+            "range": 7,
+            "firepower": 9,
+            "responsiveness": 8,
+            "cold_weather_ops": 5
+          },
+          "payload_kg": 1000
         },
         {
           "id": "mg42",
           "name": "MG 42 Machine Gun",
           "type": "machine_gun",
+          "stats": {
+            "range": 7,
+            "weight": 11,
+            "firepower": 10,
+            "reliability_cold": 7
+          },
           "caliber": "7.92mm",
-          "effective_range_m": 1000,
           "rate_of_fire_rpm": 1200,
-          "stats": { "firepower": 10, "range": 7, "reliability_cold": 7, "weight": 11 }
+          "effective_range_m": 1000
         },
         {
           "id": "kar98k",
           "name": "Karabiner 98k Rifle",
           "type": "rifle",
+          "stats": {
+            "range": 6,
+            "weight": 4,
+            "firepower": 7,
+            "reliability_cold": 8
+          },
           "caliber": "7.92mm",
-          "effective_range_m": 500,
-          "stats": { "firepower": 7, "range": 6, "reliability_cold": 8, "weight": 4 }
+          "effective_range_m": 500
         },
         {
           "id": "nebelwerfer-41",
           "name": "15 cm Nebelwerfer 41 Rocket Launcher",
           "type": "rocket_artillery",
-          "effective_range_m": 6900,
-          "stats": { "firepower": 9, "range": 6, "mobility": 6, "cold_weather_ops": 6 }
+          "stats": {
+            "range": 6,
+            "mobility": 6,
+            "firepower": 9,
+            "cold_weather_ops": 6
+          },
+          "effective_range_m": 6900
         },
         {
           "id": "pak-38",
           "name": "5 cm Pak 38 Anti-Tank Gun",
           "type": "anti_tank_gun",
+          "stats": {
+            "range": 5,
+            "firepower": 7,
+            "anti_armor": 7,
+            "cold_weather_ops": 6
+          },
           "caliber": "50mm",
-          "effective_range_m": 1000,
-          "stats": { "firepower": 7, "range": 5, "anti_armor": 7, "cold_weather_ops": 6 }
+          "effective_range_m": 1000
         }
-      ]
+      ],
+      "strength": {
+        "tanks": 675,
+        "total_troops": 1011500,
+        "infantry_battalions": 150,
+        "artillery_battalions": 90,
+        "engaged_at_reservoir": 430000,
+        "aircraft_sorties_available": 1600
+      },
+      "commander": "General Friedrich Paulus (→ Field Marshal, 31 Jan 1943)",
+      "full_name": "German 6th Army, 4th Panzer Army, Romanian 3rd & 4th Armies",
+      "color_light": "#3a6fa8",
+      "nation_flags": [
+        "germany",
+        "romania"
+      ],
+      "higher_command": "Field Marshal Fedor von Bock / Maximilian von Weichs (Army Group B)"
     }
   ],
+  "location": {
+    "lat": 48.708,
+    "lng": 44.513,
+    "region": "Stalingrad Oblast, Soviet Union",
+    "terrain_description": "Industrial city on the western bank of the Volga River; factory districts, ravines (balkas), rubble-filled streets, Mamayev Kurgan hill; steppe to the west and north"
+  },
+  "casualties": {
+    "axis-6th-army": {
+      "note": "~330,000 encircled; 91,000 surrendered; only ~6,000 POWs ever returned to Germany",
+      "killed_in_action": 300000,
+      "missing_in_action": 91000,
+      "wounded_in_action": 110000,
+      "non_battle_frostbite": 100000,
+      "total_combat_ineffective": 800000
+    },
+    "soviet-stalingrad": {
+      "note": "Total Soviet casualties including all three fronts over the entire operation",
+      "killed_in_action": 478741,
+      "missing_in_action": 0,
+      "wounded_in_action": 650878,
+      "non_battle_frostbite": 0,
+      "total_combat_ineffective": 1129619
+    }
+  },
+  "date_range": {
+    "end": "1943-02-02",
+    "start": "1942-08-23"
+  },
+  "map_bounds": {
+    "east": 45.6,
+    "west": 42.8,
+    "north": 49.2,
+    "south": 47.8
+  },
+  "key_figures": [
+    {
+      "name": "General Vasily Chuikov",
+      "role": "Commander, 62nd Army",
+      "faction": "soviet-stalingrad",
+      "significance": "Invented the 'hugging' tactic that neutralised German firepower. Kept the 62nd Army fighting when it held only a few hundred metres of Volga bank."
+    },
+    {
+      "name": "General Friedrich Paulus",
+      "role": "Commander, German 6th Army",
+      "faction": "axis-6th-army",
+      "significance": "Trapped by Hitler's 'fortress' order. Promoted to Field Marshal on 31 January 1943 — surrendered the next day. First German field marshal ever captured."
+    },
+    {
+      "name": "Marshal Georgy Zhukov",
+      "role": "Stavka Coordinator (with Vasilevsky)",
+      "faction": "soviet-stalingrad",
+      "significance": "Co-designed Operation Uranus. Correctly identified the Romanian flanks as the decisive weak point while the German High Command focused on the city."
+    },
+    {
+      "name": "General Wolfram von Richthofen",
+      "role": "Commander, Luftflotte 4",
+      "faction": "axis-6th-army",
+      "significance": "Privately warned that the promised 500-ton daily airlift was impossible. Delivered at most 120 tons on any single day — sealing the 6th Army's fate."
+    },
+    {
+      "name": "Marshal Alexander Vasilevsky",
+      "role": "Stavka Representative / Co-planner of Operation Uranus",
+      "faction": "soviet-stalingrad",
+      "significance": "Co-designed Operation Uranus alongside Zhukov. As Stavka representative, he coordinated all three Soviet fronts on the ground during both the encirclement and Operation Ring, ensuring seamless multi-front timing."
+    }
+  ],
+  "terrain_type": "urban_winter",
+  "result_summary": "Operation Uranus encircled ~330,000 Axis troops; 91,000 surrendered including Field Marshal Paulus. Germany never recovered the strategic offensive on the Eastern Front.",
   "phases": [
     {
       "id": "phase-1-german-advance",
       "index": 0,
       "label": "German Advance & Bombing of Stalingrad",
-      "date_range": { "start": "1942-08-23", "end": "1942-09-12" },
-      "timestamp_offset_hours": 0,
-      "summary": "Army Group B's 6th Army and 4th Panzer Army drive toward the Volga. On August 23, the 16th Panzer Division reaches the Volga north of the city. Luftflotte 4 launches a devastating bombing raid, killing ~40,000 civilians and turning Stalingrad into a rubble-field. Soviet forces scramble to defend the approaches.",
-      "tactical_situation": "The German 6th Army advances from the west across the open steppe toward Stalingrad. Romanian armies protect both flanks along the Don. The Soviet Stalingrad Front attempts to slow the advance but is outgunned. The city's industrial workers form fighting battalions.",
-      "unit_positions": [
-        { "unit_id": "6th-army-hq",        "faction_id": "axis-6th-army",     "positions": [{ "location": "West of Stalingrad",    "lat": 48.70, "lng": 43.80, "strength_pct": 1.0, "posture": "advancing" }] },
-        { "unit_id": "xiv-panzer-corps",   "faction_id": "axis-6th-army",     "positions": [{ "location": "North Stalingrad / Volga", "lat": 48.82, "lng": 44.52, "strength_pct": 1.0, "posture": "advancing" }] },
-        { "unit_id": "16th-panzer-div",    "faction_id": "axis-6th-army",     "positions": [{ "location": "Volga bank north of city", "lat": 48.86, "lng": 44.58, "strength_pct": 1.0, "posture": "attacking" }] },
-        { "unit_id": "li-army-corps",      "faction_id": "axis-6th-army",     "positions": [{ "location": "Western Stalingrad outskirts", "lat": 48.70, "lng": 44.25, "strength_pct": 1.0, "posture": "advancing" }] },
-        { "unit_id": "4th-panzer-army",    "faction_id": "axis-6th-army",     "positions": [{ "location": "South Stalingrad approach",   "lat": 48.42, "lng": 44.30, "strength_pct": 1.0, "posture": "advancing" }] },
-        { "unit_id": "romanian-3rd-army",  "faction_id": "axis-6th-army",     "positions": [{ "location": "Don River — north flank",     "lat": 49.10, "lng": 43.20, "strength_pct": 1.0, "posture": "holding" }] },
-        { "unit_id": "romanian-4th-army",  "faction_id": "axis-6th-army",     "positions": [{ "location": "South flank — Sarpa Lakes",   "lat": 47.90, "lng": 44.20, "strength_pct": 1.0, "posture": "holding" }] },
-        { "unit_id": "luftwaffe-4th-fleet","faction_id": "axis-6th-army",     "positions": [{ "location": "Morozovsk Airfield",           "lat": 48.35, "lng": 41.83, "strength_pct": 1.0, "posture": "advancing" }] },
-        { "unit_id": "62nd-army",          "faction_id": "soviet-stalingrad",  "positions": [{ "location": "Stalingrad city — west bank", "lat": 48.70, "lng": 44.48, "strength_pct": 0.70, "posture": "defending" }] },
-        { "unit_id": "stalingrad-front",   "faction_id": "soviet-stalingrad",  "positions": [{ "location": "Stalingrad outer defense ring","lat": 48.55, "lng": 44.10, "strength_pct": 0.80, "posture": "defending" }] },
-        { "unit_id": "sw-front",           "faction_id": "soviet-stalingrad",  "positions": [{ "location": "Don River — Serafimovich",    "lat": 49.58, "lng": 42.73, "strength_pct": 0.85, "posture": "defending" }] }
-      ],
       "events": [
         {
           "id": "evt-1-1",
           "type": "combat",
-          "timestamp_offset_hours": 0,
           "label": "16th Panzer Reaches the Volga",
+          "location": {
+            "lat": 48.86,
+            "lng": 44.57
+          },
           "description": "On 23 August, Hube's 16th Panzer Division cuts through to the Volga bank north of Stalingrad, isolating the city from the north. A column of Stalingrad factory workers in armed trucks attempts a counterattack and is destroyed.",
-          "location": { "lat": 48.86, "lng": 44.57 },
-          "significance": "critical"
+          "significance": "critical",
+          "timestamp_offset_hours": 0
         },
         {
           "id": "evt-1-2",
           "type": "air_support",
-          "timestamp_offset_hours": 2,
           "label": "Luftwaffe Bombing of Stalingrad",
+          "location": {
+            "lat": 48.7,
+            "lng": 44.51
+          },
           "description": "Luftflotte 4 launches ~1,000 sorties, dropping incendiary and high-explosive bombs. The city is reduced to rubble. ~40,000 civilians killed. The ruins will ironically favour the Soviet defenders in close combat.",
-          "location": { "lat": 48.70, "lng": 44.51 },
-          "significance": "critical"
+          "significance": "critical",
+          "timestamp_offset_hours": 2
         },
         {
           "id": "evt-1-3",
           "type": "command",
-          "timestamp_offset_hours": 480,
           "label": "Chuikov Takes Command of 62nd Army",
+          "location": {
+            "lat": 48.7,
+            "lng": 44.5
+          },
           "description": "On 12 September, Lt Gen Vasily Chuikov is given command of the battered 62nd Army. He adopts a 'hugging' tactic — keeping his troops so close to German lines that the Luftwaffe and artillery cannot engage without hitting their own men.",
-          "location": { "lat": 48.70, "lng": 44.50 },
-          "significance": "critical"
+          "significance": "critical",
+          "timestamp_offset_hours": 480
         },
         {
           "id": "evt-1-4",
           "type": "movement",
-          "timestamp_offset_hours": 240,
           "label": "4th Panzer Army Advances from South",
+          "location": {
+            "lat": 48.42,
+            "lng": 44.35
+          },
           "description": "Hoth's 4th Panzer Army closes in from the south through the Kalmyk steppe, creating a double envelopment threat. Soviet forces fall back toward the city perimeter.",
-          "location": { "lat": 48.42, "lng": 44.35 },
-          "significance": "high"
+          "significance": "high",
+          "timestamp_offset_hours": 240
         }
       ],
+      "summary": "Army Group B's 6th Army and 4th Panzer Army drive toward the Volga. On August 23, the 16th Panzer Division reaches the Volga north of the city. Luftflotte 4 launches a devastating bombing raid, killing ~40,000 civilians and turning Stalingrad into a rubble-field. Soviet forces scramble to defend the approaches.",
+      "weather": {
+        "wind_kph": 15,
+        "conditions": "hot_dry_steppe",
+        "temp_celsius": 28
+      },
       "annotation": "The German high command expected Stalingrad to fall in days. Hitler diverted 4th Panzer Army south toward the Caucasus and then back north — a fatal delay that allowed the Soviets to reinforce. The ruins created by the Luftwaffe bombing became the greatest defensive asset the Soviets had.",
-      "weather": { "temp_celsius": 28, "conditions": "hot_dry_steppe", "wind_kph": 15 }
+      "date_range": {
+        "end": "1942-09-12",
+        "start": "1942-08-23"
+      },
+      "unit_positions": [
+        {
+          "unit_id": "6th-army-hq",
+          "positions": [
+            {
+              "lat": 48.7,
+              "lng": 43.8,
+              "posture": "advancing",
+              "location": "West of Stalingrad",
+              "strength_pct": 1.0
+            }
+          ],
+          "faction_id": "axis-6th-army"
+        },
+        {
+          "unit_id": "xiv-panzer-corps",
+          "positions": [
+            {
+              "lat": 48.82,
+              "lng": 44.52,
+              "posture": "advancing",
+              "location": "North Stalingrad / Volga",
+              "strength_pct": 1.0
+            }
+          ],
+          "faction_id": "axis-6th-army"
+        },
+        {
+          "unit_id": "16th-panzer-div",
+          "positions": [
+            {
+              "lat": 48.86,
+              "lng": 44.58,
+              "posture": "attacking",
+              "location": "Volga bank north of city",
+              "strength_pct": 1.0
+            }
+          ],
+          "faction_id": "axis-6th-army"
+        },
+        {
+          "unit_id": "li-army-corps",
+          "positions": [
+            {
+              "lat": 48.7,
+              "lng": 44.25,
+              "posture": "advancing",
+              "location": "Western Stalingrad outskirts",
+              "strength_pct": 1.0
+            }
+          ],
+          "faction_id": "axis-6th-army"
+        },
+        {
+          "unit_id": "4th-panzer-army",
+          "positions": [
+            {
+              "lat": 48.42,
+              "lng": 44.3,
+              "posture": "advancing",
+              "location": "South Stalingrad approach",
+              "strength_pct": 1.0
+            }
+          ],
+          "faction_id": "axis-6th-army"
+        },
+        {
+          "unit_id": "romanian-3rd-army",
+          "positions": [
+            {
+              "lat": 49.1,
+              "lng": 43.2,
+              "posture": "holding",
+              "location": "Don River — north flank",
+              "strength_pct": 1.0
+            }
+          ],
+          "faction_id": "axis-6th-army"
+        },
+        {
+          "unit_id": "romanian-4th-army",
+          "positions": [
+            {
+              "lat": 47.9,
+              "lng": 44.2,
+              "posture": "holding",
+              "location": "South flank — Sarpa Lakes",
+              "strength_pct": 1.0
+            }
+          ],
+          "faction_id": "axis-6th-army"
+        },
+        {
+          "unit_id": "luftwaffe-4th-fleet",
+          "positions": [
+            {
+              "lat": 48.35,
+              "lng": 41.83,
+              "posture": "advancing",
+              "location": "Morozovsk Airfield",
+              "strength_pct": 1.0
+            }
+          ],
+          "faction_id": "axis-6th-army"
+        },
+        {
+          "unit_id": "62nd-army",
+          "positions": [
+            {
+              "lat": 48.7,
+              "lng": 44.48,
+              "posture": "defending",
+              "location": "Stalingrad city — west bank",
+              "strength_pct": 0.7
+            }
+          ],
+          "faction_id": "soviet-stalingrad"
+        },
+        {
+          "unit_id": "stalingrad-front",
+          "positions": [
+            {
+              "lat": 48.55,
+              "lng": 44.1,
+              "posture": "defending",
+              "location": "Stalingrad outer defense ring",
+              "strength_pct": 0.8
+            }
+          ],
+          "faction_id": "soviet-stalingrad"
+        },
+        {
+          "unit_id": "sw-front",
+          "positions": [
+            {
+              "lat": 49.58,
+              "lng": 42.73,
+              "posture": "defending",
+              "location": "Don River — Serafimovich",
+              "strength_pct": 0.85
+            }
+          ],
+          "faction_id": "soviet-stalingrad"
+        }
+      ],
+      "tactical_situation": "The German 6th Army advances from the west across the open steppe toward Stalingrad. Romanian armies protect both flanks along the Don. The Soviet Stalingrad Front attempts to slow the advance but is outgunned. The city's industrial workers form fighting battalions.",
+      "timestamp_offset_hours": 0
     },
     {
       "id": "phase-2-street-fighting",
       "index": 1,
       "label": "Urban Warfare — The Rattenkrieg",
-      "date_range": { "start": "1942-09-13", "end": "1942-11-18" },
-      "timestamp_offset_hours": 504,
-      "summary": "The most savage urban combat in history. Germans fight for every building, every floor, every room. The 62nd Army clings to a strip of the Volga bank, never more than a few hundred metres wide. Chuikov's 'hugging' tactics neutralise German air and artillery superiority. Famous engagements: Pavlov's House, the Grain Elevator, Mamayev Kurgan, the factory district.",
-      "tactical_situation": "The 62nd Army holds a narrow perimeter on the west bank. The Volga ferries are the only supply line — running under constant Luftwaffe attack. German forces hold most of the city but cannot reach the riverbank. The factory district becomes the main battleground in October–November.",
-      "unit_positions": [
-        { "unit_id": "6th-army-hq",        "faction_id": "axis-6th-army",     "positions": [{ "location": "Gumrak — west Stalingrad",      "lat": 48.66, "lng": 44.37, "strength_pct": 0.82, "posture": "attacking" }] },
-        { "unit_id": "li-army-corps",      "faction_id": "axis-6th-army",     "positions": [{ "location": "Central Stalingrad",             "lat": 48.70, "lng": 44.49, "strength_pct": 0.72, "posture": "attacking" }] },
-        { "unit_id": "295th-infantry-div", "faction_id": "axis-6th-army",     "positions": [{ "location": "Mamayev Kurgan",                 "lat": 48.74, "lng": 44.52, "strength_pct": 0.68, "posture": "attacking" }] },
-        { "unit_id": "71st-infantry-div",  "faction_id": "axis-6th-army",     "positions": [{ "location": "Central Station / City Centre",  "lat": 48.70, "lng": 44.51, "strength_pct": 0.65, "posture": "attacking" }] },
-        { "unit_id": "xiv-panzer-corps",   "faction_id": "axis-6th-army",     "positions": [{ "location": "Tractor Factory District",       "lat": 48.82, "lng": 44.53, "strength_pct": 0.70, "posture": "attacking" }] },
-        { "unit_id": "16th-panzer-div",    "faction_id": "axis-6th-army",     "positions": [{ "location": "Volga bank — factory sector",    "lat": 48.80, "lng": 44.55, "strength_pct": 0.65, "posture": "attacking" }] },
-        { "unit_id": "romanian-3rd-army",  "faction_id": "axis-6th-army",     "positions": [{ "location": "Don River front — Kletskaya",    "lat": 49.15, "lng": 43.10, "strength_pct": 0.88, "posture": "holding" }] },
-        { "unit_id": "romanian-4th-army",  "faction_id": "axis-6th-army",     "positions": [{ "location": "South flank — Sarpa sector",     "lat": 47.92, "lng": 44.15, "strength_pct": 0.85, "posture": "holding" }] },
-        { "unit_id": "62nd-army",          "faction_id": "soviet-stalingrad",  "positions": [{ "location": "Volga west bank — narrow strip", "lat": 48.70, "lng": 44.50, "strength_pct": 0.55, "posture": "defending" }] },
-        { "unit_id": "13th-guards-div",    "faction_id": "soviet-stalingrad",  "positions": [{ "location": "Central Stalingrad / Mamayev",   "lat": 48.72, "lng": 44.51, "strength_pct": 0.45, "posture": "defending" }] },
-        { "unit_id": "284th-rifle-div",    "faction_id": "soviet-stalingrad",  "positions": [{ "location": "Mamayev Kurgan",                 "lat": 48.74, "lng": 44.52, "strength_pct": 0.50, "posture": "defending" }] },
-        { "unit_id": "308th-rifle-div",    "faction_id": "soviet-stalingrad",  "positions": [{ "location": "Barrikady Factory",              "lat": 48.79, "lng": 44.54, "strength_pct": 0.48, "posture": "defending" }] },
-        { "unit_id": "sw-front",           "faction_id": "soviet-stalingrad",  "positions": [{ "location": "Serafimovich — Don bridgehead",  "lat": 49.58, "lng": 42.73, "strength_pct": 0.95, "posture": "holding" }] },
-        { "unit_id": "5th-tank-army",      "faction_id": "soviet-stalingrad",  "positions": [{ "location": "Don River north — staging area", "lat": 49.40, "lng": 42.90, "strength_pct": 1.0,  "posture": "holding" }] },
-        { "unit_id": "51st-army",          "faction_id": "soviet-stalingrad",  "positions": [{ "location": "Sarpa Lakes — south staging",    "lat": 47.92, "lng": 44.00, "strength_pct": 1.0,  "posture": "holding" }] }
-      ],
       "events": [
         {
           "id": "evt-2-1",
           "type": "combat",
-          "timestamp_offset_hours": 510,
           "label": "13th Guards Cross the Volga Under Fire",
+          "location": {
+            "lat": 48.7,
+            "lng": 44.52
+          },
           "description": "Rodimtsev's 13th Guards Division crosses the Volga on the night of 14–15 September under intense German fire, suffering 30% casualties in the crossing. They immediately counterattack, retaking the central landing stage and halting the German push to the river.",
-          "location": { "lat": 48.70, "lng": 44.52 },
-          "significance": "critical"
+          "significance": "critical",
+          "timestamp_offset_hours": 510
         },
         {
           "id": "evt-2-2",
           "type": "combat",
-          "timestamp_offset_hours": 720,
           "label": "Battle for Mamayev Kurgan",
+          "location": {
+            "lat": 48.74,
+            "lng": 44.52
+          },
           "description": "The dominant Hill 102 (Mamayev Kurgan) changes hands multiple times. Its summit is so fought-over that the soil is saturated with metal fragments — no grass will grow there for years. Whoever holds the summit controls artillery observation over the entire city and river.",
-          "location": { "lat": 48.74, "lng": 44.52 },
-          "significance": "critical"
+          "significance": "critical",
+          "timestamp_offset_hours": 720
         },
         {
           "id": "evt-2-3",
           "type": "combat",
-          "timestamp_offset_hours": 1200,
           "label": "Battle of the Factory District",
+          "location": {
+            "lat": 48.8,
+            "lng": 44.53
+          },
           "description": "German forces launch major assaults on the Tractor Factory, Barrikady gun factory, and Red October steel works in October. Workers continue producing tanks on the factory floor while combat rages in adjacent workshops. The 62nd Army is reduced to a few hundred metres of riverbank.",
-          "location": { "lat": 48.80, "lng": 44.53 },
-          "significance": "critical"
+          "significance": "critical",
+          "timestamp_offset_hours": 1200
         },
         {
           "id": "evt-2-4",
           "type": "combat",
-          "timestamp_offset_hours": 900,
           "label": "Pavlov's House — 58-Day Siege",
+          "location": {
+            "lat": 48.706,
+            "lng": 44.513
+          },
           "description": "A platoon under Sgt Yakov Pavlov fortifies a four-storey apartment building in the city centre. The building holds for 58 days against continuous German assault, becoming a symbol of Soviet resistance. Chuikov later remarked that more Germans died attacking it than were lost taking Paris.",
-          "location": { "lat": 48.706, "lng": 44.513 },
-          "significance": "high"
+          "significance": "high",
+          "timestamp_offset_hours": 900
         }
       ],
+      "summary": "The most savage urban combat in history. Germans fight for every building, every floor, every room. The 62nd Army clings to a strip of the Volga bank, never more than a few hundred metres wide. Chuikov's 'hugging' tactics neutralise German air and artillery superiority. Famous engagements: Pavlov's House, the Grain Elevator, Mamayev Kurgan, the factory district.",
+      "weather": {
+        "wind_kph": 20,
+        "conditions": "autumn_turning_winter",
+        "temp_celsius": -5
+      },
       "annotation": "The Rattenkrieg ('rat war') negated Germany's superiority in combined arms. In the rubble, tanks couldn't manoeuvre, Stukas couldn't target accurately, and radios didn't work. It became a war of small groups, grenades, and knives. The 62nd Army's average life expectancy for a new soldier dropped to 24 hours.",
-      "weather": { "temp_celsius": -5, "conditions": "autumn_turning_winter", "wind_kph": 20 }
+      "date_range": {
+        "end": "1942-11-18",
+        "start": "1942-09-13"
+      },
+      "unit_positions": [
+        {
+          "unit_id": "6th-army-hq",
+          "positions": [
+            {
+              "lat": 48.66,
+              "lng": 44.37,
+              "posture": "attacking",
+              "location": "Gumrak — west Stalingrad",
+              "strength_pct": 0.82
+            }
+          ],
+          "faction_id": "axis-6th-army"
+        },
+        {
+          "unit_id": "li-army-corps",
+          "positions": [
+            {
+              "lat": 48.7,
+              "lng": 44.49,
+              "posture": "attacking",
+              "location": "Central Stalingrad",
+              "strength_pct": 0.72
+            }
+          ],
+          "faction_id": "axis-6th-army"
+        },
+        {
+          "unit_id": "295th-infantry-div",
+          "positions": [
+            {
+              "lat": 48.74,
+              "lng": 44.52,
+              "posture": "attacking",
+              "location": "Mamayev Kurgan",
+              "strength_pct": 0.68
+            }
+          ],
+          "faction_id": "axis-6th-army"
+        },
+        {
+          "unit_id": "71st-infantry-div",
+          "positions": [
+            {
+              "lat": 48.7,
+              "lng": 44.51,
+              "posture": "attacking",
+              "location": "Central Station / City Centre",
+              "strength_pct": 0.65
+            }
+          ],
+          "faction_id": "axis-6th-army"
+        },
+        {
+          "unit_id": "xiv-panzer-corps",
+          "positions": [
+            {
+              "lat": 48.82,
+              "lng": 44.53,
+              "posture": "attacking",
+              "location": "Tractor Factory District",
+              "strength_pct": 0.7
+            }
+          ],
+          "faction_id": "axis-6th-army"
+        },
+        {
+          "unit_id": "16th-panzer-div",
+          "positions": [
+            {
+              "lat": 48.8,
+              "lng": 44.55,
+              "posture": "attacking",
+              "location": "Volga bank — factory sector",
+              "strength_pct": 0.65
+            }
+          ],
+          "faction_id": "axis-6th-army"
+        },
+        {
+          "unit_id": "romanian-3rd-army",
+          "positions": [
+            {
+              "lat": 49.15,
+              "lng": 43.1,
+              "posture": "holding",
+              "location": "Don River front — Kletskaya",
+              "strength_pct": 0.88
+            }
+          ],
+          "faction_id": "axis-6th-army"
+        },
+        {
+          "unit_id": "romanian-4th-army",
+          "positions": [
+            {
+              "lat": 47.92,
+              "lng": 44.15,
+              "posture": "holding",
+              "location": "South flank — Sarpa sector",
+              "strength_pct": 0.85
+            }
+          ],
+          "faction_id": "axis-6th-army"
+        },
+        {
+          "unit_id": "62nd-army",
+          "positions": [
+            {
+              "lat": 48.7,
+              "lng": 44.5,
+              "posture": "defending",
+              "location": "Volga west bank — narrow strip",
+              "strength_pct": 0.55
+            }
+          ],
+          "faction_id": "soviet-stalingrad"
+        },
+        {
+          "unit_id": "13th-guards-div",
+          "positions": [
+            {
+              "lat": 48.72,
+              "lng": 44.51,
+              "posture": "defending",
+              "location": "Central Stalingrad / Mamayev",
+              "strength_pct": 0.45
+            }
+          ],
+          "faction_id": "soviet-stalingrad"
+        },
+        {
+          "unit_id": "284th-rifle-div",
+          "positions": [
+            {
+              "lat": 48.74,
+              "lng": 44.52,
+              "posture": "defending",
+              "location": "Mamayev Kurgan",
+              "strength_pct": 0.5
+            }
+          ],
+          "faction_id": "soviet-stalingrad"
+        },
+        {
+          "unit_id": "308th-rifle-div",
+          "positions": [
+            {
+              "lat": 48.79,
+              "lng": 44.54,
+              "posture": "defending",
+              "location": "Barrikady Factory",
+              "strength_pct": 0.48
+            }
+          ],
+          "faction_id": "soviet-stalingrad"
+        },
+        {
+          "unit_id": "sw-front",
+          "positions": [
+            {
+              "lat": 49.58,
+              "lng": 42.73,
+              "posture": "holding",
+              "location": "Serafimovich — Don bridgehead",
+              "strength_pct": 0.95
+            }
+          ],
+          "faction_id": "soviet-stalingrad"
+        },
+        {
+          "unit_id": "5th-tank-army",
+          "positions": [
+            {
+              "lat": 49.4,
+              "lng": 42.9,
+              "posture": "holding",
+              "location": "Don River north — staging area",
+              "strength_pct": 1.0
+            }
+          ],
+          "faction_id": "soviet-stalingrad"
+        },
+        {
+          "unit_id": "51st-army",
+          "positions": [
+            {
+              "lat": 47.92,
+              "lng": 44.0,
+              "posture": "holding",
+              "location": "Sarpa Lakes — south staging",
+              "strength_pct": 1.0
+            }
+          ],
+          "faction_id": "soviet-stalingrad"
+        }
+      ],
+      "tactical_situation": "The 62nd Army holds a narrow perimeter on the west bank. The Volga ferries are the only supply line — running under constant Luftwaffe attack. German forces hold most of the city but cannot reach the riverbank. The factory district becomes the main battleground in October–November.",
+      "timestamp_offset_hours": 504
     },
     {
       "id": "phase-3-operation-uranus",
       "index": 2,
       "label": "Operation Uranus — The Encirclement",
-      "date_range": { "start": "1942-11-19", "end": "1942-11-23" },
-      "timestamp_offset_hours": 2016,
-      "summary": "In four days, the Soviets execute the most decisive encirclement of the war. Three fronts strike simultaneously: the South-West and Don Fronts smash through the Romanian 3rd Army to the north, while the Stalingrad Front breaks through the Romanian 4th Army to the south. The two pincers meet at Kalach-on-Don on 23 November, trapping ~330,000 Axis troops.",
-      "tactical_situation": "The Romanian flanks — stretched, under-equipped, and lacking anti-tank guns — collapse in hours. The 6th Army is encircled before it can withdraw. Hitler orders it to stand fast and form a 'fortress Stalingrad'. General Paulus requests permission to break out — denied.",
-      "unit_positions": [
-        { "unit_id": "6th-army-hq",        "faction_id": "axis-6th-army",     "positions": [{ "location": "Stalingrad Kessel (pocket)",     "lat": 48.70, "lng": 44.40, "strength_pct": 0.75, "posture": "encircled" }] },
-        { "unit_id": "li-army-corps",      "faction_id": "axis-6th-army",     "positions": [{ "location": "City — now encircled",           "lat": 48.70, "lng": 44.49, "strength_pct": 0.65, "posture": "encircled" }] },
-        { "unit_id": "295th-infantry-div", "faction_id": "axis-6th-army",     "positions": [{ "location": "Mamayev Kurgan — encircled",     "lat": 48.74, "lng": 44.52, "strength_pct": 0.55, "posture": "encircled" }] },
-        { "unit_id": "71st-infantry-div",  "faction_id": "axis-6th-army",     "positions": [{ "location": "City centre — encircled",        "lat": 48.70, "lng": 44.51, "strength_pct": 0.55, "posture": "encircled" }] },
-        { "unit_id": "xiv-panzer-corps",   "faction_id": "axis-6th-army",     "positions": [{ "location": "Factory district — encircled",   "lat": 48.80, "lng": 44.50, "strength_pct": 0.60, "posture": "encircled" }] },
-        { "unit_id": "romanian-3rd-army",  "faction_id": "axis-6th-army",     "positions": [{ "location": "Collapsed — Don front",          "lat": 49.10, "lng": 43.10, "strength_pct": 0.15, "posture": "retreating" }] },
-        { "unit_id": "romanian-4th-army",  "faction_id": "axis-6th-army",     "positions": [{ "location": "Collapsed — south of Stalingrad", "lat": 47.90, "lng": 44.10, "strength_pct": 0.12, "posture": "retreating" }] },
-        { "unit_id": "4th-panzer-army",    "faction_id": "axis-6th-army",     "positions": [{ "location": "Kotelnikovo — outside pocket",   "lat": 47.63, "lng": 43.14, "strength_pct": 0.85, "posture": "defending" }] },
-        { "unit_id": "5th-tank-army",      "faction_id": "soviet-stalingrad",  "positions": [{ "location": "Kletskaya — breakthrough north", "lat": 49.15, "lng": 43.05, "strength_pct": 0.88, "posture": "attacking" }] },
-        { "unit_id": "sw-front",           "faction_id": "soviet-stalingrad",  "positions": [{ "location": "Don River breakthrough — north", "lat": 49.00, "lng": 43.30, "strength_pct": 0.88, "posture": "attacking" }] },
-        { "unit_id": "51st-army",          "faction_id": "soviet-stalingrad",  "positions": [{ "location": "Sarpa — southern breakthrough",  "lat": 47.92, "lng": 44.10, "strength_pct": 0.90, "posture": "attacking" }] },
-        { "unit_id": "stalingrad-front",   "faction_id": "soviet-stalingrad",  "positions": [{ "location": "South — closing the ring",       "lat": 48.20, "lng": 43.90, "strength_pct": 0.82, "posture": "attacking" }] },
-        { "unit_id": "don-front",          "faction_id": "soviet-stalingrad",  "positions": [{ "location": "North — squeezing the Kessel",   "lat": 49.00, "lng": 44.00, "strength_pct": 0.90, "posture": "attacking" }] },
-        { "unit_id": "62nd-army",          "faction_id": "soviet-stalingrad",  "positions": [{ "location": "Stalingrad city — pinning force", "lat": 48.70, "lng": 44.50, "strength_pct": 0.40, "posture": "attacking" }] }
-      ],
       "events": [
         {
           "id": "evt-3-1",
           "type": "combat",
-          "timestamp_offset_hours": 2016,
           "label": "Northern Pincer Launches — 19 November",
+          "location": {
+            "lat": 49.15,
+            "lng": 43.05
+          },
           "description": "At 07:30 on 19 November, after a 90-minute Katyusha barrage in thick fog and snow, the South-West and Don Fronts attack. The 5th Tank Army with 500 tanks tears through the Romanian 3rd Army. Within hours the front collapses across a 50-mile width.",
-          "location": { "lat": 49.15, "lng": 43.05 },
-          "significance": "critical"
+          "significance": "critical",
+          "timestamp_offset_hours": 2016
         },
         {
           "id": "evt-3-2",
           "type": "combat",
-          "timestamp_offset_hours": 2040,
           "label": "Southern Pincer Launches — 20 November",
+          "location": {
+            "lat": 47.92,
+            "lng": 44.1
+          },
           "description": "The Stalingrad Front attacks from the south through the Sarpa Lakes. The Romanian 4th Army collapses within hours. Soviet armour races northwest toward Kalach to meet the northern pincer.",
-          "location": { "lat": 47.92, "lng": 44.10 },
-          "significance": "critical"
+          "significance": "critical",
+          "timestamp_offset_hours": 2040
         },
         {
           "id": "evt-3-3",
           "type": "movement",
-          "timestamp_offset_hours": 2100,
           "label": "Pincers Close at Kalach — 23 November",
+          "location": {
+            "lat": 48.71,
+            "lng": 43.51
+          },
           "description": "Soviet tank columns from north and south meet at Kalach-on-Don on 23 November. The encirclement of the entire German 6th Army — 330,000 men — is complete. Paulus requests permission to break out; Hitler refuses.",
-          "location": { "lat": 48.71, "lng": 43.51 },
-          "significance": "critical"
+          "significance": "critical",
+          "timestamp_offset_hours": 2100
         },
         {
           "id": "evt-3-4",
           "type": "command",
-          "timestamp_offset_hours": 2110,
           "label": "Hitler Orders 'Fortress Stalingrad'",
+          "location": {
+            "lat": 48.7,
+            "lng": 44.4
+          },
           "description": "Hitler declares Stalingrad a 'fortress' and orders the 6th Army to hold. Göring promises the Luftwaffe can supply 500 tons/day by air. In reality, the Luftwaffe never delivers more than 120 tons on any single day.",
-          "location": { "lat": 48.70, "lng": 44.40 },
-          "significance": "critical"
+          "significance": "critical",
+          "timestamp_offset_hours": 2110
         }
       ],
+      "summary": "In four days, the Soviets execute the most decisive encirclement of the war. Three fronts strike simultaneously: the South-West and Don Fronts smash through the Romanian 3rd Army to the north, while the Stalingrad Front breaks through the Romanian 4th Army to the south. The two pincers meet at Kalach-on-Don on 23 November, trapping ~330,000 Axis troops.",
+      "weather": {
+        "wind_kph": 35,
+        "conditions": "heavy_snow_fog",
+        "temp_celsius": -18
+      },
       "annotation": "Operation Uranus was planned in secret for months while the street fighting in Stalingrad consumed German attention and reserves. Zhukov and Vasilevsky correctly identified the weakest points — the Romanian flanks — and designed a classic double envelopment. The entire operation took only four days.",
-      "weather": { "temp_celsius": -18, "conditions": "heavy_snow_fog", "wind_kph": 35 }
+      "date_range": {
+        "end": "1942-11-23",
+        "start": "1942-11-19"
+      },
+      "unit_positions": [
+        {
+          "unit_id": "6th-army-hq",
+          "positions": [
+            {
+              "lat": 48.7,
+              "lng": 44.4,
+              "posture": "encircled",
+              "location": "Stalingrad Kessel (pocket)",
+              "strength_pct": 0.75
+            }
+          ],
+          "faction_id": "axis-6th-army"
+        },
+        {
+          "unit_id": "li-army-corps",
+          "positions": [
+            {
+              "lat": 48.7,
+              "lng": 44.49,
+              "posture": "encircled",
+              "location": "City — now encircled",
+              "strength_pct": 0.65
+            }
+          ],
+          "faction_id": "axis-6th-army"
+        },
+        {
+          "unit_id": "295th-infantry-div",
+          "positions": [
+            {
+              "lat": 48.74,
+              "lng": 44.52,
+              "posture": "encircled",
+              "location": "Mamayev Kurgan — encircled",
+              "strength_pct": 0.55
+            }
+          ],
+          "faction_id": "axis-6th-army"
+        },
+        {
+          "unit_id": "71st-infantry-div",
+          "positions": [
+            {
+              "lat": 48.7,
+              "lng": 44.51,
+              "posture": "encircled",
+              "location": "City centre — encircled",
+              "strength_pct": 0.55
+            }
+          ],
+          "faction_id": "axis-6th-army"
+        },
+        {
+          "unit_id": "xiv-panzer-corps",
+          "positions": [
+            {
+              "lat": 48.8,
+              "lng": 44.5,
+              "posture": "encircled",
+              "location": "Factory district — encircled",
+              "strength_pct": 0.6
+            }
+          ],
+          "faction_id": "axis-6th-army"
+        },
+        {
+          "unit_id": "romanian-3rd-army",
+          "positions": [
+            {
+              "lat": 49.1,
+              "lng": 43.1,
+              "posture": "retreating",
+              "location": "Collapsed — Don front",
+              "strength_pct": 0.15
+            }
+          ],
+          "faction_id": "axis-6th-army"
+        },
+        {
+          "unit_id": "romanian-4th-army",
+          "positions": [
+            {
+              "lat": 47.9,
+              "lng": 44.1,
+              "posture": "retreating",
+              "location": "Collapsed — south of Stalingrad",
+              "strength_pct": 0.12
+            }
+          ],
+          "faction_id": "axis-6th-army"
+        },
+        {
+          "unit_id": "4th-panzer-army",
+          "positions": [
+            {
+              "lat": 47.63,
+              "lng": 43.14,
+              "posture": "defending",
+              "location": "Kotelnikovo — outside pocket",
+              "strength_pct": 0.85
+            }
+          ],
+          "faction_id": "axis-6th-army"
+        },
+        {
+          "unit_id": "5th-tank-army",
+          "positions": [
+            {
+              "lat": 49.15,
+              "lng": 43.05,
+              "posture": "attacking",
+              "location": "Kletskaya — breakthrough north",
+              "strength_pct": 0.88
+            }
+          ],
+          "faction_id": "soviet-stalingrad"
+        },
+        {
+          "unit_id": "sw-front",
+          "positions": [
+            {
+              "lat": 49.0,
+              "lng": 43.3,
+              "posture": "attacking",
+              "location": "Don River breakthrough — north",
+              "strength_pct": 0.88
+            }
+          ],
+          "faction_id": "soviet-stalingrad"
+        },
+        {
+          "unit_id": "51st-army",
+          "positions": [
+            {
+              "lat": 47.92,
+              "lng": 44.1,
+              "posture": "attacking",
+              "location": "Sarpa — southern breakthrough",
+              "strength_pct": 0.9
+            }
+          ],
+          "faction_id": "soviet-stalingrad"
+        },
+        {
+          "unit_id": "stalingrad-front",
+          "positions": [
+            {
+              "lat": 48.2,
+              "lng": 43.9,
+              "posture": "attacking",
+              "location": "South — closing the ring",
+              "strength_pct": 0.82
+            }
+          ],
+          "faction_id": "soviet-stalingrad"
+        },
+        {
+          "unit_id": "don-front",
+          "positions": [
+            {
+              "lat": 49.0,
+              "lng": 44.0,
+              "posture": "attacking",
+              "location": "North — squeezing the Kessel",
+              "strength_pct": 0.9
+            }
+          ],
+          "faction_id": "soviet-stalingrad"
+        },
+        {
+          "unit_id": "62nd-army",
+          "positions": [
+            {
+              "lat": 48.7,
+              "lng": 44.5,
+              "posture": "attacking",
+              "location": "Stalingrad city — pinning force",
+              "strength_pct": 0.4
+            }
+          ],
+          "faction_id": "soviet-stalingrad"
+        }
+      ],
+      "tactical_situation": "The Romanian flanks — stretched, under-equipped, and lacking anti-tank guns — collapse in hours. The 6th Army is encircled before it can withdraw. Hitler orders it to stand fast and form a 'fortress Stalingrad'. General Paulus requests permission to break out — denied.",
+      "timestamp_offset_hours": 2016
     },
     {
       "id": "phase-4-operation-ring",
       "index": 3,
       "label": "Operation Ring — Surrender of the 6th Army",
-      "date_range": { "start": "1942-12-01", "end": "1943-02-02" },
-      "timestamp_offset_hours": 2256,
-      "summary": "The trapped 6th Army slowly starves and freezes. Operation Winter Storm — Hoth's relief attempt — is halted 50km short of the pocket at the Myshkova River. Operation Ring (10 Jan) compresses the Kessel. On 31 January, Paulus (promoted to Field Marshal that day) surrenders the southern pocket. The last resistance ends on 2 February 1943.",
-      "tactical_situation": "330,000 men trapped in the Kessel, supplied only by air at 10% of the required rate. Temperatures reach -30°C. Starvation, frostbite, and disease ravage the 6th Army. Operation Winter Storm (Dec 12) gets within 50km but is halted. Operation Little Saturn (Dec 16) destroys the Italian 8th Army, ending any relief prospect.",
-      "unit_positions": [
-        { "unit_id": "6th-army-hq",        "faction_id": "axis-6th-army",     "positions": [{ "location": "Gumrak — shrinking Kessel",      "lat": 48.66, "lng": 44.37, "strength_pct": 0.35, "posture": "encircled" }] },
-        { "unit_id": "li-army-corps",      "faction_id": "axis-6th-army",     "positions": [{ "location": "City ruins — pocket east half",   "lat": 48.70, "lng": 44.49, "strength_pct": 0.28, "posture": "encircled" }] },
-        { "unit_id": "295th-infantry-div", "faction_id": "axis-6th-army",     "positions": [{ "location": "Mamayev Kurgan — final defence",  "lat": 48.74, "lng": 44.52, "strength_pct": 0.20, "posture": "encircled" }] },
-        { "unit_id": "71st-infantry-div",  "faction_id": "axis-6th-army",     "positions": [{ "location": "City centre — Univermag dept store","lat": 48.70, "lng": 44.51, "strength_pct": 0.18, "posture": "encircled" }] },
-        { "unit_id": "xiv-panzer-corps",   "faction_id": "axis-6th-army",     "positions": [{ "location": "Northwest pocket — Stalingrad",   "lat": 48.80, "lng": 44.40, "strength_pct": 0.20, "posture": "encircled" }] },
-        { "unit_id": "4th-panzer-army",    "faction_id": "axis-6th-army",     "positions": [{ "location": "Myshkova River — halted",         "lat": 48.05, "lng": 43.70, "strength_pct": 0.60, "posture": "attacking" }] },
-        { "unit_id": "luftwaffe-4th-fleet","faction_id": "axis-6th-army",     "positions": [{ "location": "Novocherkassk — reduced airlift",  "lat": 47.42, "lng": 40.10, "strength_pct": 0.40, "posture": "holding" }] },
-        { "unit_id": "don-front",          "faction_id": "soviet-stalingrad",  "positions": [{ "location": "Kessel perimeter — west/north",   "lat": 49.00, "lng": 44.00, "strength_pct": 0.88, "posture": "attacking" }] },
-        { "unit_id": "stalingrad-front",   "faction_id": "soviet-stalingrad",  "positions": [{ "location": "Kessel perimeter — south",        "lat": 48.20, "lng": 44.20, "strength_pct": 0.85, "posture": "attacking" }] },
-        { "unit_id": "62nd-army",          "faction_id": "soviet-stalingrad",  "positions": [{ "location": "City — advancing into ruins",     "lat": 48.70, "lng": 44.50, "strength_pct": 0.35, "posture": "attacking" }] },
-        { "unit_id": "sw-front",           "faction_id": "soviet-stalingrad",  "positions": [{ "location": "Operation Little Saturn — west",  "lat": 49.20, "lng": 41.80, "strength_pct": 0.80, "posture": "attacking" }] },
-        { "unit_id": "51st-army",          "faction_id": "soviet-stalingrad",  "positions": [{ "location": "Southern outer ring — blocking",  "lat": 47.80, "lng": 43.80, "strength_pct": 0.82, "posture": "blocking" }] }
-      ],
       "events": [
         {
           "id": "evt-4-1",
           "type": "combat",
-          "timestamp_offset_hours": 2496,
           "label": "Operation Winter Storm Halted",
+          "location": {
+            "lat": 48.05,
+            "lng": 43.72
+          },
           "description": "Hoth's relief force (4th Panzer Army) reaches to within 48km of the pocket on Dec 19 but is halted at the Myshkova River by the Soviet 2nd Guards Army. Operation Little Saturn (Dec 16) smashes the Italian 8th Army, threatening to envelop Hoth's force. The relief is abandoned.",
-          "location": { "lat": 48.05, "lng": 43.72 },
-          "significance": "critical"
+          "significance": "critical",
+          "timestamp_offset_hours": 2496
         },
         {
           "id": "evt-4-2",
           "type": "logistics",
-          "timestamp_offset_hours": 2600,
           "label": "Tatsinskaya Airfield Overrun",
+          "location": {
+            "lat": 48.52,
+            "lng": 41.73
+          },
           "description": "On 24 December, Soviet tanks overrun Tatsinskaya Airfield — the main Luftwaffe supply base. The airlift, already delivering only 100 tons/day vs the 500 needed, collapses further. Starvation rations in the pocket drop to 200 calories/day.",
-          "location": { "lat": 48.52, "lng": 41.73 },
-          "significance": "critical"
+          "significance": "critical",
+          "timestamp_offset_hours": 2600
         },
         {
           "id": "evt-4-3",
           "type": "combat",
-          "timestamp_offset_hours": 2928,
           "label": "Operation Ring — Soviet Final Assault",
+          "location": {
+            "lat": 48.55,
+            "lng": 44.2
+          },
           "description": "On 10 January 1943, Rokossovsky's Don Front launches Operation Ring with 7,000 artillery pieces firing simultaneously. The Kessel is cut in two by 26 January. Gumrak airfield — the last runway — falls on 22 January, ending the airlift entirely.",
-          "location": { "lat": 48.55, "lng": 44.20 },
-          "significance": "critical"
+          "significance": "critical",
+          "timestamp_offset_hours": 2928
         },
         {
           "id": "evt-4-4",
           "type": "command",
-          "timestamp_offset_hours": 3120,
           "label": "Paulus Surrenders — 2 February 1943",
+          "location": {
+            "lat": 48.7,
+            "lng": 44.51
+          },
           "description": "Promoted to Feldmarschall by Hitler on 31 January (no German field marshal had ever surrendered), Paulus surrenders the southern pocket that day. The northern pocket surrenders on 2 February. 91,000 survivors march into captivity — only 6,000 will ever return to Germany.",
-          "location": { "lat": 48.70, "lng": 44.51 },
-          "significance": "critical"
+          "significance": "critical",
+          "timestamp_offset_hours": 3120
         }
       ],
+      "summary": "The trapped 6th Army slowly starves and freezes. Operation Winter Storm — Hoth's relief attempt — is halted 50km short of the pocket at the Myshkova River. Operation Ring (10 Jan) compresses the Kessel. On 31 January, Paulus (promoted to Field Marshal that day) surrenders the southern pocket. The last resistance ends on 2 February 1943.",
+      "weather": {
+        "wind_kph": 50,
+        "conditions": "extreme_winter_blizzard",
+        "temp_celsius": -30
+      },
       "annotation": "The German 6th Army could have broken out in late November when the encirclement ring was thin. Hitler's 'fortress' order, Göring's false promise of an air bridge, and the failed Winter Storm relief doomed 330,000 men. Of the 91,000 who surrendered, only ~6,000 ever returned to Germany — the last in 1955.",
-      "weather": { "temp_celsius": -30, "conditions": "extreme_winter_blizzard", "wind_kph": 50 }
-    }
-  ],
-  "casualties": {
-    "soviet-stalingrad": {
-      "killed_in_action": 478741,
-      "wounded_in_action": 650878,
-      "missing_in_action": 0,
-      "non_battle_frostbite": 0,
-      "total_combat_ineffective": 1129619,
-      "note": "Total Soviet casualties including all three fronts over the entire operation"
-    },
-    "axis-6th-army": {
-      "killed_in_action": 300000,
-      "wounded_in_action": 110000,
-      "missing_in_action": 91000,
-      "non_battle_frostbite": 100000,
-      "total_combat_ineffective": 800000,
-      "note": "~330,000 encircled; 91,000 surrendered; only ~6,000 POWs ever returned to Germany"
-    }
-  },
-  "key_figures": [
-    {
-      "name": "General Vasily Chuikov",
-      "faction": "soviet-stalingrad",
-      "role": "Commander, 62nd Army",
-      "significance": "Invented the 'hugging' tactic that neutralised German firepower. Kept the 62nd Army fighting when it held only a few hundred metres of Volga bank."
-    },
-    {
-      "name": "General Friedrich Paulus",
-      "faction": "axis-6th-army",
-      "role": "Commander, German 6th Army",
-      "significance": "Trapped by Hitler's 'fortress' order. Promoted to Field Marshal on 31 January 1943 — surrendered the next day. First German field marshal ever captured."
-    },
-    {
-      "name": "Marshal Georgy Zhukov",
-      "faction": "soviet-stalingrad",
-      "role": "Stavka Coordinator (with Vasilevsky)",
-      "significance": "Co-designed Operation Uranus. Correctly identified the Romanian flanks as the decisive weak point while the German High Command focused on the city."
-    },
-    {
-      "name": "General Wolfram von Richthofen",
-      "faction": "axis-6th-army",
-      "role": "Commander, Luftflotte 4",
-      "significance": "Privately warned that the promised 500-ton daily airlift was impossible. Delivered at most 120 tons on any single day — sealing the 6th Army's fate."
-    },
-    {
-      "name": "Marshal Alexander Vasilevsky",
-      "faction": "soviet-stalingrad",
-      "role": "Stavka Representative / Co-planner of Operation Uranus",
-      "significance": "Co-designed Operation Uranus alongside Zhukov. As Stavka representative, he coordinated all three Soviet fronts on the ground during both the encirclement and Operation Ring, ensuring seamless multi-front timing."
-    }
-  ],
-  "sources": [
-    { "title": "Stalingrad — Antony Beevor", "type": "book", "url": null },
-    { "title": "Enemy at the Gates: The Battle for Stalingrad — William Craig", "type": "book", "url": null },
-    { "title": "Battle of Stalingrad — Wikipedia", "type": "article", "url": "https://en.wikipedia.org/wiki/Battle_of_Stalingrad" }
-  ],
-  "wisdom": [
-    {
-      "id": "sw-1",
-      "category": "strategic",
-      "title": "Never Underestimate a Defender Who Has Nothing Left to Lose",
-      "body": "The 62nd Army was reduced to a strip a few hundred metres wide — nowhere to retreat, the Volga at their backs. Paradoxically, this made them more dangerous. Chuikov understood that a soldier with no retreat route fights harder than one with an exit. The city fought to a different set of physics than the open steppe.",
-      "related_phase": "phase-2-street-fighting"
-    },
-    {
-      "id": "sw-2",
-      "category": "intelligence",
-      "title": "The Flank Is Always the Decisive Point",
-      "body": "Zhukov and Vasilevsky didn't try to defeat Germany in Stalingrad. They watched the Germans exhaust themselves in the city, then struck the weakest flanks — the Romanian armies holding a 300km front with anti-tank rifles, not guns. The lesson: never let a strong enemy choose the ground; find where they are weak.",
-      "related_phase": "phase-3-operation-uranus"
-    },
-    {
-      "id": "sw-3",
-      "category": "logistics",
-      "title": "Air Supply Cannot Substitute for Ground Lines of Communication",
-      "body": "Göring promised 500 tons/day by air. The Luftwaffe never delivered more than 120 tons on any day. 330,000 men require 600+ tons/day just to survive. The 6th Army starved in place while waiting for a logistical miracle that was physically impossible. Leaders who accept impossible promises from their subordinates condemn their men.",
-      "related_phase": "phase-4-operation-ring"
-    },
-    {
-      "id": "sw-4",
-      "category": "terrain",
-      "title": "Urban Rubble Defeats Combined Arms",
-      "body": "The Luftwaffe's bombing of Stalingrad — intended to shatter Soviet resistance — instead created the perfect defensive terrain. In rubble, tanks cannot manoeuvre, aircraft cannot target accurately, artillery kills attacker and defender alike. The Germans' greatest advantages (air power, armour, artillery coordination) were nullified by the very destruction they created.",
-      "related_phase": "phase-2-street-fighting"
-    },
-    {
-      "id": "sw-5",
-      "category": "leadership",
-      "title": "The Decisive Moment Has an Expiry Date",
-      "body": "Paulus had a narrow window in late November 1942 to break out when the Soviet encirclement ring was only a few divisions deep. His instinct was to retreat; Hitler forbade it. Three months later, 91,000 men surrendered. The commander on the ground who sees the decisive moment must have the authority — and the courage — to act on it.",
-      "related_phase": "phase-3-operation-uranus"
-    },
-    {
-      "id": "sw-6",
-      "category": "adaptability",
-      "title": "Hug Your Enemy — The Proximity Tactic",
-      "body": "Chuikov's 'hugging' tactic — keeping Soviet troops so close to German lines that Luftwaffe and artillery could not engage without hitting their own men — is a masterclass in asymmetric adaptation. When you cannot match the enemy's firepower, negate it by collapsing the distance at which it is effective.",
-      "related_phase": "phase-2-street-fighting"
+      "date_range": {
+        "end": "1943-02-02",
+        "start": "1942-12-01"
+      },
+      "unit_positions": [
+        {
+          "unit_id": "6th-army-hq",
+          "positions": [
+            {
+              "lat": 48.66,
+              "lng": 44.37,
+              "posture": "encircled",
+              "location": "Gumrak — shrinking Kessel",
+              "strength_pct": 0.35
+            }
+          ],
+          "faction_id": "axis-6th-army"
+        },
+        {
+          "unit_id": "li-army-corps",
+          "positions": [
+            {
+              "lat": 48.7,
+              "lng": 44.49,
+              "posture": "encircled",
+              "location": "City ruins — pocket east half",
+              "strength_pct": 0.28
+            }
+          ],
+          "faction_id": "axis-6th-army"
+        },
+        {
+          "unit_id": "295th-infantry-div",
+          "positions": [
+            {
+              "lat": 48.74,
+              "lng": 44.52,
+              "posture": "encircled",
+              "location": "Mamayev Kurgan — final defence",
+              "strength_pct": 0.2
+            }
+          ],
+          "faction_id": "axis-6th-army"
+        },
+        {
+          "unit_id": "71st-infantry-div",
+          "positions": [
+            {
+              "lat": 48.7,
+              "lng": 44.51,
+              "posture": "encircled",
+              "location": "City centre — Univermag dept store",
+              "strength_pct": 0.18
+            }
+          ],
+          "faction_id": "axis-6th-army"
+        },
+        {
+          "unit_id": "xiv-panzer-corps",
+          "positions": [
+            {
+              "lat": 48.8,
+              "lng": 44.4,
+              "posture": "encircled",
+              "location": "Northwest pocket — Stalingrad",
+              "strength_pct": 0.2
+            }
+          ],
+          "faction_id": "axis-6th-army"
+        },
+        {
+          "unit_id": "4th-panzer-army",
+          "positions": [
+            {
+              "lat": 48.05,
+              "lng": 43.7,
+              "posture": "attacking",
+              "location": "Myshkova River — halted",
+              "strength_pct": 0.6
+            }
+          ],
+          "faction_id": "axis-6th-army"
+        },
+        {
+          "unit_id": "luftwaffe-4th-fleet",
+          "positions": [
+            {
+              "lat": 47.42,
+              "lng": 40.1,
+              "posture": "holding",
+              "location": "Novocherkassk — reduced airlift",
+              "strength_pct": 0.4
+            }
+          ],
+          "faction_id": "axis-6th-army"
+        },
+        {
+          "unit_id": "don-front",
+          "positions": [
+            {
+              "lat": 49.0,
+              "lng": 44.0,
+              "posture": "attacking",
+              "location": "Kessel perimeter — west/north",
+              "strength_pct": 0.88
+            }
+          ],
+          "faction_id": "soviet-stalingrad"
+        },
+        {
+          "unit_id": "stalingrad-front",
+          "positions": [
+            {
+              "lat": 48.2,
+              "lng": 44.2,
+              "posture": "attacking",
+              "location": "Kessel perimeter — south",
+              "strength_pct": 0.85
+            }
+          ],
+          "faction_id": "soviet-stalingrad"
+        },
+        {
+          "unit_id": "62nd-army",
+          "positions": [
+            {
+              "lat": 48.7,
+              "lng": 44.5,
+              "posture": "attacking",
+              "location": "City — advancing into ruins",
+              "strength_pct": 0.35
+            }
+          ],
+          "faction_id": "soviet-stalingrad"
+        },
+        {
+          "unit_id": "sw-front",
+          "positions": [
+            {
+              "lat": 49.2,
+              "lng": 41.8,
+              "posture": "attacking",
+              "location": "Operation Little Saturn — west",
+              "strength_pct": 0.8
+            }
+          ],
+          "faction_id": "soviet-stalingrad"
+        },
+        {
+          "unit_id": "51st-army",
+          "positions": [
+            {
+              "lat": 47.8,
+              "lng": 43.8,
+              "posture": "blocking",
+              "location": "Southern outer ring — blocking",
+              "strength_pct": 0.82
+            }
+          ],
+          "faction_id": "soviet-stalingrad"
+        }
+      ],
+      "tactical_situation": "330,000 men trapped in the Kessel, supplied only by air at 10% of the required rate. Temperatures reach -30°C. Starvation, frostbite, and disease ravage the 6th Army. Operation Winter Storm (Dec 12) gets within 50km but is halted. Operation Little Saturn (Dec 16) destroys the Italian 8th Army, ending any relief prospect.",
+      "timestamp_offset_hours": 2256
     }
   ]
 }
