@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 import type { Unit, Faction } from '@/types/battle'
 import { WIKI_COLOURS } from '@/utils/wikiMapStyle'
 import { formatNumber } from '@/utils/formatUtils'
@@ -67,6 +68,7 @@ const NATION_FLAG: Record<string, string> = {
 }
 
 export function UnitDrawer({ unit, faction, positionLabel, posture, strengthPct, anchor, onClose }: UnitDrawerProps) {
+  const { t } = useTranslation()
   const DRAWER_W = 264
   const DRAWER_H = 260 // approximate max height
   const OFFSET   = 12  // gap from marker
@@ -86,7 +88,9 @@ export function UnitDrawer({ unit, faction, positionLabel, posture, strengthPct,
   const branchGlyph = NATO_BRANCH[unit.type] ?? '╳'
   const sizeSymbol  = NATO_SIZE[unit.type]  ?? '–'
   const supplyColor = SUPPLY_COLOR[unit.supply_status] ?? '#9ca3af'
-  const supplyLabel = SUPPLY_LABEL[unit.supply_status] ?? unit.supply_status
+  const supplyLabel = unit.supply_status in SUPPLY_LABEL
+    ? t(`supply.long.${unit.supply_status}`)
+    : unit.supply_status
   const moraleWidth = Math.round(unit.morale * 100)
   const strWidth    = strengthPct != null ? Math.round(strengthPct * 100) : 100
   const flag        = unit.nation ? (NATION_FLAG[unit.nation] ?? '') : ''
@@ -180,13 +184,13 @@ export function UnitDrawer({ unit, faction, positionLabel, posture, strengthPct,
       <div style={{ padding: '8px 10px', display: 'flex', flexDirection: 'column', gap: 5 }}>
 
         {/* Commander */}
-        <Row label="Commander" value={unit.commander} />
-        {unit.deputy_commander && <Row label="Deputy" value={unit.deputy_commander} />}
+        <Row label={t('unit.commander')} value={unit.commander} />
+        {unit.deputy_commander && <Row label={t('unit.deputy')} value={unit.deputy_commander} />}
 
         {/* Location + posture */}
         {positionLabel && (
           <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-            <span style={{ fontSize: 9, color: WIKI_COLOURS.panelText, opacity: 0.5, width: 62, flexShrink: 0 }}>Location</span>
+            <span style={{ fontSize: 9, color: WIKI_COLOURS.panelText, opacity: 0.5, width: 62, flexShrink: 0 }}>{t('unit.location')}</span>
             <span style={{ fontSize: 9, color: WIKI_COLOURS.panelText, fontWeight: 600 }}>{positionLabel}</span>
             {posture && (
               <span style={{
@@ -209,7 +213,7 @@ export function UnitDrawer({ unit, faction, positionLabel, posture, strengthPct,
 
         {/* Strength bar */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-          <span style={{ fontSize: 9, color: WIKI_COLOURS.panelText, opacity: 0.5, width: 62, flexShrink: 0 }}>Strength</span>
+          <span style={{ fontSize: 9, color: WIKI_COLOURS.panelText, opacity: 0.5, width: 62, flexShrink: 0 }}>{t('unit.strength')}</span>
           <span style={{ fontSize: 9, color: WIKI_COLOURS.panelText, fontWeight: 600, width: 36, flexShrink: 0 }}>
             {formatNumber(unit.strength)}
           </span>
@@ -223,7 +227,7 @@ export function UnitDrawer({ unit, faction, positionLabel, posture, strengthPct,
 
         {/* Morale bar */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-          <span style={{ fontSize: 9, color: WIKI_COLOURS.panelText, opacity: 0.5, width: 62, flexShrink: 0 }}>Morale</span>
+          <span style={{ fontSize: 9, color: WIKI_COLOURS.panelText, opacity: 0.5, width: 62, flexShrink: 0 }}>{t('unit.morale')}</span>
           <div style={{ flex: 1, height: 4, background: WIKI_COLOURS.parchmentDk, borderRadius: 2, overflow: 'hidden', marginLeft: 42 }}>
             <div style={{ height: '100%', width: `${moraleWidth}%`, background: accentLight, borderRadius: 2 }} />
           </div>
@@ -234,7 +238,7 @@ export function UnitDrawer({ unit, faction, positionLabel, posture, strengthPct,
 
         {/* Supply */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-          <span style={{ fontSize: 9, color: WIKI_COLOURS.panelText, opacity: 0.5, width: 62, flexShrink: 0 }}>Supply</span>
+          <span style={{ fontSize: 9, color: WIKI_COLOURS.panelText, opacity: 0.5, width: 62, flexShrink: 0 }}>{t('unit.supply')}</span>
           <span style={{
             fontSize: 9,
             fontWeight: 700,

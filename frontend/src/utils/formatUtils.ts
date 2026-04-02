@@ -1,8 +1,19 @@
+import i18n from '@/i18n'
+
+const LOCALE_MAP: Record<string, string> = {
+  en: 'en-US',
+  zh: 'zh-CN',
+}
+
+function currentLocale(): string {
+  return LOCALE_MAP[i18n.language] ?? 'en-US'
+}
+
 /** Format an ISO date string to a human-readable short date */
 export function formatDate(iso: string): string {
   try {
     const d = new Date(iso)
-    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+    return d.toLocaleDateString(currentLocale(), { month: 'short', day: 'numeric', year: 'numeric' })
   } catch {
     return iso
   }
@@ -15,7 +26,7 @@ export function formatDateRange(range: { start: string; end: string }): string {
 
 /** Format a large number with thousands separator */
 export function formatNumber(n: number): string {
-  return n.toLocaleString('en-US')
+  return n.toLocaleString(currentLocale())
 }
 
 /** Format a percentage (0–1) as "75%" */

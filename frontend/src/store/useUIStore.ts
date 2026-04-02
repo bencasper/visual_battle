@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import i18n from '@/i18n'
 
 type ActivePanel = 'army' | 'weapons' | 'strategy' | 'insights' | null
 
@@ -14,6 +15,7 @@ interface UIState {
   mapPitch: number
   sidebarCollapsed: boolean
   is3D: boolean
+  language: 'en' | 'zh'
 }
 
 interface UIActions {
@@ -26,6 +28,7 @@ interface UIActions {
   setMapView: (view: Partial<Pick<UIState, 'mapBearing' | 'mapZoom' | 'mapPitch'>>) => void
   toggleSidebar: () => void
   toggle3D: () => void
+  setLanguage: (lang: 'en' | 'zh') => void
 }
 
 export const useUIStore = create<UIState & UIActions>((set, get) => ({
@@ -40,6 +43,7 @@ export const useUIStore = create<UIState & UIActions>((set, get) => ({
   mapPitch: 0,
   sidebarCollapsed: false,
   is3D: false,
+  language: 'en' as const,
 
   togglePanel: (panel) =>
     set((s) => ({ activePanel: s.activePanel === panel ? null : panel })),
@@ -59,4 +63,9 @@ export const useUIStore = create<UIState & UIActions>((set, get) => ({
   toggleSidebar: () => set((s) => ({ sidebarCollapsed: !s.sidebarCollapsed })),
 
   toggle3D: () => set((s) => ({ is3D: !s.is3D })),
+
+  setLanguage: (lang) => {
+    i18n.changeLanguage(lang)
+    set({ language: lang })
+  },
 }))

@@ -1,4 +1,5 @@
 import type { Faction } from '@/types/battle'
+import { useTranslation } from 'react-i18next'
 import { WIKI_COLOURS } from '@/utils/wikiMapStyle'
 
 interface MapLegendProps {
@@ -30,6 +31,7 @@ const POSTURE_COLOR: Record<string, string> = {
 }
 
 export function MapLegend({ factions }: MapLegendProps) {
+  const { t } = useTranslation()
   return (
     <div
       style={{
@@ -48,7 +50,7 @@ export function MapLegend({ factions }: MapLegendProps) {
     >
       {/* ── Factions ── */}
       <p style={{ fontSize: 7, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: WIKI_COLOURS.panelText, opacity: 0.5, marginBottom: 4 }}>
-        Factions
+        {t('legend.factions')}
       </p>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 3, marginBottom: 7 }}>
         {factions.map((f) => (
@@ -72,15 +74,15 @@ export function MapLegend({ factions }: MapLegendProps) {
 
       {/* ── NATO Unit Types ── */}
       <p style={{ fontSize: 7, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: WIKI_COLOURS.panelText, opacity: 0.5, marginBottom: 4 }}>
-        NATO Symbols
+        {t('legend.natoSymbols')}
       </p>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 2, marginBottom: 7 }}>
         {[
-          { glyph: '╳', label: 'Infantry / Recon' },
-          { glyph: '●', label: 'Artillery' },
-          { glyph: '○', label: 'Armour' },
-          { glyph: '★', label: 'HQ' },
-          { glyph: '∿', label: 'Air Wing' },
+          { glyph: '╳', label: t('legend.infantry') },
+          { glyph: '●', label: t('legend.artillery') },
+          { glyph: '○', label: t('legend.armour') },
+          { glyph: '★', label: t('legend.hq') },
+          { glyph: '∿', label: t('legend.airWing') },
         ].map(({ glyph, label }) => (
           <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
             <div style={{
@@ -100,16 +102,16 @@ export function MapLegend({ factions }: MapLegendProps) {
 
       {/* ── Echelon sizes ── */}
       <p style={{ fontSize: 7, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: WIKI_COLOURS.panelText, opacity: 0.5, marginBottom: 4 }}>
-        Echelon
+        {t('legend.echelon')}
       </p>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2px 8px' }}>
         {[
-          { sym: 'XX',  label: 'Corps' },
-          { sym: 'X',   label: 'Division' },
-          { sym: 'III', label: 'Regiment' },
-          { sym: 'II',  label: 'Battalion' },
-          { sym: 'I',   label: 'Company' },
-          { sym: '★',   label: 'HQ' },
+          { sym: 'XX',  label: t('legend.corps') },
+          { sym: 'X',   label: t('legend.division') },
+          { sym: 'III', label: t('legend.regiment') },
+          { sym: 'II',  label: t('legend.battalion') },
+          { sym: 'I',   label: t('legend.company') },
+          { sym: '★',   label: t('legend.hq') },
         ].map(({ sym, label }) => (
           <div key={label} style={{ display: 'flex', alignItems: 'baseline', gap: 3 }}>
             <span style={{ fontSize: 8, fontWeight: 700, fontFamily: 'monospace', color: WIKI_COLOURS.panelText, minWidth: 18 }}>{sym}</span>

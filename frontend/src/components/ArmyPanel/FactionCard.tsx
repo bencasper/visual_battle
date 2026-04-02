@@ -1,4 +1,5 @@
 import type { FactionCardProps } from './ArmyPanel.types'
+import { useTranslation } from 'react-i18next'
 import { Badge } from '@/components/shared/Badge'
 import { getFactionStrengthPct } from '@/utils/phaseUtils'
 import { strengthColor } from '@/utils/colorUtils'
@@ -6,6 +7,7 @@ import { formatNumber, formatPct } from '@/utils/formatUtils'
 import { WIKI_COLOURS } from '@/utils/wikiMapStyle'
 
 export function FactionCard({ faction, currentPhase, isSelected, onClick }: FactionCardProps) {
+  const { t } = useTranslation()
   const strengthPct = getFactionStrengthPct(currentPhase, faction.id)
   const side = faction.side.toLowerCase() as 'un' | 'pva'
   const wikiColor = side === 'un' ? WIKI_COLOURS.unBlue : WIKI_COLOURS.pvaRed
@@ -40,7 +42,7 @@ export function FactionCard({ faction, currentPhase, isSelected, onClick }: Fact
 
       {/* Troop count */}
       <p className="text-[9px] text-wiki-textMuted mt-1">
-        {formatNumber(faction.strength.total_troops)} troops
+        {formatNumber(faction.strength.total_troops)} {t('unit.troops')}
       </p>
     </button>
   )

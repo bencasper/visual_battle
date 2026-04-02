@@ -1,4 +1,5 @@
 import type { TimelineProps } from './Timeline.types'
+import { useTranslation } from 'react-i18next'
 import { PlaybackControls } from './PlaybackControls'
 import { EventFeed } from './EventFeed'
 import { formatDateRange } from '@/utils/formatUtils'
@@ -9,7 +10,7 @@ export function Timeline({
   onSeek, onPlayPause, onStepForward, onStepBack, onSpeedChange,
 }: TimelineProps) {
   useTimeline()
-
+  const { t } = useTranslation()
   const currentPhase = phases[currentIndex]
 
   return (
@@ -34,7 +35,7 @@ export function Timeline({
                 background: isCurrent ? 'rgba(26,58,92,0.08)' : 'transparent',
                 borderRight: i < phases.length - 1 ? '1px solid var(--color-panel-border)' : undefined,
               }}
-              aria-label={`Go to phase ${i + 1}: ${phase.label}`}
+              aria-label={t('timeline.goToPhase', { n: i + 1, label: phase.label })}
             >
               {/* active indicator bar */}
               {isCurrent && (

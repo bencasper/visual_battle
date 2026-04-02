@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next'
+
 interface MapControlsProps {
   onZoomIn: () => void
   onZoomOut: () => void
@@ -8,6 +10,7 @@ interface MapControlsProps {
 }
 
 export function MapControls({ onZoomIn, onZoomOut, onResetBearing, onFitBounds, is3D, onToggle3D }: MapControlsProps) {
+  const { t } = useTranslation()
   const btnClass =
     'w-8 h-8 flex items-center justify-center ' +
     'bg-wiki-panel hover:bg-wiki-parchmentDk ' +
@@ -22,11 +25,11 @@ export function MapControls({ onZoomIn, onZoomOut, onResetBearing, onFitBounds, 
 
   return (
     <div className="absolute bottom-4 right-3 flex flex-col gap-1 z-30">
-      <button onClick={onZoomIn}       className={btnClass}                    title="Zoom in">+</button>
-      <button onClick={onZoomOut}      className={btnClass}                    title="Zoom out">−</button>
-      <button onClick={onResetBearing} className={btnClass}                    title="Reset north">⬆</button>
-      <button onClick={onFitBounds}    className={btnClass}                    title="Fit to battle">⤢</button>
-      <button onClick={onToggle3D} className={is3D ? activeClass : btnClass} title={is3D ? 'Switch to 2D' : 'Switch to 3D'}>
+      <button onClick={onZoomIn}       className={btnClass}                    title={t('mapControls.zoomIn')}>+</button>
+      <button onClick={onZoomOut}      className={btnClass}                    title={t('mapControls.zoomOut')}>−</button>
+      <button onClick={onResetBearing} className={btnClass}                    title={t('mapControls.resetNorth')}>⬆</button>
+      <button onClick={onFitBounds}    className={btnClass}                    title={t('mapControls.fitBattle')}>⤢</button>
+      <button onClick={onToggle3D} className={is3D ? activeClass : btnClass} title={is3D ? t('mapControls.switchTo2D') : t('mapControls.switchTo3D')}>
         {is3D ? '2D' : '3D'}
       </button>
     </div>

@@ -1,6 +1,7 @@
 import { Component, type ReactNode } from 'react'
+import { withTranslation, type WithTranslation } from 'react-i18next'
 
-interface Props {
+interface Props extends WithTranslation {
   children: ReactNode
   fallback?: ReactNode
 }
@@ -10,7 +11,7 @@ interface State {
   error: Error | null
 }
 
-export class ErrorBoundary extends Component<Props, State> {
+class ErrorBoundaryBase extends Component<Props, State> {
   state: State = { hasError: false, error: null }
 
   static getDerivedStateFromError(error: Error): State {
@@ -21,7 +22,7 @@ export class ErrorBoundary extends Component<Props, State> {
     if (this.state.hasError) {
       return this.props.fallback ?? (
         <div className="glass-panel p-4 text-red-400 text-sm">
-          <p className="font-semibold">Something went wrong</p>
+          <p className="font-semibold">{this.props.t('error.title')}</p>
           <p className="text-xs text-slate-400 mt-1">{this.state.error?.message}</p>
         </div>
       )
@@ -29,3 +30,5 @@ export class ErrorBoundary extends Component<Props, State> {
     return this.props.children
   }
 }
+
+export const ErrorBoundary = withTranslation()(ErrorBoundaryBase)

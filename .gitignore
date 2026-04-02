@@ -31,3 +31,4 @@ services/**/__pycache__/
 /frontend/tsconfig.node.tsbuildinfo
 /frontend/tsconfig.tsbuildinfoª
 /frontend/tsconfig.tsbuildinfo
+/.docker-compose.yml.swp

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import type { OrderOfBattleProps } from './ArmyPanel.types'
 import type { Phase, Unit } from '@/types/battle'
 import { formatNumber } from '@/utils/formatUtils'
@@ -70,6 +71,7 @@ interface UnitRowProps {
 }
 
 function UnitRow({ unit, children, side, depth = 0, effectiveStrength, strengthMap }: UnitRowProps) {
+  const { t } = useTranslation()
   const [open, setOpen] = useState(false)
   const hasChildren = children && children.length > 0
   const accentColor = side === 'un' ? WIKI_COLOURS.unBlue : WIKI_COLOURS.pvaRed
@@ -78,7 +80,9 @@ function UnitRow({ unit, children, side, depth = 0, effectiveStrength, strengthM
   const sizeInfo = NATO_SIZE[unit.type] ?? { symbol: '–', label: unit.type }
   const branchGlyph = NATO_BRANCH[unit.type] ?? '╳'
   const supplyColor = SUPPLY_COLOR[unit.supply_status] ?? '#9ca3af'
-  const supplyLabel = SUPPLY_LABEL[unit.supply_status] ?? unit.supply_status
+  const supplyLabel = unit.supply_status in SUPPLY_LABEL
+    ? t(`supply.short.${unit.supply_status}`)
+    : unit.supply_status
   const moraleWidth = Math.round(unit.morale * 100)
 
   return (
@@ -168,7 +172,7 @@ function UnitRow({ unit, children, side, depth = 0, effectiveStrength, strengthM
 
           {/* Morale bar */}
           <div className="flex items-center gap-1.5 mb-1">
-            <span className="text-wiki-textMuted w-9">Morale</span>
+            <span className="text-wiki-textMuted w-9">{t('oob.morale')}</span>
             <div className="flex-1 h-1 bg-wiki-hillShade rounded-full overflow-hidden">
               <div
                 className="h-full rounded-full"
@@ -205,6 +209,7 @@ function UnitRow({ unit, children, side, depth = 0, effectiveStrength, strengthM
 }
 
 export function OrderOfBattle({ faction, currentPhase }: OrderOfBattleProps) {
+  const { t } = useTranslation()
   const [showAll, setShowAll] = useState(false)
   const side = faction.side.toLowerCase() as 'un' | 'pva'
   const accentColor = side === 'un' ? WIKI_COLOURS.unBlue : WIKI_COLOURS.pvaRed
@@ -245,13 +250,13 @@ export function OrderOfBattle({ faction, currentPhase }: OrderOfBattleProps) {
           className="text-[7px] font-bold px-1 py-0.5 rounded uppercase tracking-widest"
           style={{ background: accentColor, color: '#fff' }}
         >
-          OOB
+          {t('oob.label')}
         </span>
         <span className="text-[9px] uppercase tracking-widest text-wiki-textMuted font-semibold">
-          Order of Battle
+          {t('oob.title')}
         </span>
         <span className="ml-auto text-[9px] text-wiki-textMuted">
-          {faction.units.length} units
+          {t('oob.unitCount', { count: faction.units.length })}
         </span>
       </div>
 
@@ -276,7 +281,7 @@ export function OrderOfBattle({ faction, currentPhase }: OrderOfBattleProps) {
           className="mt-1.5 text-[9px] font-semibold uppercase tracking-wider hover:underline w-full text-center"
           style={{ color: accentColor }}
         >
-          {showAll ? '▲ Show fewer' : `▼ +${hiddenCount} more units`}
+          {showAll ? t('oob.showFewer') : t('oob.showMore', { count: hiddenCount })}
         </button>
       )}
     </div>
