@@ -1,14 +1,71 @@
 services:
+  # ── PostGIS Database ──
   db:
     image: postgis/postgis:16-3.4
     container_name: visual_battle_postgres
     ports:
-      - '5432:5432'
+      - "5432:5432"
     environment:
       POSTGRES_DB: visual_battle
       POSTGRES_USER: visual_battle_user
       POSTGRES_PASSWORD: mysecretpassword
     volumes:
       - visual_battle_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U visual_battle_user -d visual_battle"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # ── FastAPI Backend ──
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: visual_battle_backend
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql+asyncpg://visual_battle_user:mysecretpassword@db:5432/visual_battle
+      CORS_ORIGINS: http://localhost:5173,http://localhost:3000,http://localhost
+      SERVER_PORT: 8000
+      DATA_PATH: ./data/battles
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Seed the database (runs once then exits) ──
+  seed:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: visual_battle_seed
+    working_dir: /app
+    command: ["python", "-m", "scripts.seed_db"]
+    environment:
+      DATABASE_URL: postgresql+asyncpg://visual_battle_user:mysecretpassword@db:5432/visual_battle
+      DATA_PATH: ./data/battles
+      PYTHONPATH: /app:/app/server
+    depends_on:
+      db:
+        condition: service_healthy
+
+  # ── React/Vite Frontend (nginx) ──
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: visual_battle_frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+
 volumes:
   visual_battle_pgdata:

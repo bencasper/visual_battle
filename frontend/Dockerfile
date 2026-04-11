@@ -1,0 +1,30 @@
+# ---- Frontend Dockerfile ----
+# Stage 1: Build the Vite/React app
+FROM node:20-alpine AS build
+
+WORKDIR /app
+
+# Install dependencies first (cached layer)
+COPY package.json package-lock.json ./
+RUN npm ci
+
+# Copy source and build
+COPY . .
+# Skip tsc type-check in Docker build (run typecheck separately in CI)
+RUN npx vite build
+
+# Stage 2: Serve with nginx
+FROM nginx:alpine
+
+# Remove default nginx config
+RUN rm /etc/nginx/conf.d/default.conf
+
+# Copy custom nginx config
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Copy built assets from build stage
+COPY --from=build /app/dist /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
